@@ -154,6 +154,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lib\IDataProvider.cs" />
+    <Compile Include="Lib\MSSqlDataProvider.cs" />
     <Compile Include="Models\Foto.cs" />
     <Compile Include="Models\Fotoserie.cs" />
     <Compile Include="Models\SqlFotoserieRepository.cs" />
@@ -194,7 +196,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

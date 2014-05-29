@@ -1,42 +1,88 @@
-﻿using System;
+﻿using FotoWebservice.Lib;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration; 
 
 namespace FotoWebservice.Models
 {
     public class SqlFotoserieRepository : IFotoserieRepository
     {
-        private SqlConnection conn;
-        public SqlFotoserieRepository()
+        private MSSqlDataProvider dataProvider;
+        public SqlFotoserieRepository(MSSqlDataProvider dataProvider)
         {
-            this.conn = new SqlConnection("Server=localhost\myInstanceName;Database=fotolabdatabase;User Id=myUsername;Password=myPassword;");
+            this.dataProvider = dataProvider;
         }
 
         public IEnumerable<Fotoserie> GetAll()
         {
-            throw new NotImplementedException();
+            List<Fotoserie> fotoseries = new List<Fotoserie>();
+            
+            SqlCommand cmd = new SqlCommand("SELECT * FROM fotoserie");
+
+            DataSet ds = dataProvider.Query(cmd);
+
+            foreach (DataRow r in ds.Tables[0].Rows)
+            {
+                fotoseries.Add(DataRowToObject(r));
+            }
+
+            return fotoseries;
         }
 
         public Fotoserie Get(int id)
         {
-            throw new NotImplementedException();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM fotoserie WHERE id = @Id");
+            SqlParameter parameter = new SqlParameter("Id", id);
+
+            DataSet ds = dataProvider.Query(cmd, parameter);
+
+            return DataRowToObject(ds.Tables[0].Rows[0]);
         }
 
-        public Fotoserie Add(Fotoserie item)
+        public Fotoserie Add(Fotoserie fotoserie)
         {
-            throw new NotImplementedException();
+            SqlCommand cmd = new SqlCommand("INSERT INTO fotoserie SET id = @Id, serie_key = @Key");
+            List<SqlParameter> parameters = new List<SqlParameter> { 
+                new SqlParameter("Id", fotoserie.Id),
+                new SqlParameter("Key", fotoserie.Key)
+            };
+
+            dataProvider.Query(cmd, parameters);
+
+            return fotoserie;
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            SqlCommand cmd = new SqlCommand("DELETE FROM fotoserie WHERE id = @Id");
+            SqlParameter parameter = new SqlParameter("Id", id);
+
+            dataProvider.Query(cmd, parameter);
         }
 
-        public bool Update(Fotoserie item)
+        public bool Update(Fotoserie fotoserie)
         {
-            throw new NotImplementedException();
+            SqlCommand cmd = new SqlCommand("UPDATE fotoserie SET serie_key = @Key WHERE id = @Id");
+            List<SqlParameter> parameters = new List<SqlParameter> { 
+                new SqlParameter("Id", fotoserie.Id),
+                new SqlParameter("Key", fotoserie.Key)
+            };
+
+            dataProvider.Query(cmd, parameters);
+
+            return true;
+        }
+
+        private Fotoserie DataRowToObject(DataRow row)
+        {
+            return new Fotoserie { 
+                Id  = Convert.ToInt32(row["id"]), 
+                Key = Convert.ToString(row["serie_key"]) 
+            };
         }
     }
 }
