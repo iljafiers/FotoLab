@@ -1,0 +1,16 @@
+
+/*==============================================================*/
+/* User: fotoserieUser                                          */
+/*==============================================================*/
+CREATE LOGIN fotoserieUser 
+   WITH PASSWORD = 'fotoserieGebruikerZijnIsGaaf'
+GO
+
+CREATE USER fotoserieUser FOR LOGIN fotoserieUser;
+GO
+
+EXEC sp_addrolemember 'db_owner', 'fotoserieUser'
+
+
+
+

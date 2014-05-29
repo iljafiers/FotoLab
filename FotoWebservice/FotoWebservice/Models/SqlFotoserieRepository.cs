@@ -12,18 +12,18 @@ namespace FotoWebservice.Models
     public class SqlFotoserieRepository : IFotoserieRepository
     {
         private MSSqlDataProvider dataProvider;
-        public SqlFotoserieRepository(MSSqlDataProvider dataProvider)
+        public SqlFotoserieRepository()
         {
-            this.dataProvider = dataProvider;
+            this.dataProvider = new MSSqlDataProvider();
         }
 
         public IEnumerable<Fotoserie> GetAll()
         {
             List<Fotoserie> fotoseries = new List<Fotoserie>();
             
-            SqlCommand cmd = new SqlCommand("SELECT * FROM fotoserie");
+            string sql ="SELECT * FROM fotoserie";
 
-            DataSet ds = dataProvider.Query(cmd);
+            DataSet ds = dataProvider.Query(sql);
 
             foreach (DataRow r in ds.Tables[0].Rows)
             {
@@ -35,44 +35,44 @@ namespace FotoWebservice.Models
 
         public Fotoserie Get(int id)
         {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM fotoserie WHERE id = @Id");
+            string sql = "SELECT * FROM fotoserie WHERE id = @Id";
             SqlParameter parameter = new SqlParameter("Id", id);
 
-            DataSet ds = dataProvider.Query(cmd, parameter);
+            DataSet ds = dataProvider.Query(sql, parameter);
 
             return DataRowToObject(ds.Tables[0].Rows[0]);
         }
 
         public Fotoserie Add(Fotoserie fotoserie)
         {
-            SqlCommand cmd = new SqlCommand("INSERT INTO fotoserie SET id = @Id, serie_key = @Key");
+            string sql = "INSERT INTO fotoserie SET id = @Id, serie_key = @Key";
             List<SqlParameter> parameters = new List<SqlParameter> { 
                 new SqlParameter("Id", fotoserie.Id),
                 new SqlParameter("Key", fotoserie.Key)
             };
 
-            dataProvider.Query(cmd, parameters);
+            dataProvider.Query(sql, parameters);
 
             return fotoserie;
         }
 
         public void Remove(int id)
         {
-            SqlCommand cmd = new SqlCommand("DELETE FROM fotoserie WHERE id = @Id");
+            string sql = "DELETE FROM fotoserie WHERE id = @Id";
             SqlParameter parameter = new SqlParameter("Id", id);
 
-            dataProvider.Query(cmd, parameter);
+            dataProvider.Query(sql, parameter);
         }
 
         public bool Update(Fotoserie fotoserie)
         {
-            SqlCommand cmd = new SqlCommand("UPDATE fotoserie SET serie_key = @Key WHERE id = @Id");
+            string sql = "UPDATE fotoserie SET serie_key = @Key WHERE id = @Id";
             List<SqlParameter> parameters = new List<SqlParameter> { 
                 new SqlParameter("Id", fotoserie.Id),
                 new SqlParameter("Key", fotoserie.Key)
             };
 
-            dataProvider.Query(cmd, parameters);
+            dataProvider.Query(sql, parameters);
 
             return true;
         }

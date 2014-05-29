@@ -13,7 +13,7 @@ go
 
 
 /*==============================================================*/
-/* Database: fotolabdatabase                                     */
+/* Database: fotolabdatabase                                    */
 /*==============================================================*/
 create database fotolabdatabase
 go
@@ -24,7 +24,7 @@ go
 
 
 /*==============================================================*/
-/* Table: Gebruikers                                       */
+/* Table: Gebruikers                                            */
 /*==============================================================*/
 create table klanten (
    id               	int           		primary key identity not null,

@@ -5,78 +5,66 @@ using System.Web;
 using System.Data;
 using System.Web.Configuration;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace FotoWebservice.Lib
 {
     public class MSSqlDataProvider
     {
-        private SqlConnection conn;
+        private string connectionstring;
 
         public MSSqlDataProvider()
         {
-            this.conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["fotolabdatabase"].ConnectionString);
-            this.Open();
+            this.connectionstring = WebConfigurationManager.ConnectionStrings["fotolabdatabase"].ConnectionString;
         }
-        ~MSSqlDataProvider()
+
+        public DataSet Query(string sql, List<SqlParameter> parameters)
         {
-            this.Close();
-        }
-        public void Open()
-        {
-            if (!IsOpen())
+            DataSet ds = new DataSet();
+
+            using (SqlConnection connection = new SqlConnection(this.connectionstring))
             {
-                this.conn.Open();
+                connection.Open();
+                SqlCommand cmd = BuildSqlCommand(sql, parameters, connection);
+                ds = BuildDataSet(cmd);
+                connection.Close();
             }
+
+            return ds;
+        }
+        public DataSet Query(string sql, SqlParameter parameter)
+        {
+            return Query(sql, new List<SqlParameter> { parameter });
+        }
+        public DataSet Query(string sql)
+        {
+            return Query(sql, new List<SqlParameter>());
         }
 
-        public void Close()
+       /* public SqlDataReader QueryReader(string sql, List<SqlParameter> parameters)
         {
-            if (IsOpen())
-            {
-                this.conn.Close();
-            }
+            SqlCommand cmd = BuildSqlCommand(sql, parameters);
+            return cmd.ExecuteReader();
         }
-        public bool IsOpen()
+        public SqlDataReader QueryReader(string sql, SqlParameter parameter)
         {
-            return (this.conn != null && this.conn.State != System.Data.ConnectionState.Closed);
+            SqlCommand cmd = BuildSqlCommand(sql, new List<SqlParameter> { parameter });
+            return cmd.ExecuteReader();
         }
+        public SqlDataReader QueryReader(string sql)
+        {
+            SqlCommand cmd = BuildSqlCommand(sql, new List<SqlParameter>());
+            return cmd.ExecuteReader();
+        }*/
 
-        public DataSet Query(SqlCommand sql, List<SqlParameter> parameters)
+        private SqlCommand BuildSqlCommand(string sql, List<SqlParameter> parameters, SqlConnection connection)
         {
-            InjectParameters(sql, parameters);
-            return BuildDataSet(sql);
-        }
-        public DataSet Query(SqlCommand sql, SqlParameter parameter)
-        {
-            InjectParameters(sql, new List<SqlParameter> { parameter });
-            return BuildDataSet(sql);
-        }
-        public DataSet Query(SqlCommand sql)
-        {
-            return BuildDataSet(sql);
-        }
-
-        public SqlDataReader QueryReader(SqlCommand sql, List<SqlParameter> parameters)
-        {
-            InjectParameters(sql, parameters);
-            return sql.ExecuteReader();
-        }
-        public SqlDataReader QueryReader(SqlCommand sql, SqlParameter parameter)
-        {
-            InjectParameters(sql, new List<SqlParameter> { parameter });
-            return sql.ExecuteReader();
-        }
-        public SqlDataReader QueryReader(SqlCommand sql)
-        {
-            return sql.ExecuteReader();
-        }
-
-        private void InjectParameters(SqlCommand sql, List<SqlParameter> parameters)
-        {
+            SqlCommand cmd = new SqlCommand(sql, connection);
             foreach (SqlParameter param in parameters)
             {
-                sql.Parameters.Add(param);
+                cmd.Parameters.Add(param);
             }
+            return cmd;
         }
 
         private DataSet BuildDataSet(SqlCommand sql)
