@@ -1,0 +1,25 @@
+The best approach that I found was to give your user an API_KEY and a SECRET_KEY.
+
+Build your REST API request passing in the API_KEY, timestamp and any other parameters necessary for making the call.
+
+Using a scripting language like PHP create an API_SIGNATURE variable using two way encryption with your SECRET_KEY and append that to your base url and that is what you fire off as your request.
+
+Now anyone can see that request and that is why you put the timestamp in as a parameter. Basically you can put in a constraint that will only process requests that are less than one minute old.
+
+Example: (do this part in scripting language)
+
+$API_BASE_URL="http://api.yourdomain.com/1.1/comments.json?api_key=2002&timestamp=2323234544&id=4";
+$API_KEY=300;
+$API_SIGNATURE=hash_hmac('sha256', API_BASE_URL, API_KEY);
+$API_URL=$API_BASE_URL.'&api_signature='.$API_SIGNATURE;
+--
+
+Now in your jquery ajax url: echo out $API_URL using PHP.
+
+--
+
+In your API when you get a request you lookup the users account based on API_KEY and get their SECRET_KEY and decrypt the signature and make sure that matches what was passed in. If that passes now check the timestamp and make sure the request is less than a minute old.
+
+You can also do rate limiting and a whole bunch of other stuff before processing the request.
+
+Thats it.

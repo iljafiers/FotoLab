@@ -34,7 +34,7 @@ go
 
 create table fotoserie (
 	id 					int 				primary key identity not null,
-	serie_key			varchar(50)			not null 				
+	serie_key			varchar(50)			unique not null 				
 )
 go
 
@@ -42,12 +42,19 @@ go
 create table foto (
 	id 					int 				primary key identity not null,
 	fotoserie_id		int 				not null,
-	path				varchar(260)		not null
+	foto_path			varchar(260)		not null
 )
 go
 
-create table klant_key (
+create table klant_fotoserie (
 	klant_id			int 				not null,
 	fotoserie_id		int 				not null
+)
+go
+
+create table api_clients (
+	id 					int 				primary key identity not null,
+	api_key				varchar(50)			unique not null,
+	salt				varchar(50)			not null
 )
 go

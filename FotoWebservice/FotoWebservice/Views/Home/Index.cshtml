@@ -22,3 +22,45 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
     </div>
 </div>
+<script>
+    window.onload = function () {
+        $(document).ready(function () {
+            $("#addFotoserie").submit(function (event) {
+                event.preventDefault();
+
+                var serie_key = $("input[name='key']").val();
+
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.RouteUrl("FotoserieApi", new { httproute = "", controller = "fotoserie" })",
+                    dataType: "json",
+                    success: function(data) {
+                        $("#values").text(data);
+                    }
+                })
+            });
+
+        });
+    };
+</script>
+<div class="row">
+    <div class="col-md-12">
+        <!--<select id="page_select">
+            <option value="@Url.RouteUrl("FotoserieApi", new { httproute = "", controller = "fotoserie" })">Alle fotoseries</option>
+            <option value="@Url.RouteUrl("FotoserieApi", new { httproute = "", controller = "fotoserie" })">Alle fotoseries</option>
+        </select>-->
+        <form id="addFotoserie">
+            <input type="text" name="key" />
+            <input type="submit" value="Toevoegen"/>
+        </form>
+        <ul>
+            <li><a class="btn btn-info" href="">Alle fotoseries</a></li>
+            <li><a class="btn btn-info" href="">Get Id</a></li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div id="values" class="col-md-12">
+
+    </div>
+</div>

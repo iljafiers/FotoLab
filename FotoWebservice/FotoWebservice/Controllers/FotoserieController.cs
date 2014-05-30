@@ -14,13 +14,35 @@ namespace FotoWebservice.Controllers
         // GET: api/Fotoserie
         public IEnumerable<Fotoserie> GetAll()
         {
-            return repository.GetAll();
+            IEnumerable<Fotoserie> fotoseries = repository.GetAll();
+
+            if (fotoseries == null)
+            {
+                var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent("Er is iets mis gegaan."),
+                    ReasonPhrase = "Interne server fout"
+                };
+                throw new HttpResponseException(resp);
+            }
+
+            return fotoseries;
         }
 
         // GET: api/Fotoserie/5
         public Fotoserie Get(int id)
         {
-            return repository.Get(id);
+            Fotoserie fotoserie = repository.Get(id);
+            if (fotoserie == null)
+            {
+                var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent(string.Format("Er bestaat geen fotoserie met Id = {0}", id)),
+                    ReasonPhrase = "Fotoserie Id niet gevonden"
+                };
+                throw new HttpResponseException(resp);
+            }
+            return fotoserie;
         }
 
         // POST: api/Fotoserie

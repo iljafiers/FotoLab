@@ -20,61 +20,96 @@ namespace FotoWebservice.Models
         public IEnumerable<Fotoserie> GetAll()
         {
             List<Fotoserie> fotoseries = new List<Fotoserie>();
-            
-            string sql ="SELECT * FROM fotoserie";
-
-            DataSet ds = dataProvider.Query(sql);
-
-            foreach (DataRow r in ds.Tables[0].Rows)
+            try
             {
-                fotoseries.Add(DataRowToObject(r));
-            }
+                string sql = "SELECT * FROM fotoserie";
 
-            return fotoseries;
+                DataSet ds = dataProvider.Query(sql);
+
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    fotoseries.Add(DataRowToObject(r));
+                }
+
+                return fotoseries;
+            }
+            catch (Exception ex)
+            {
+                fotoseries = null;
+                return fotoseries;
+            }
         }
 
         public Fotoserie Get(int id)
         {
-            string sql = "SELECT * FROM fotoserie WHERE id = @Id";
-            SqlParameter parameter = new SqlParameter("Id", id);
+            try
+            {
+                string sql = "SELECT * FROM fotoserie WHERE id = @Id";
+                SqlParameter parameter = new SqlParameter("Id", id);
 
-            DataSet ds = dataProvider.Query(sql, parameter);
+                DataSet ds = dataProvider.Query(sql, parameter);
 
-            return DataRowToObject(ds.Tables[0].Rows[0]);
+                return DataRowToObject(ds.Tables[0].Rows[0]);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public Fotoserie Add(Fotoserie fotoserie)
         {
-            string sql = "INSERT INTO fotoserie SET id = @Id, serie_key = @Key";
-            List<SqlParameter> parameters = new List<SqlParameter> { 
-                new SqlParameter("Id", fotoserie.Id),
-                new SqlParameter("Key", fotoserie.Key)
-            };
+            try
+            {
+                string sql = "INSERT INTO fotoserie (serie_key) OUTPUT INSERTED.ID AS Id VALUES (@Key)";
+                List<SqlParameter> parameters = new List<SqlParameter> { 
+                    new SqlParameter("Key", fotoserie.Key)
+                };
 
-            dataProvider.Query(sql, parameters);
+                DataSet ds = dataProvider.Query(sql, parameters);
+                fotoserie.Id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"]);
 
-            return fotoserie;
+                return fotoserie;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public void Remove(int id)
         {
-            string sql = "DELETE FROM fotoserie WHERE id = @Id";
-            SqlParameter parameter = new SqlParameter("Id", id);
+            try
+            {
+                string sql = "DELETE FROM fotoserie WHERE id = @Id";
+                SqlParameter parameter = new SqlParameter("Id", id);
 
-            dataProvider.Query(sql, parameter);
+                dataProvider.Query(sql, parameter);
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
         }
 
         public bool Update(Fotoserie fotoserie)
         {
-            string sql = "UPDATE fotoserie SET serie_key = @Key WHERE id = @Id";
-            List<SqlParameter> parameters = new List<SqlParameter> { 
-                new SqlParameter("Id", fotoserie.Id),
-                new SqlParameter("Key", fotoserie.Key)
-            };
+            try
+            {
+                string sql = "UPDATE fotoserie SET serie_key = @Key WHERE id = @Id";
+                List<SqlParameter> parameters = new List<SqlParameter> { 
+                    new SqlParameter("Id", fotoserie.Id),
+                    new SqlParameter("Key", fotoserie.Key)
+                };
 
-            dataProvider.Query(sql, parameters);
+                dataProvider.Query(sql, parameters);
 
-            return true;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         private Fotoserie DataRowToObject(DataRow row)
