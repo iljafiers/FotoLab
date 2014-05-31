@@ -58,3 +58,27 @@ create table api_clients (
 	salt				varchar(50)			not null
 )
 go
+
+create table bestellingen (
+	id 					int 				primary key identity not null,
+	klant_id			int 				not null,
+	datum				datetime 			not null
+
+)
+go
+
+create table bestelling_foto (
+	bestelling_id		int 				not null,
+	foto_id				int 				not null,
+	fotoproduct_id		int 				not null
+)
+go
+
+-- Op de site kunnen foto's en producten worden besteld. Hierin staan alle producten waarin een foto aangeleverd kan worden
+-- Quote: "Na het inloggen kunnen klanten extra exemplaren van hun eigen foto's en producten online bestellen met daarop een gekozen foto. "
+create table fotoproducten (
+	id 					int 				primary key identity not null,
+	naam				varchar(255)		unique not null,
+	meerprijs			smallmoney			not null
+)
+go

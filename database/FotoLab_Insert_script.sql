@@ -27,4 +27,14 @@ INSERT INTO fotoserie (serie_key) VALUES ('XAtC9lRSxmuiOjHJ7DGuPTFrhtO9MECY9Pgd1
 GO
 
 
+INSERT INTO fotoproducten (naam, meerprijs) VALUES ('Origineel', 0.00),
+                                               ('Fotolijst', 4.99),
+                                               ('Schilderij (60x40)', 29.99),
+                                               ('Schilderij (120x80)', 59.99),
+                                               ('Schilderij (240x160', 99.99),
+                                               ('Poster (30x20)', 9.99),
+                                               ('Poster (60x40)', 18.99),
+                                               ('Poster (90x60)', 24.99)
+go
+
 

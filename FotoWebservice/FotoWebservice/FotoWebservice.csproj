@@ -115,6 +115,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Auth\" />
+    <Folder Include="Fotos\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -156,10 +157,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lib\FotoApiSection.cs" />
     <Compile Include="Lib\IDataProvider.cs" />
     <Compile Include="Lib\MSSqlDataProvider.cs" />
+    <Compile Include="Models\FileFotoRepository.cs" />
     <Compile Include="Models\Foto.cs" />
     <Compile Include="Models\Fotoserie.cs" />
+    <Compile Include="Models\IFotoRepository.cs" />
+    <Compile Include="Models\SqlFotoRepository.cs" />
     <Compile Include="Models\SqlFotoserieRepository.cs" />
     <Compile Include="Models\IFotoserieRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FotoWebservice.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,31 +10,42 @@ namespace FotoWebservice.Controllers
 {
     public class FotoController : ApiController
     {
+        IFotoRepository repository = new SqlFotoRepository();
+
         // GET: api/Fotoserie/{fotoserie_id}/Foto
-        public IEnumerable<string> Get()
+        public IEnumerable<int> Get(int fotoserieId)
         {
-            return new string[] { "value1", "value2" };
+            IEnumerable<int> fotoIds = repository.GetAll(fotoserieId);
+
+            if (fotoIds == null)
+            {
+                HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent("Er is iets mis gegaan."),
+                    ReasonPhrase = "Interne server fout"
+                };
+                throw new HttpResponseException(resp);
+            }
+
+            return fotoIds;
         }
 
         // GET: api/Fotoserie/{fotoserie_id}/Foto/5
-        public string Get(int id)
+        public Byte[] Get(int fotoserieId, int id)
         {
-            return "value";
+            return repository.Get(fotoserieId, id);
         }
 
         // POST: api/Fotoserie/{fotoserie_id}/Foto
-        public void Post([FromBody]string value)
+        public void Post(int fotoserieId, Byte[] fotoByteArray)
         {
-        }
-
-        // PUT: api/Fotoserie/{fotoserie_id}/Foto/5
-        public void Put(int id, [FromBody]string value)
-        {
+            repository.Add(fotoserieId, fotoByteArray);
         }
 
         // DELETE: api/Fotoserie/{fotoserie_id}/Foto/5
-        public void Delete(int id)
+        public void Delete(int fotoserieId, int id)
         {
+            repository.Remove(fotoserieId, id);
         }
     }
 }
