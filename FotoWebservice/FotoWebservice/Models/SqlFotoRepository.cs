@@ -9,7 +9,7 @@ using System.Web.Configuration;
 
 namespace FotoWebservice.Models
 {
-    public class SqlFotoRepository : IFotoRepository
+    public class SqlFotoRepository
     {
         private MSSqlDataProvider dataProvider;
         public SqlFotoRepository()
@@ -68,26 +68,48 @@ namespace FotoWebservice.Models
             }
         }
 
-        public Foto Add(int fotoserieId, Byte[] fotoByteArray)
+        public int Add(int fotoserieId)
         {
-            return null;
-
-            /*try
+            try
             {
-                string sql = "INSERT INTO foto (serie_key) OUTPUT INSERTED.ID AS Id VALUES (@Key)";
+                string sql = "INSERT INTO foto (fotoserie_id) OUTPUT INSERTED.ID AS Id VALUES (@FotoserieId)";
                 List<SqlParameter> parameters = new List<SqlParameter> { 
-                    new SqlParameter("fotoserie_id", foto.Key)
+                    new SqlParameter("FotoserieId", fotoserieId)
                 };
 
                 DataSet ds = dataProvider.Query(sql, parameters);
-                foto.Id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"]);
+                int id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"]);
+
+                return id;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+        public Foto AddPath(int id, string fotoPath)
+        {
+            try
+            {
+                string sql = "UPDATE foto (foto_path) VALUES (@FotoPath) WHERE id = @Id";
+                List<SqlParameter> parameters = new List<SqlParameter> { 
+                    new SqlParameter("Id", id),
+                    new SqlParameter("FotoPath", fotoPath)
+                };
+
+                dataProvider.Query(sql, parameters);
+
+                Foto foto = new Foto();
+                foto.Id = id;
+                foto.Path = fotoPath;
 
                 return foto;
             }
             catch (Exception ex)
             {
-                return null;
-            }*/
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         public void Remove(int fotoserieId, int id)

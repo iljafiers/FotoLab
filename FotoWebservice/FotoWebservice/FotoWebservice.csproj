@@ -113,7 +113,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Upload_Temp\" />
     <Folder Include="Auth\" />
     <Folder Include="Fotos\" />
   </ItemGroup>
@@ -163,7 +163,6 @@
     <Compile Include="Models\FileFotoRepository.cs" />
     <Compile Include="Models\Foto.cs" />
     <Compile Include="Models\Fotoserie.cs" />
-    <Compile Include="Models\IFotoRepository.cs" />
     <Compile Include="Models\SqlFotoRepository.cs" />
     <Compile Include="Models\SqlFotoserieRepository.cs" />
     <Compile Include="Models\IFotoserieRepository.cs" />

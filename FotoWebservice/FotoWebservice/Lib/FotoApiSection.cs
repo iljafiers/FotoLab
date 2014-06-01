@@ -11,7 +11,7 @@ namespace FotoWebservice.Lib
     public class FotoApiSection : ConfigurationSection
     {
         [ConfigurationProperty("basePath", IsRequired = true)]
-        public BasePathElement BaseFotoPath
+        public BasePathElement BasePath
         {
             get
             {
@@ -22,12 +22,23 @@ namespace FotoWebservice.Lib
                 this["basePath"] = value;
             }
         }
+        public TempPathElement TempPath
+        {
+            get
+            {
+                return (TempPathElement)this["tempPath"];
+            }
+            set
+            {
+                this["tempPath"] = value;
+            }
+        }
     }
 
     public class BasePathElement : ConfigurationElement
     {
         [ConfigurationProperty("name", IsRequired = true)]
-        [StringValidator(InvalidCharacters = "~!@#$%^*[]{}/;'\"|", MinLength = 1, MaxLength = 60)]
+        [StringValidator(InvalidCharacters = "~!@#$%^*[]{};'\"|", MinLength = 1, MaxLength = 60)]
         public string Name
         {
             get { return (string)this["name"]; }
@@ -35,8 +46,18 @@ namespace FotoWebservice.Lib
         } 
     }
 
+    public class TempPathElement : ConfigurationElement
+    {
+        [ConfigurationProperty("name", IsRequired = true)]
+        [StringValidator(InvalidCharacters = "!@#$%^*[]{};'\"|", MinLength = 1, MaxLength = 60)]
+        public string Name
+        {
+            get { return (string)this["name"]; }
+            set { this["name"] = value; }
+        }
+    }
 
-    public class PageAppearanceSection : ConfigurationSection
+    /*public class PageAppearanceSection : ConfigurationSection
     {
         // Create a "remoteOnly" attribute.
         [ConfigurationProperty("remoteOnly", DefaultValue = "false", IsRequired = false)]
@@ -137,5 +158,5 @@ namespace FotoWebservice.Lib
             }
         }
 
-    }
+    }*/
 }
