@@ -22,27 +22,7 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
     </div>
 </div>
-<script>
-    window.onload = function () {
-        $(document).ready(function () {
-            $("#addFotoserie").submit(function (event) {
-                event.preventDefault();
 
-                var serie_key = $("input[name='key']").val();
-
-                $.ajax({
-                    type: "GET",
-                    url: "@Url.RouteUrl("FotoserieApi", new { httproute = "", controller = "fotoserie" })",
-                    dataType: "json",
-                    success: function(data) {
-                        $("#values").text(data);
-                    }
-                })
-            });
-
-        });
-    };
-</script>
 <div class="row">
     <div class="col-md-12">
         <!--<select id="page_select">
@@ -74,3 +54,39 @@
         <input type="submit" value="Submit" />
     </div>
 </form>
+
+<button id="getAllIdsButton">Alle foto id's</button>
+<div id="fotoIds_values">
+
+</div>
+<script>
+    window.onload = function () {
+        $(document).ready(function () {
+            $("#addFotoserie").submit(function (event) {
+                event.preventDefault();
+
+                var serie_key = $("input[name='key']").val();
+
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.RouteUrl("FotoserieApi", new { httproute = "", controller = "fotoserie" })",
+                    dataType: "json",
+                    success: function (data) {
+                        $("#values").text(data);
+                    }
+                })
+            });
+
+            $("#getAllIdsButton").click(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "@{Request.ApplicationPath.ToString();}/api/Fotoserie/flappies_fotoserie_key/Foto/All", // http://localhost:2372/api/Fotoserie/flappies_fotoserie_key/Foto/All
+                    dataType: "json",
+                    success: function (data) {
+                        $("#fotoids_values").text(data);
+                    }
+                })
+            });
+        });
+    };
+</script>

@@ -1,5 +1,6 @@
 ## Custom Ignores ##
-
+FotoWebservice/FotoWebservice/App_Data/Upload_Temp/
+FotoWebservice/FotoWebservice/Fotos/
 
 
 ## Github Ignores ##

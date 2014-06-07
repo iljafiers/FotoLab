@@ -24,7 +24,7 @@ namespace FotoWebservice.Models
             List<int> fotoIds = new List<int>();
             try
             {
-                string sql = "SELECT id FROM foto WHERE fotoserie_id = @FotoserieId";
+                string sql = "SELECT id FROM fotos WHERE fotoserie_id = @FotoserieId";
                 SqlParameter parameter = new SqlParameter("FotoserieId", fotoserieId);
 
                 DataSet ds = dataProvider.Query(sql, parameter);
@@ -33,19 +33,17 @@ namespace FotoWebservice.Models
                 {
                     fotoIds.Add(Convert.ToInt32(r["id"]));
                 }
-
-                return fotoIds;
             }
             catch (Exception ex)
             {
-                fotoIds = null;
-                return fotoIds;
+                throw new Exception(ex.Message, ex);
             }
+            return fotoIds;
         }
 
         /* Vraag een foto op */
         //http://www.codeguru.com/csharp/.net/returning-images-from-asp.net-web-api.htm
-        public Byte[] Get(int fotoserieId, int id)
+       /* public Byte[] Get(int fotoserieId, int id)
         {
             try
             {
@@ -67,14 +65,14 @@ namespace FotoWebservice.Models
             {
                 return null;
             }
-        }
+        }*/
 
         public int Add(int fotoserieId, string md5)
         {
             int id = 0;
 
-    //        try
-     //       {
+            try
+            {
                 string sql = "sp_InsertFoto"; //"IF NOT EXISTS(SELECT 1 FROM fotos WHERE md5 = '@Md5') BEGIN INSERT INTO fotos (fotoserie_id, md5) OUTPUT INSERTED.ID AS Id VALUES (@FotoserieId, @md5) END";
 
                 SqlParameter param1 = new SqlParameter("@fotoserieId", fotoserieId);
@@ -93,16 +91,16 @@ namespace FotoWebservice.Models
                 {
                     id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"]);
                 }               
-       /*     }
+            }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message, ex);
-            }*/
+            }
 
             return id;
         }
 
-        public Foto AddPath(int id, string fotoPath)
+        /*public Foto AddPath(int id, string fotoPath)
         {
             try
             {
@@ -131,7 +129,7 @@ namespace FotoWebservice.Models
             {
                 throw new Exception(ex.Message, ex);
             }
-        }
+        }*/
 
         public void Remove(int fotoserieId, int id)
         {

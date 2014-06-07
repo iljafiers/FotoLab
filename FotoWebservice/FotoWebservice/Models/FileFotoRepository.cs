@@ -39,7 +39,7 @@ namespace FotoWebservice.Models
         public string Add(string tempFile, int fotoserieId, int id, string extension)
         {
             string filename = id.ToString() + extension;
-            string permPath = Path.Combine(FileFotoRepository.RemoveBadPathChars(FotoserieDirectoryExists(fotoserieId.ToString())), FileFotoRepository.RemoveBadPathChars(filename));
+            string permPath = Path.Combine(FileFotoRepository.RemoveBadPathChars(FotoserieDirectoryExists(fotoserieId)), FileFotoRepository.RemoveBadPathChars(filename));
 
             string otherPath = ImageTypeExists(permPath);
             if (otherPath != string.Empty)
@@ -53,21 +53,40 @@ namespace FotoWebservice.Models
             return permPath;
         }
 
-        public void Get(string fotoserieKey, int id, Byte[] fotoByteArray)
+        public string Get(int fotoserieId, int id)
         {
-            string fotoseriePath = FotoserieDirectoryExists(fotoserieKey);
+            string returnPath = "";
+            string fotoseriePath = FotoserieDirectoryExists(fotoserieId);
 
+            foreach (string ext in this.acceptList)
+            {
+                string fullPath = Path.Combine(fotoseriePath, id + ext);
+                if (File.Exists(fullPath))
+                {
+                    returnPath = fullPath;
+                }
+            }
 
+            return returnPath;
         }
 
-        public void Remove(string fotoserieKey, int id)
+        public void Remove(int fotoserieId, int id)
         {
-            string fotoseriePath = FotoserieDirectoryExists(fotoserieKey);
+            string fotoseriePath = FotoserieDirectoryExists(fotoserieId);
+
+            foreach (string ext in this.acceptList)
+	        {
+                string fullPath = Path.Combine(fotoseriePath, id + ext);
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+                }
+	        }
         }
 
-        private string FotoserieDirectoryExists(string fotoserieKey)
+        private string FotoserieDirectoryExists(int fotoserieId)
         {
-            string fotoseriePath = Path.Combine(this.basePath, fotoserieKey);
+            string fotoseriePath = Path.Combine(this.basePath, fotoserieId.ToString());
 
             if (!Directory.Exists(fotoseriePath))
             {

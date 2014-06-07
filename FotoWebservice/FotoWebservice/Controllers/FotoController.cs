@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
@@ -18,9 +19,12 @@ namespace FotoWebservice.Controllers
         SqlFotoRepository repository = new SqlFotoRepository();
         FileFotoRepository filerepo = new FileFotoRepository();
 
-        // GET: api/fotoserie/{fotoserie_id}/foto
-        public IEnumerable<int> Get(int fotoserieId)
+        // GET: api/fotoserie/{fotoserie_id}/foto/all
+        public IEnumerable<int> GetAll()
         {
+            string fotoserieKey = this.FotoserieKey();
+
+            int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
             IEnumerable<int> fotoIds = repository.GetAll(fotoserieId);
 
             if (fotoIds == null)
@@ -37,10 +41,33 @@ namespace FotoWebservice.Controllers
         }
 
         // GET: api/fotoserie/{fotoserie_id}/foto/5
-        public Byte[] Get(int fotoserieId, int id)
+/*        [HttpGet]
+        [Route("~/fotoserie/{fotoserie_key}/foto/{id}")]*/
+        public HttpResponseMessage Get()
         {
-            return null;
-          //  return repository.Get(fotoserieId, id);
+            string fotoserieKey = this.FotoserieKey();
+            int fotoId = this.Id();
+
+            int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
+            string fullPath = filerepo.Get(fotoserieId, fotoId);
+
+            Debug.WriteLine("fullPath: " + fullPath);
+            Debug.WriteLine("fotoserieKey: " + fotoserieKey);
+            Debug.WriteLine("fotoserieId: " + fotoserieId);
+            Debug.WriteLine("fotoId: " + fotoId.ToString()); 
+
+            if (fullPath != string.Empty)
+            {
+                HttpResponseMessage response = new HttpResponseMessage();
+                response.Content = new StreamContent(new FileStream(fullPath, FileMode.Open));
+                response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+
+                return response;
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
         }
 
         // POST: api/fotoserie/{fotoserie_id}/foto
@@ -50,14 +77,16 @@ namespace FotoWebservice.Controllers
         }*/
 
         // DELETE: api/fotoserie/{fotoserie_id}/foto/5
-        public void Delete(int fotoserieId, int id)
+        public void Delete(string fotoserieKey, int id)
         {
+            int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
+
             repository.Remove(fotoserieId, id);
         }
 
        /* [Route("~/fotoserie/{fotoserieId:int}/foto")]
         [HttpPost]*/
-        public async Task<HttpResponseMessage> Post()
+        public async Task<HttpResponseMessage> Post() // parameter: fotoserie_key
         {
             // http://www.asp.net/web-api/overview/working-with-http/sending-html-form-data,-part-2
 
@@ -109,11 +138,11 @@ namespace FotoWebservice.Controllers
             }
         }
 
-        private int FotoserieId()
+        private int Id()
         {
             // Het lukt niet om de url-parameter fotoserieId meteen mee te sturen en als parameter voor een functie te gebruiken.
             // Daarom op deze manier handmatig de parameter ophalen uit de request
-            return Convert.ToInt32(Request.GetRouteData().Values["fotoserie_id"]);
+            return Convert.ToInt32(Request.GetRouteData().Values["id"]);
         }
 
         private string FotoserieKey()
