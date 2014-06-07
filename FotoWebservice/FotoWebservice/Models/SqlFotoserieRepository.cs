@@ -112,6 +112,26 @@ namespace FotoWebservice.Models
             }
         }
 
+        public int FindIdForKey(string fotoserieKey)
+        {
+            int id = 0;
+
+            try
+            {
+                string sql = "SELECT id FROM fotoseries WHERE fotoserie_key = @FotoserieKey";
+                SqlParameter parameter = new SqlParameter("FotoserieKey", fotoserieKey);
+
+                DataSet ds = dataProvider.Query(sql, parameter);
+                id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"]);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+
+            return id;
+        }
+
         private Fotoserie DataRowToObject(DataRow row)
         {
             return new Fotoserie { 

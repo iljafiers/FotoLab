@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -68,37 +69,57 @@ namespace FotoWebservice.Models
             }
         }
 
-        public int Add(int fotoserieId)
+        public int Add(int fotoserieId, string md5)
         {
-            try
-            {
-                string sql = "INSERT INTO foto (fotoserie_id) OUTPUT INSERTED.ID AS Id VALUES (@FotoserieId)";
-                List<SqlParameter> parameters = new List<SqlParameter> { 
-                    new SqlParameter("FotoserieId", fotoserieId)
-                };
+            int id = 0;
 
-                DataSet ds = dataProvider.Query(sql, parameters);
-                int id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"]);
+    //        try
+     //       {
+                string sql = "sp_InsertFoto"; //"IF NOT EXISTS(SELECT 1 FROM fotos WHERE md5 = '@Md5') BEGIN INSERT INTO fotos (fotoserie_id, md5) OUTPUT INSERTED.ID AS Id VALUES (@FotoserieId, @md5) END";
 
-                return id;
-            }
+                SqlParameter param1 = new SqlParameter("@fotoserieId", fotoserieId);
+                param1.Direction = ParameterDirection.Input;
+                param1.DbType = DbType.Int32;
+
+                SqlParameter param2 = new SqlParameter("@md5", md5);
+                param2.Direction = ParameterDirection.Input;
+                param2.DbType = DbType.String;
+                param2.Size = 32;
+
+                List<SqlParameter> parameters = new List<SqlParameter> { param1, param2 }; 
+
+                DataSet ds = dataProvider.Query(sql, parameters, true);
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"]);
+                }               
+       /*     }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message, ex);
-            }
+            }*/
+
+            return id;
         }
 
         public Foto AddPath(int id, string fotoPath)
         {
             try
             {
-                string sql = "UPDATE foto (foto_path) VALUES (@FotoPath) WHERE id = @Id";
+                string sql = "UPDATE foto SET foto_path = @FotoPath WHERE id = @Id";
                 List<SqlParameter> parameters = new List<SqlParameter> { 
                     new SqlParameter("Id", id),
                     new SqlParameter("FotoPath", fotoPath)
                 };
 
-                dataProvider.Query(sql, parameters);
+                string debugSql = sql;
+                foreach (SqlParameter p in parameters)
+                {
+                    debugSql = debugSql.Replace(p.ParameterName, p.Value.ToString());
+                }
+                Debug.WriteLine(debugSql);
+
+                dataProvider.Execute(sql, parameters);
 
                 Foto foto = new Foto();
                 foto.Id = id;

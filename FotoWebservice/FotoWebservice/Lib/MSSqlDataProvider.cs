@@ -18,27 +18,72 @@ namespace FotoWebservice.Lib
             this.connectionstring = WebConfigurationManager.ConnectionStrings["fotolabdatabase"].ConnectionString;
         }
 
-        public DataSet Query(string sql, List<SqlParameter> parameters)
+
+        public DataSet Query(SqlCommand cmd)
         {
             DataSet ds = new DataSet();
 
             using (SqlConnection connection = new SqlConnection(this.connectionstring))
             {
                 connection.Open();
-                SqlCommand cmd = BuildSqlCommand(sql, parameters, connection);
                 ds = BuildDataSet(cmd);
                 connection.Close();
             }
 
             return ds;
         }
-        public DataSet Query(string sql, SqlParameter parameter)
+        public DataSet Query(string sql, List<SqlParameter> parameters, bool storedProcedure = false)
         {
-            return Query(sql, new List<SqlParameter> { parameter });
+            DataSet ds = new DataSet();
+
+            using (SqlConnection connection = new SqlConnection(this.connectionstring))
+            {
+                connection.Open();
+                SqlCommand cmd = BuildSqlCommand(sql, parameters, connection, storedProcedure);
+                ds = BuildDataSet(cmd);
+                connection.Close();
+            }
+
+            return ds;
         }
-        public DataSet Query(string sql)
+        public DataSet Query(string sql, SqlParameter parameter, bool storedProcedure = false)
         {
-            return Query(sql, new List<SqlParameter>());
+            return Query(sql, new List<SqlParameter> { parameter }, storedProcedure);
+        }
+        public DataSet Query(string sql, bool storedProcedure = false)
+        {
+            return Query(sql, new List<SqlParameter>(), storedProcedure);
+        }
+
+        public void Execute(SqlCommand cmd)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionstring))
+            {
+                connection.Open();               
+                cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+        public void Execute(string sql, List<SqlParameter> parameters, bool storedProcedure = false)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionstring))
+            {
+                connection.Open();
+                SqlCommand cmd = BuildSqlCommand(sql, parameters, connection, storedProcedure);
+
+                cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        public void Execute(string sql, SqlParameter parameter, bool storedProcedure = false)
+        {
+            Execute(sql, new List<SqlParameter> { parameter }, storedProcedure);
+        }
+
+        public void Execute(string sql, bool storedProcedure = false)
+        {
+            Execute(sql, new List<SqlParameter>(), storedProcedure);
         }
 
        /* public SqlDataReader QueryReader(string sql, List<SqlParameter> parameters)
@@ -57,9 +102,15 @@ namespace FotoWebservice.Lib
             return cmd.ExecuteReader();
         }*/
 
-        private SqlCommand BuildSqlCommand(string sql, List<SqlParameter> parameters, SqlConnection connection)
+        private SqlCommand BuildSqlCommand(string sql, List<SqlParameter> parameters, SqlConnection connection, bool storedProcedure)
         {
             SqlCommand cmd = new SqlCommand(sql, connection);
+
+            if (storedProcedure)
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+            }
+
             foreach (SqlParameter param in parameters)
             {
                 cmd.Parameters.Add(param);

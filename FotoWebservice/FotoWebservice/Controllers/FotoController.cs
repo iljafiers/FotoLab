@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -66,8 +67,9 @@ namespace FotoWebservice.Controllers
             }
 
             try
-            {                
-                int fotoserieId = FotoserieId();
+            {
+                string fotoserieKey = FotoserieKey();
+                int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
 
                 var provider = new MultipartFormDataStreamProvider(filerepo.TempPath);
 
@@ -77,20 +79,29 @@ namespace FotoWebservice.Controllers
                 // This illustrates how to get the file names.
                 foreach (MultipartFileData file in provider.FileData)
                 {
-                    int id = repository.Add(fotoserieId);
+                    string md5 = FileFotoRepository.CalculateMD5Hash(File.ReadAllBytes(file.LocalFileName));
+                    int id = repository.Add(fotoserieId, md5);
 
-                    string extension = Path.GetExtension(file.Headers.ContentDisposition.FileName);
+                    if (id != null && id > 0) // id > 0 dus het plaatje is toegevoegd aan de database
+                    {
+                        string originalFilename = file.Headers.ContentDisposition.FileName.ToString().ToLower();
+                        originalFilename = FileFotoRepository.RemoveBadPathChars(originalFilename);
 
+                        string[] pointParts = originalFilename.Split('.'); //CommonUtils.GetFileExtension(originalFilename); //  Path.GetExtension(originalFilename);//info.Extension; // 
+                        string extension = "." + pointParts.Last();
 
-                    string fotoPath = filerepo.Add(file.LocalFileName, fotoserieId, id, extension);
+                        string fotoPath = filerepo.Add(file.LocalFileName, fotoserieId, id, extension);
 
-                    repository.AddPath(id, fotoPath);
-
-                    Debug.WriteLine(file.Headers.ContentDisposition.FileName);
-                    Debug.WriteLine("Server file path: " + file.LocalFileName);
+                        return Request.CreateResponse(HttpStatusCode.Created);
+                    }
+                    else // Niet kunnen toevoegen aan de database, dus plaatje bestond al, dus temp file verwijderen
+                    {
+                        File.Delete(file.LocalFileName);
+                        return Request.CreateResponse(HttpStatusCode.Conflict);
+                    }
                 }
-                
-                return Request.CreateResponse(HttpStatusCode.OK);
+
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
             catch (Exception ex)
             {
@@ -103,6 +114,11 @@ namespace FotoWebservice.Controllers
             // Het lukt niet om de url-parameter fotoserieId meteen mee te sturen en als parameter voor een functie te gebruiken.
             // Daarom op deze manier handmatig de parameter ophalen uit de request
             return Convert.ToInt32(Request.GetRouteData().Values["fotoserie_id"]);
+        }
+
+        private string FotoserieKey()
+        {
+            return Convert.ToString(Request.GetRouteData().Values["fotoserie_key"]);
         }
     }
 }

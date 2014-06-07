@@ -24,7 +24,7 @@ go
 
 
 /*==============================================================*/
-/* Table: Gebruikers                                            */
+/* Tables                                                       */
 /*==============================================================*/
 create table klanten (
    id               	int           		primary key identity not null,
@@ -32,21 +32,23 @@ create table klanten (
 )
 go
 
-create table fotoserie (
+create table fotoseries (
 	id 					int 				primary key identity not null,
-	serie_key			varchar(50)			unique not null 				
+	fotoserie_key			varchar(50)			unique not null,
+	fotoproducent_id	int 				,
+	datum				date 				not null,
 )
 go
 
  -- MAX path limit: http://stackoverflow.com/questions/265769/maximum-filename-length-in-ntfs-windows-xp-and-windows-vista
-create table foto (
+create table fotos (
 	id 					int 				primary key identity not null,
 	fotoserie_id		int 				not null,
-	foto_path			varchar(260)		not null
+	md5					varchar(32)			unique not null
 )
 go
 
-create table klant_fotoserie (
+create table klanten_fotoseries (
 	klant_id			int 				not null,
 	fotoserie_id		int 				not null
 )
@@ -67,7 +69,7 @@ create table bestellingen (
 )
 go
 
-create table bestelling_foto (
+create table bestellingen_fotos (
 	bestelling_id		int 				not null,
 	foto_id				int 				not null,
 	fotoproduct_id		int 				not null
@@ -81,4 +83,32 @@ create table fotoproducten (
 	naam				varchar(255)		unique not null,
 	meerprijs			smallmoney			not null
 )
+go
+
+create table fotoproducenten (
+	id 					int 				primary key identity not null,
+	naam				varchar(842)		not null,
+	adres 				varchar(255)        not null,
+	woonplaats 			varchar(255) 		not null
+)
+go
+
+/*==============================================================*/
+/* Stored Procedures                                            */
+/*==============================================================*/
+
+CREATE PROC sp_InsertFoto
+@fotoserieId 		int,
+@md5 				varchar(32)
+AS 
+BEGIN
+	IF NOT EXISTS(SELECT 1 FROM fotos WHERE md5 = @md5)
+	BEGIN 
+		INSERT INTO fotos (fotoserie_id, md5) OUTPUT INSERTED.ID AS Id VALUES (@fotoserieId, @md5) 
+	END
+	ELSE
+	BEGIN
+		SELECT 0 AS Id;
+	END
+END
 go

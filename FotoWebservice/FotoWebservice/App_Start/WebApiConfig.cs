@@ -23,7 +23,7 @@ namespace FotoWebservice
             // Foto
             config.Routes.MapHttpRoute(
                 name: "FotoApi",
-                routeTemplate: "api/fotoserie/{fotoserie_id}/foto/{foto_id}",
+                routeTemplate: "api/fotoserie/{fotoserie_key}/foto/{foto_id}",
                 defaults: new { controller = "Foto", foto_id = RouteParameter.Optional }
             );
 

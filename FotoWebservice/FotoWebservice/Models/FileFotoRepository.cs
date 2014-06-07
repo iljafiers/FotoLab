@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -21,9 +24,12 @@ namespace FotoWebservice.Models
 
         public FileFotoRepository()
         {
-            FotoWebservice.Lib.FotoApiSection config = (FotoWebservice.Lib.FotoApiSection)System.Configuration.ConfigurationManager.GetSection("fotoApiGroup/fotoApi");
+            /*FotoWebservice.Lib.FotoApiSection config = (FotoWebservice.Lib.FotoApiSection)System.Configuration.ConfigurationManager.GetSection("fotoApiGroup/fotoApi");
             basePath = HttpContext.Current.Server.MapPath(config.BasePath.Name);
-            tempPath = HttpContext.Current.Server.MapPath(config.TempPath.Name);
+            tempPath = HttpContext.Current.Server.MapPath(config.TempPath.Name);*/
+
+            basePath = HttpContext.Current.Server.MapPath("~/Fotos/");
+            tempPath = HttpContext.Current.Server.MapPath("~/App_Data/Upload_Temp");
         }
 
         public string TempPath { 
@@ -32,9 +38,10 @@ namespace FotoWebservice.Models
 
         public string Add(string tempFile, int fotoserieId, int id, string extension)
         {
-            string permPath = Path.Combine(FotoserieDirectoryExists(fotoserieId.ToString()), id.ToString(), extension);
+            string filename = id.ToString() + extension;
+            string permPath = Path.Combine(FileFotoRepository.RemoveBadPathChars(FotoserieDirectoryExists(fotoserieId.ToString())), FileFotoRepository.RemoveBadPathChars(filename));
 
-            string otherPath = FileExists(permPath);
+            string otherPath = ImageTypeExists(permPath);
             if (otherPath != string.Empty)
             {
                 File.Delete(tempFile);
@@ -61,11 +68,6 @@ namespace FotoWebservice.Models
         private string FotoserieDirectoryExists(string fotoserieKey)
         {
             string fotoseriePath = Path.Combine(this.basePath, fotoserieKey);
-            Uri uriFotoseriePath = new Uri(fotoseriePath);
-            if (!uriFotoseriePath.IsWellFormedOriginalString())
-            {
-                throw new FileNotFoundException();
-            }
 
             if (!Directory.Exists(fotoseriePath))
             {
@@ -75,7 +77,7 @@ namespace FotoWebservice.Models
             return fotoseriePath;
         }
 
-        private string FileExists(string fullFilePath)
+        private string ImageTypeExists(string fullFilePath)
         {
             string extension = Path.GetExtension(fullFilePath);
 
@@ -91,5 +93,37 @@ namespace FotoWebservice.Models
 
             return "";
         }
+
+        public static string RemoveBadPathChars(string path) {
+            string[] badChars = new string[] { "\"", "<", ">", "|", "\b", "\0", "\t" };
+
+            foreach (string badChr in badChars)
+	        {
+		        path = path.Replace(badChr, "");
+	        }
+
+            return path;
+        }
+
+        public static string CalculateMD5Hash(string input)
+        {
+            byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+            return FileFotoRepository.CalculateMD5Hash(inputBytes);
+        }
+
+        public static string CalculateMD5Hash(byte[] input)
+        {
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] hash = md5.ComputeHash(input);
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
+        }
+
+
     }
 }
