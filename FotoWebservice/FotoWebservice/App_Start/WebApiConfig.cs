@@ -15,12 +15,21 @@ namespace FotoWebservice
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+
             // Foto all
             config.Routes.MapHttpRoute(
                 name: "FotoApiAll",
                 routeTemplate: "api/fotoserie/{fotoserie_key}/foto/all",
                 defaults: new { controller = "Foto", action = "GetAll" }
             );
+
+            // Foto Get
+            config.Routes.MapHttpRoute(
+                name: "FotoApiGet",
+                routeTemplate: "api/fotoserie/{fotoserie_key}/foto/{id}",
+                defaults: new { controller = "Foto", action = "Get" }
+            );
+
             // Foto
             config.Routes.MapHttpRoute(
                 name: "FotoApi",

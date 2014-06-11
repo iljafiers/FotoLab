@@ -51,15 +51,17 @@ namespace FotoWebservice.Controllers
             int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
             string fullPath = filerepo.Get(fotoserieId, fotoId);
 
-            Debug.WriteLine("fullPath: " + fullPath);
+            /*Debug.WriteLine("fullPath: " + fullPath);
             Debug.WriteLine("fotoserieKey: " + fotoserieKey);
             Debug.WriteLine("fotoserieId: " + fotoserieId);
-            Debug.WriteLine("fotoId: " + fotoId.ToString()); 
+            Debug.WriteLine("fotoId: " + fotoId.ToString()); */
 
             if (fullPath != string.Empty)
             {
                 HttpResponseMessage response = new HttpResponseMessage();
                 response.Content = new StreamContent(new FileStream(fullPath, FileMode.Open));
+
+                
                 response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
 
                 return response;
