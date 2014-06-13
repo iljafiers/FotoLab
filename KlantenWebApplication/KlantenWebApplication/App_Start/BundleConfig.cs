@@ -40,9 +40,11 @@ namespace KlantenWebApplication
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                  "~/Content/bootstrap.css",
-                 "~/Content/Site.css"));
+                 "~/Content/font-awesome.css",
+                 "~/Content/site.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/fotolab").Include("~/Scripts/fotolab/Main.js"));
+            bundles.Add(new ScriptBundle("~/bundles/fotolab").Include(
+                "~/Scripts/fotolab/site.js-*"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

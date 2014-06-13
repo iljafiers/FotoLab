@@ -17,13 +17,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="@Url.Action("Index", "Home", null, Request.Url.Scheme)" class="navbar-brand"><img src="~/Content/Images/fotolablogo.png" style="width:22px" /> Fotolab Inc.</a> 
-</div>
+                <a href="@Url.Action("Index", "Home", null, Request.Url.Scheme)" class="navbar-brand"><img src="~/Content/Images/fotolablogo.png" style="width:22px" /> Fotolab Inc.</a>
+            </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <!--<li>@Html.ActionLink("Fotolab", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>-->
-                 </ul>
+                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

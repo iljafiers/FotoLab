@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("KlantenWebApplication")]
+[assembly: AssemblyTitle("KlantenWebApplication.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("KlantenWebApplication")]
+[assembly: AssemblyProduct("KlantenWebApplication.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a7213c57-8937-4ec0-a7a7-ec29b61a0433")]
+[assembly: Guid("fb68e015-3c18-44ed-9ec8-206317b3313f")]
 
 // Version information for an assembly consists of the following four values:
 //
