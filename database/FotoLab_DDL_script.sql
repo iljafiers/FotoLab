@@ -38,7 +38,7 @@ create table fotoseries (
 	fotoserie_key			varchar(50)			unique not null,
 	fotoproducent_id	int 				,
 	datum				date 				not null,
-	gepubliseerd		bool				not null
+	gepubliseerd		bit				not null
 )
 go
 
