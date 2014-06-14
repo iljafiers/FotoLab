@@ -1,11 +1,42 @@
 ﻿<!-- Begin content -->
 <div class="row">
     <div class="col-md-12">
-    	
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title" data-bind="text: currentSection().titel"></h3>
+			</div>
+			<div class="panel-body" data-bind="template: { name: displaySection }">
+				
+			</div>
+			<div class="btn-group" id="navControls">
+			    <button class="btn btn-default" data-bind="enable: previousEnabled, click: previous" type="button">Vorige</button>
+			    <button class="btn btn-default"data-bind="enable: nextEnabled, click: next" type="button">Volgende</button>
+			    <button class="btn btn-default"data-bind="enable: previousEnabled, click: reset" type="button">Reset</button>
+		    </div>
+		</div>
 
 	   <div id="fotolabsite">
 	    	<div id="fotolab_login" class="section">
-	    		Login
+	    		<div class="row">
+	    			<div class="form-group col-md-12">
+		    			<label class="control-label" for="klantkey">Key</label>
+			    		<input class="form-control" data-bind="value: klant.key" placeholder="3653695KL"/>
+		    		</div>
+	    		</div>
+	    	</div>
+
+	    	<div id="fotolab_klantgegevens" class="section">
+	    		<h3>Klantgegevens</h3>
+	    		<label for="klantnaam">Naam</label>
+	    		<input  id="klantnaam" data-bind="value: klant.naam"/>
+	    		<label for="klantstraat">Straat</label>
+	    		<input  id="klantstraat"data-bind="value: klant.straat"/>
+	    		<label for="klanthuisnummer">Huisnummer</label>
+	    		<input  id="klanthuisnummer"data-bind="value: klant.huisnummer"/>
+	    		<label for="klantpostcode">Postcode</label>
+	    		<input  id="klantpostcode"data-bind="value: klant.postcode"/>
+	    		<label for="klantwoonplaats">Woonplaats</label>
+	    		<input  id="klantwoonplaats"data-bind="value: klant.woonplaats"/>
 	    	</div>
 
 	    	<div id="fotolab_select_fotoserie" class="section">
@@ -20,10 +51,6 @@
 	    		Productenlijst
 	    	</div>
 
-	    	<div id="fotolab_klantgegevens" class="section">
-	    		Klantgegevens
-	    	</div>
-
 	    	<div id="fotolab_payment" class="section">
 	    		Betaling selecteren
 	    	</div>
@@ -31,20 +58,15 @@
 	    	<div id="fotolab_thanks" class="section">
 	    		Bedankt voor uw bestelling!
 	    	</div>
-	        <button data-bind="click: getSections">Blaaat</button>
+
+	    </div>
+<br /><br /><br />
+	    <div id="fotolabcart" >
 	    </div>
 
-		<table>
-		    <thead><tr>
-		        <th>Section name</th>
-		    </tr></thead>
-		    <!-- Todo: Generate table body -->
-		    <tbody data-bind="foreach: sections">
-		        <tr>
-		            <td data-bind="text: domId"></td>
-		        </tr>    
-		    </tbody>
-		</table>
+	    <p data-bind="text: currentSectionKey"></p>
+
+	    <button data-bind="click: enableNext">Enable Next</button>
 
 
 

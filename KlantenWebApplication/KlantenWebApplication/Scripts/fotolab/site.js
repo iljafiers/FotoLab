@@ -1,7 +1,10 @@
-﻿function Section(domId) {
+function Section(template, titel, enabled, enableNext) {
 	var self = this;
 
-	self.domId = ko.observable(domId);
+	self.template = template;
+	self.titel = ko.observable(titel);
+	self.enabled = ko.observable(enabled);
+	self.enableNext = enableNext; // function
 }
 
 function Extra(naam, bedrag) {
@@ -36,10 +39,16 @@ function Fotoserie(key, fotos) {
 	self.fotos = fotos;
 }
 
-function Klant(naam) {
+function Klant() {
 	var self = this;
-	self.naam = ko.observable(naam);
+	self.key = ko.observable();
 	self.fotoseries = ko.observableArray();
+
+	self.naam = ko.observable();
+	self.straat = ko.observable();
+	self.huisnummer = ko.observable();
+	self.postcode = ko.observable();
+	self.woonplaats = ko.observable();
 }
 
 function Order(klant) {
@@ -58,16 +67,59 @@ function Order(klant) {
 function fotolabViewModel() {
 	var self = this;
 
-	self.klant = ko.observable();
-	self.order = ko.observable();
+	self.klant = new Klant();
+	self.order = new Order();
 
-	self.sections = ko.observableArray();
+	self.sections = ko.observableArray([
+		new Section("fotolab_login", "Login", true, function() {} ),
+		new Section("fotolab_select_fotoserie", "Selecteer fotoserie", false, function() {} ),
+		new Section("fotolab_select_fotos", "Selecteer foto's", false, function() {} ),
+		new Section("fotolab_productlist", "Productenlijst", false, function() {} ),
+		new Section("fotolab_klantgegevens", "Klantgegevens", false, function() { } ),
+		new Section("fotolab_payment", "Betaalmethode", false, function() {} ),
+		new Section("fotolab_thanks", "Bedankt voor uw bestelling", false, function() {} )
+	]);
+	self.currentSectionKey = ko.observable(0);
 
-	self.getSections = function() {
+	/*self.getSections = function() {
+		self.sections.removeAll();
+		
 		$("#fotolabsite .section").each(function() {
 			self.sections.push( new Section( $(this).attr("id") ) );
 		});
+	};*/
+
+	self.nextEnabled = ko.computed(function() {
+		return ( self.currentSectionKey() < (self.sections().length - 1) ) && 
+			   ( self.sections()[self.currentSectionKey() + 1].enabled() );
+	});
+	self.previousEnabled = ko.computed(function() {
+		return (self.currentSectionKey() > 0);
+	});
+
+	self.next = function() {
+		if(self.nextEnabled()) { 
+			self.currentSectionKey( self.currentSectionKey() + 1 );
+		}
 	};
+	self.previous = function() {
+		if(self.previousEnabled()) {
+			self.currentSectionKey( self.currentSectionKey() - 1 );
+		}
+	};
+	self.reset = function() {
+		self.currentSectionKey(0);
+	};
+
+	self.displaySection = function() {
+		return self.currentSection().template;
+	};
+	self.enableNext = function() {
+		self.sections()[self.currentSectionKey() + 1].enabled(true);
+	};
+	self.currentSection = ko.computed(function() {
+		return self.sections()[self.currentSectionKey()];
+	});
 }
 
 ko.applyBindings(new fotolabViewModel());
