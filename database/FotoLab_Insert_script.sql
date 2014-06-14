@@ -11,6 +11,10 @@ TRUNCATE TABLE klanten;
 TRUNCATE TABLE fotoseries;
 TRUNCATE TABLE fotos;
 TRUNCATE TABLE klanten_fotoseries;
+TRUNCATE TABLE fotoproducten;
+TRUNCATE TABLE bestellingen;
+TRUNCATE TABLE bestellingen_fotos;
+go
 
 /* Opmerking:
    Een enkel aanhalingsteken binnen een string (zoals in muziekschool 2 en stuk 12) moet
