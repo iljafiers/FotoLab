@@ -1,4 +1,10 @@
-﻿function Extra(naam, bedrag) {
+﻿function Section(domId) {
+	var self = this;
+
+	self.domId = ko.observable(domId);
+}
+
+function Extra(naam, bedrag) {
 	var self = this;
 	self.naam = naam;
 	self.bedrag = bedrag;
@@ -20,7 +26,7 @@ function Foto(id, fotoserie) {
 
 	self.id = id;
 	self.fotoserie = fotoserie;
-	self.
+
 }
 
 function Fotoserie(key, fotos) {
@@ -52,7 +58,16 @@ function Order(klant) {
 function fotolabViewModel() {
 	var self = this;
 
+	self.klant = ko.observable();
+	self.order = ko.observable();
 
+	self.sections = ko.observableArray();
+
+	self.getSections = function() {
+		$("#fotolabsite .section").each(function() {
+			self.sections.push( new Section( $(this).attr("id") ) );
+		});
+	};
 }
 
 ko.applyBindings(new fotolabViewModel());

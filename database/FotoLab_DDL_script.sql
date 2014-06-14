@@ -28,7 +28,8 @@ go
 /*==============================================================*/
 create table klanten (
    id               	int           		primary key identity not null,
-   naam					varchar(45)			not null
+   naam					varchar(45)			not null,
+   klant_key			varchar(50)			not null
 )
 go
 
@@ -51,7 +52,7 @@ go
 
 create table klanten_fotoseries (
 	klant_id			int 				not null,
-	fotoserie_id		int 				not null
+	fotoserie_id		int 				not null,
 )
 go
 

@@ -44,7 +44,7 @@ namespace KlantenWebApplication
                  "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/fotolab").Include(
-                "~/Scripts/fotolab/site.js-*"));
+                "~/Scripts/fotolab/site.js"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
