@@ -16,8 +16,8 @@ TRUNCATE TABLE klanten_fotoseries;
    Een enkel aanhalingsteken binnen een string (zoals in muziekschool 2 en stuk 12) moet
    twee keer worden genoteerd; anders wordt het opgevat als einde-string teken.
 */
-INSERT INTO klanten VALUES ('Pieter Scheffers');
-INSERT INTO klanten VALUES ('Ilja Fiers');
+INSERT INTO klanten(naam, klant_key) VALUES ('Pieter Scheffers', 'abcdefghijkl');
+INSERT INTO klanten(naam, klant_key) VALUES ('Ilja Fiers', 'qwertyuiop');
 GO
 
 INSERT INTO fotoseries (fotoserie_key, datum, gepubliseerd) VALUES ('XAtC9lRSxmuiOjHJ7DGuPTFrhtO9MECY9Pgd1g2pdhUPKDGuwn', '2014-06-06', 0),
