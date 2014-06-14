@@ -20,11 +20,11 @@ INSERT INTO klanten VALUES ('Pieter Scheffers');
 INSERT INTO klanten VALUES ('Ilja Fiers');
 GO
 
-INSERT INTO fotoseries (fotoserie_key, datum) VALUES ('XAtC9lRSxmuiOjHJ7DGuPTFrhtO9MECY9Pgd1g2pdhUPKDGuwn', '2014-06-06'),
-                                         			 ('e4bnWKw2aDxBuM69J814YW2kf9XYUKdWG5kczqjPPUgk4KOWkS', '2013-06-06'),
-                                         			 ('x5pHg3Tg6x27v25LueHPLUXzer8jpnKcMBDhOvsizzCGVVMWkW', '2013-08-03'),
-                                         			 ('hUIl4Q5gRJpznL7K7Zs7fVtAh15nk67zxnaNqh95egk4S8VLpx', '2012-09-15'),
-                                         			 ('flappies_fotoserie_key', '2013-11-12')
+INSERT INTO fotoseries (fotoserie_key, datum, gepubliseerd) VALUES ('XAtC9lRSxmuiOjHJ7DGuPTFrhtO9MECY9Pgd1g2pdhUPKDGuwn', '2014-06-06', 0),
+                                         			 ('e4bnWKw2aDxBuM69J814YW2kf9XYUKdWG5kczqjPPUgk4KOWkS', '2013-06-06', 0),
+                                         			 ('x5pHg3Tg6x27v25LueHPLUXzer8jpnKcMBDhOvsizzCGVVMWkW', '2013-08-03', 0),
+                                         			 ('hUIl4Q5gRJpznL7K7Zs7fVtAh15nk67zxnaNqh95egk4S8VLpx', '2012-09-15', 0),
+                                         			 ('flappies_fotoserie_key', '2013-11-12', 0)
 GO
 
 
