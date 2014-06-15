@@ -14,8 +14,12 @@
 			    <button class="btn btn-danger"data-bind="enable: previousEnabled, click: reset" type="button">Reset</button>
 		    </div>
 		</div>
+    </div>
+</div>
 
 	   <div id="fotolabsite">
+
+
 	    	<div id="fotolab_login" class="section">
 	    		<div class="row">
 	    			<div class="form-group col-md-12">
@@ -25,46 +29,66 @@
 	    		</div>
 	    	</div>
 
+
 	    	<div id="fotolab_klantgegevens" class="section">
     			<div class="row">
 	    			<div class="form-group col-md-12">
-		    			<label class="control-label" for="klantnaam">Key</label>
-			    		<input id="klantnaam" class="form-control" data-bind="value: klant.naam" placeholder="Jan Jansen"/>
+		    			<label class="control-label" for="klantnaam">Naam</label>
+			    		<input id="klantnaam" class="form-control" data-bind="value: klant.naam" placeholder="Naam"/>
 		    		</div>
 	    		</div>
-	    		<label for="klantnaam">Naam</label>
-	    		<input  id="klantnaam" data-bind="value: klant.naam"/>
-	    		<label for="klantstraat">Straat</label>
-	    		<input  id="klantstraat"data-bind="value: klant.straat"/>
-	    		<label for="klanthuisnummer">Huisnummer</label>
-	    		<input  id="klanthuisnummer"data-bind="value: klant.huisnummer"/>
-	    		<label for="klantpostcode">Postcode</label>
-	    		<input  id="klantpostcode"data-bind="value: klant.postcode"/>
-	    		<label for="klantwoonplaats">Woonplaats</label>
-	    		<input  id="klantwoonplaats"data-bind="value: klant.woonplaats"/>
+    			<div class="row">
+	    			<div class="form-group col-md-8">
+		    			<label class="control-label" for="klantstraat">Straat</label>
+			    		<input id="klantstraat" class="form-control" data-bind="value: klant.straat" placeholder="Straat"/>
+		    		</div>
+	    			<div class="form-group col-md-4">
+		    			<label class="control-label" for="klanthuisnummer">Huisnummer</label>
+			    		<input id="klanthuisnummer" class="form-control" data-bind="value: klant.huisnummer" placeholder="Nr."/>
+		    		</div>
+	    		</div>
+    			<div class="row">
+	    			<div class="form-group col-md-4">
+		    			<label class="control-label" for="klantpostcode">Postcode</label>
+			    		<input id="klantpostcode" class="form-control" data-bind="value: klant.postcode" placeholder="Postcode"/>
+		    		</div>
+	    			<div class="form-group col-md-8">
+		    			<label class="control-label" for="klantwoonplaats">Woonplaats</label>
+			    		<input id="klantwoonplaats" class="form-control" data-bind="value: klant.woonplaats" placeholder="Woonplaats"/>
+		    		</div>
+	    		</div>
 	    	</div>
+
 
 	    	<div id="fotolab_select_fotoserie" class="section">
 	    		Fotoserie Selecteren
 	    	</div>
 
+
 	    	<div id="fotolab_select_fotos" class="section">
 	    		Foto's Selecteren
 	    	</div>
+
 
 	    	<div id="fotolab_productlist" class="section">
 	    		Productenlijst
 	    	</div>
 
+
 	    	<div id="fotolab_payment" class="section">
 	    		Betaling selecteren
 	    	</div>
+
 
 	    	<div id="fotolab_thanks" class="section">
 	    		Bedankt voor uw bestelling!
 	    	</div>
 
+
 	    </div>
+
+
+	    
 <br /><br /><br />
 	    <div id="fotolabcart" >
 	    </div>
@@ -75,7 +99,6 @@
 
 
 
-    </div>
-</div>
+
 <!-- End content-->
  

@@ -22,7 +22,7 @@ namespace FotoWebservice.Models
             List<Fotoserie> fotoseries = new List<Fotoserie>();
             try
             {
-                string sql = "SELECT * FROM fotoserie";
+                string sql = "SELECT * FROM fotoseries";
 
                 DataSet ds = dataProvider.Query(sql);
 
@@ -30,21 +30,20 @@ namespace FotoWebservice.Models
                 {
                     fotoseries.Add(DataRowToObject(r));
                 }
-
-                return fotoseries;
             }
             catch (Exception ex)
             {
-                fotoseries = null;
-                return fotoseries;
+                throw new Exception(ex.Message, ex);
             }
+
+            return fotoseries;
         }
 
         public Fotoserie Get(int id)
         {
             try
             {
-                string sql = "SELECT * FROM fotoserie WHERE id = @Id";
+                string sql = "SELECT * FROM fotoseries WHERE id = @Id";
                 SqlParameter parameter = new SqlParameter("Id", id);
 
                 DataSet ds = dataProvider.Query(sql, parameter);
@@ -61,7 +60,7 @@ namespace FotoWebservice.Models
         {
             try
             {
-                string sql = "INSERT INTO fotoserie (serie_key) OUTPUT INSERTED.ID AS Id VALUES (@Key)";
+                string sql = "INSERT INTO fotoseries (serie_key) OUTPUT INSERTED.ID AS Id VALUES (@Key)";
                 List<SqlParameter> parameters = new List<SqlParameter> { 
                     new SqlParameter("Key", fotoserie.Key)
                 };
@@ -81,7 +80,7 @@ namespace FotoWebservice.Models
         {
             try
             {
-                string sql = "DELETE FROM fotoserie WHERE id = @Id";
+                string sql = "DELETE FROM fotoseries WHERE id = @Id";
                 SqlParameter parameter = new SqlParameter("Id", id);
 
                 dataProvider.Query(sql, parameter);
@@ -96,7 +95,7 @@ namespace FotoWebservice.Models
         {
             try
             {
-                string sql = "UPDATE fotoserie SET serie_key = @Key WHERE id = @Id";
+                string sql = "UPDATE fotoseries SET serie_key = @Key WHERE id = @Id";
                 List<SqlParameter> parameters = new List<SqlParameter> { 
                     new SqlParameter("Id", fotoserie.Id),
                     new SqlParameter("Key", fotoserie.Key)
@@ -136,7 +135,7 @@ namespace FotoWebservice.Models
         {
             return new Fotoserie { 
                 Id  = Convert.ToInt32(row["id"]), 
-                Key = Convert.ToString(row["serie_key"]) 
+                Key = Convert.ToString(row["fotoserie_key"]) 
             };
         }
     }

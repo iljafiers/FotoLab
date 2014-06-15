@@ -1,13 +1,16 @@
 ﻿using FotoWebservice.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace FotoWebservice.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class FotoserieController : ApiController
     {
         IFotoserieRepository repository = new SqlFotoserieRepository();
@@ -15,6 +18,7 @@ namespace FotoWebservice.Controllers
         public IEnumerable<Fotoserie> GetAll()
         {
             IEnumerable<Fotoserie> fotoseries = repository.GetAll();
+            Debug.WriteLine("fotoseries.count: " + fotoseries.Count().ToString());
 
             if (fotoseries == null)
             {
@@ -23,7 +27,7 @@ namespace FotoWebservice.Controllers
                     Content = new StringContent("Er is iets mis gegaan."),
                     ReasonPhrase = "Interne server fout"
                 };
-                throw new HttpResponseException(resp);
+                //throw new HttpResponseException(resp);
             }
 
             return fotoseries;

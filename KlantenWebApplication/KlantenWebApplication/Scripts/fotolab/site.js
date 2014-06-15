@@ -24,13 +24,13 @@ function Item(foto) {
 	});	
 }
 
-function Foto(id, fotoserie) {
+/*function Foto(id, fotoserie) {
 	var self = this;
 
 	self.id = id;
 	self.fotoserie = fotoserie;
 
-}
+}*/
 
 function Fotoserie(key, naam, fotoIds) {
 	var self = this;
@@ -38,6 +38,15 @@ function Fotoserie(key, naam, fotoIds) {
 	self.key = key;
 	self.naam = naam;
 	self.fotoIds = fotoIds;
+
+	self.getFotos = function() {
+		$.getJSON("http://localhost:2372/api/fotoserie/", function(dataArr) {
+			var fss = $.map(dataArr, function(datarow) {
+				return new Fotoserie(datarow.serie_key, datarow.naam, datarow.fotos);
+			});
+			self.fotoseries(fss);
+		});
+	};
 }
 
 function Klant() {
@@ -52,7 +61,13 @@ function Klant() {
 	self.woonplaats = ko.observable();
 
 	self.getFotoseries = ko.computed(function() {
-		$.getJSON("http://localhost:2372/api/klant/")
+		//$.getJSON("http://localhost:2372/api/klant/" + self.key() + "/fotoseries");
+		$.getJSON("http://localhost:2372/api/fotoserie/", function(dataArr) {
+			var fss = $.map(dataArr, function(datarow) {
+				return new Fotoserie(datarow.serie_key, datarow.naam, datarow.fotos);
+			});
+			self.fotoseries(fss);
+		});
 	});
 }
 
@@ -74,15 +89,16 @@ function fotolabViewModel() {
 
 	self.klant = new Klant();
 	self.order = new Order();
+	self.fotoserie = ko.observable();
 
 	self.sections = ko.observableArray([
-		new Section("fotolab_login", "Login", true, function() {} ),
-		new Section("fotolab_select_fotoserie", "Selecteer fotoserie", false, function() {} ),
-		new Section("fotolab_select_fotos", "Selecteer foto's", false, function() {} ),
-		new Section("fotolab_productlist", "Productenlijst", false, function() {} ),
-		new Section("fotolab_klantgegevens", "Klantgegevens", false, function() { } ),
-		new Section("fotolab_payment", "Betaalmethode", false, function() {} ),
-		new Section("fotolab_thanks", "Bedankt voor uw bestelling", false, function() {} )
+		new Section("fotolab_login", "Login", true, function() {  return false; } ),
+		new Section("fotolab_select_fotoserie", "Selecteer fotoserie", false, function() { return true; } ),
+		new Section("fotolab_select_fotos", "Selecteer foto's", false, function() { return true; } ),
+		new Section("fotolab_productlist", "Productenlijst", false, function() { return true; } ),
+		new Section("fotolab_klantgegevens", "Klantgegevens", false, function() { return true; } ),
+		new Section("fotolab_payment", "Betaalmethode", false, function() { return true; } ),
+		new Section("fotolab_thanks", "Bedankt voor uw bestelling", false, function() { return true; } )
 	]);
 	self.currentSectionKey = ko.observable(0);
 
@@ -94,9 +110,14 @@ function fotolabViewModel() {
 		});
 	};*/
 
+	self.currentSection = ko.computed(function() {
+		return self.sections()[self.currentSectionKey()];
+	});
+
 	self.nextEnabled = ko.computed(function() {
 		return ( self.currentSectionKey() < (self.sections().length - 1) ) && 
-			   ( self.sections()[self.currentSectionKey() + 1].enabled() );
+			  // ( self.sections()[self.currentSectionKey() + 1].enabled() );
+			   ( self.currentSection().enableNext() );
 	});
 	self.previousEnabled = ko.computed(function() {
 		return (self.currentSectionKey() > 0);
@@ -122,9 +143,9 @@ function fotolabViewModel() {
 	self.enableNext = function() {
 		self.sections()[self.currentSectionKey() + 1].enabled(true);
 	};
-	self.currentSection = ko.computed(function() {
-		return self.sections()[self.currentSectionKey()];
-	});
 }
 
-ko.applyBindings(new fotolabViewModel());
+
+$(document).ready(function() {
+	ko.applyBindings(new fotolabViewModel());
+});

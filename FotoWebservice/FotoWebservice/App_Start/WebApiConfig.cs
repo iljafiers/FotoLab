@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace FotoWebservice
 {
@@ -11,6 +12,11 @@ namespace FotoWebservice
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+
+            // CORS Request doorlaten (Ajax-requests van andere websites)
+            // http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api#create-webapi-project
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors();
 
             // Web API routes
             config.MapHttpAttributeRoutes();
