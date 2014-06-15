@@ -1,7 +1,7 @@
 ﻿<!-- Begin content -->
 <div class="row">
     <div class="col-md-12">
-		<div class="panel panel-default">
+		<div class="panel panel-purple">
 			<div class="panel-heading">
 				<h3 class="panel-title" data-bind="text: currentSection().titel"></h3>
 			</div>
@@ -9,9 +9,9 @@
 				
 			</div>
 			<div class="btn-group" id="navControls">
-			    <button class="btn btn-default" data-bind="enable: previousEnabled, click: previous" type="button">Vorige</button>
-			    <button class="btn btn-default"data-bind="enable: nextEnabled, click: next" type="button">Volgende</button>
-			    <button class="btn btn-default"data-bind="enable: previousEnabled, click: reset" type="button">Reset</button>
+			    <button class="btn btn-purple" data-bind="enable: previousEnabled, click: previous" type="button">Vorige</button>
+			    <button class="btn btn-purple"data-bind="enable: nextEnabled, click: next" type="button">Volgende</button>
+			    <button class="btn btn-danger"data-bind="enable: previousEnabled, click: reset" type="button">Reset</button>
 		    </div>
 		</div>
 
@@ -20,13 +20,18 @@
 	    		<div class="row">
 	    			<div class="form-group col-md-12">
 		    			<label class="control-label" for="klantkey">Key</label>
-			    		<input class="form-control" data-bind="value: klant.key" placeholder="3653695KL"/>
+			    		<input id="klantkey" class="form-control" data-bind="value: klant.key" placeholder="bv. 3653695KL"/>
 		    		</div>
 	    		</div>
 	    	</div>
 
 	    	<div id="fotolab_klantgegevens" class="section">
-	    		<h3>Klantgegevens</h3>
+    			<div class="row">
+	    			<div class="form-group col-md-12">
+		    			<label class="control-label" for="klantnaam">Key</label>
+			    		<input id="klantnaam" class="form-control" data-bind="value: klant.naam" placeholder="Jan Jansen"/>
+		    		</div>
+	    		</div>
 	    		<label for="klantnaam">Naam</label>
 	    		<input  id="klantnaam" data-bind="value: klant.naam"/>
 	    		<label for="klantstraat">Straat</label>

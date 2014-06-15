@@ -37,3 +37,15 @@ textarea {
 #navControls {
     margin: 20px;
 }
+.btn-purple {
+    background-color: #DB28FF;
+    color: white;
+}
+.panel-purple > .panel-heading {
+    background-color: #DB28FF; /*DA6BFF*/
+    color: white;
+    border-color: #DB28FF;
+}
+.panel-purple {
+    border-color: #DB28FF;
+}

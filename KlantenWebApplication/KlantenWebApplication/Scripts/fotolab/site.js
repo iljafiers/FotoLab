@@ -32,11 +32,12 @@ function Foto(id, fotoserie) {
 
 }
 
-function Fotoserie(key, fotos) {
+function Fotoserie(key, naam, fotoIds) {
 	var self = this;
 
 	self.key = key;
-	self.fotos = fotos;
+	self.naam = naam;
+	self.fotoIds = fotoIds;
 }
 
 function Klant() {
@@ -49,6 +50,10 @@ function Klant() {
 	self.huisnummer = ko.observable();
 	self.postcode = ko.observable();
 	self.woonplaats = ko.observable();
+
+	self.getFotoseries = ko.computed(function() {
+		$.getJSON("http://localhost:2372/api/klant/")
+	});
 }
 
 function Order(klant) {
