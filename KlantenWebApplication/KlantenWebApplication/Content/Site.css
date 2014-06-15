@@ -49,3 +49,16 @@ textarea {
 .panel-purple {
     border-color: #DB28FF;
 }
+
+.btn-lightblue {
+    background-color: #12C8F8;
+    color: white;
+}
+.panel-lightblue > .panel-heading {
+    background-color: #12C8F8;
+    color: white;
+    border-color: #12C8F8;
+}
+.panel-lightblue {
+    border-color: #12C8F8;
+}
