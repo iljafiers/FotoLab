@@ -1,9 +1,8 @@
-function Section(template, titel, enabled, enableNext) {
+function Section(template, titel, enableNext) {
 	var self = this;
 
 	self.template = template;
 	self.titel = ko.observable(titel);
-	self.enabled = ko.observable(enabled);
 	self.enableNext = enableNext; // function
 }
 
@@ -39,19 +38,19 @@ function Fotoserie(key, naam, fotoIds) {
 	self.naam = naam;
 	self.fotoIds = fotoIds;
 
-	self.getFotos = function() {
+	/*self.getFotos = function() {
 		$.getJSON("http://localhost:2372/api/fotoserie/", function(dataArr) {
 			var fss = $.map(dataArr, function(datarow) {
 				return new Fotoserie(datarow.serie_key, datarow.naam, datarow.fotos);
 			});
 			self.fotoseries(fss);
 		});
-	};
+	};*/
 }
 
 function Klant() {
 	var self = this;
-	self.key = ko.observable();
+	self.key = ko.observable("");
 	self.fotoseries = ko.observableArray();
 
 	self.naam = ko.observable();
@@ -61,13 +60,16 @@ function Klant() {
 	self.woonplaats = ko.observable();
 
 	self.getFotoseries = ko.computed(function() {
-		//$.getJSON("http://localhost:2372/api/klant/" + self.key() + "/fotoseries");
-		$.getJSON("http://localhost:2372/api/fotoserie/", function(dataArr) {
-			var fss = $.map(dataArr, function(datarow) {
-				return new Fotoserie(datarow.serie_key, datarow.naam, datarow.fotos);
+		if( self.key.length > 0 ) {
+			console.log("ajax call fired to get fotoseries " + self.key);
+			//$.getJSON("http://localhost:2372/api/klant/" + self.key() + "/fotoseries");
+			$.getJSON("http://localhost:2372/api/fotoserie/", function(dataArr) {
+				var fss = $.map(dataArr, function(datarow) {
+					return new Fotoserie(datarow.serie_key, datarow.naam, datarow.fotos);
+				});
+				self.fotoseries(fss);
 			});
-			self.fotoseries(fss);
-		});
+		}
 	});
 }
 
@@ -92,13 +94,13 @@ function fotolabViewModel() {
 	self.fotoserie = ko.observable();
 
 	self.sections = ko.observableArray([
-		new Section("fotolab_login", "Login", true, function() {  return false; } ),
-		new Section("fotolab_select_fotoserie", "Selecteer fotoserie", false, function() { return true; } ),
-		new Section("fotolab_select_fotos", "Selecteer foto's", false, function() { return true; } ),
-		new Section("fotolab_productlist", "Productenlijst", false, function() { return true; } ),
-		new Section("fotolab_klantgegevens", "Klantgegevens", false, function() { return true; } ),
-		new Section("fotolab_payment", "Betaalmethode", false, function() { return true; } ),
-		new Section("fotolab_thanks", "Bedankt voor uw bestelling", false, function() { return true; } )
+		new Section("fotolab_login", "Login", function() {  return (self.klant.key().length > 0); } ),
+		new Section("fotolab_select_fotoserie", "Selecteer fotoserie", function() { return true; } ),
+		new Section("fotolab_select_fotos", "Selecteer foto's", function() { return true; } ),
+		new Section("fotolab_productlist", "Productenlijst", function() { return true; } ),
+		new Section("fotolab_klantgegevens", "Klantgegevens", function() { return true; } ),
+		new Section("fotolab_payment", "Betaalmethode", function() { return true; } ),
+		new Section("fotolab_thanks", "Bedankt voor uw bestelling", function() { return true; } )
 	]);
 	self.currentSectionKey = ko.observable(0);
 
@@ -115,6 +117,12 @@ function fotolabViewModel() {
 	});
 
 	self.nextEnabled = ko.computed(function() {
+		/*if( self.currentSection().enableNext() ) {
+			self.sections()[self.currentSectionKey() + 1].enabled(true);
+		} else {
+			self.sections()[self.currentSectionKey() + 1].enabled(false);
+		}*/
+		
 		return ( self.currentSectionKey() < (self.sections().length - 1) ) && 
 			  // ( self.sections()[self.currentSectionKey() + 1].enabled() );
 			   ( self.currentSection().enableNext() );
@@ -135,6 +143,9 @@ function fotolabViewModel() {
 	};
 	self.reset = function() {
 		self.currentSectionKey(0);
+		self.klant = new Klant();
+		self.order = new Order();
+		self.fotoserie(null);
 	};
 
 	self.displaySection = function() {
@@ -142,6 +153,10 @@ function fotolabViewModel() {
 	};
 	self.enableNext = function() {
 		self.sections()[self.currentSectionKey() + 1].enabled(true);
+	};
+
+	self.showDebug = function() {
+		
 	};
 }
 
