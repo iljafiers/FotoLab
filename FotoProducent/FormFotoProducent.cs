@@ -13,21 +13,17 @@ using System.Web.Script.Serialization;
 
 namespace FotoProducent
 {
-    public partial class Form1 : Form
+    public partial class FormFotoProducent : Form
     {
-        public Form1()
+        public FormFotoProducent()
         {
             InitializeComponent();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
 
         private void OnChangedKlantID(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(this.numericUpDownKlantID.Value);
+            int id = Convert.ToInt32(this.textBoxKlantID);
 
             string url = "http://localhost:2372/api/Klant/" + id;
 
@@ -63,6 +59,21 @@ namespace FotoProducent
                 }
                 throw;
             }
+        }
+
+        private void OnClickOphalenKlant(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClickBrowse(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClickUpload(object sender, EventArgs e)
+        {
+
         }
     }
 }
