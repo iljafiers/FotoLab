@@ -56,6 +56,10 @@ namespace FotoWebservice
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            /* Opmerking Pieter 18-06-2014: 
+             * Ik weet denk ik al waar het fout ging in de attribute routing. Ik gebruikte een variabele met een underscore. Dat mag waarschijnlijk niet.
+             */
         }
     }
 }

@@ -39,6 +39,28 @@ namespace FotoWebservice.Models
             return fotoseries;
         }
 
+        public IEnumerable<Fotoserie> FindAllForKlant()
+        {
+            List<Fotoserie> fotoseries = new List<Fotoserie>();
+            try
+            {
+                string sql = "SELECT * FROM fotoseries";
+
+                DataSet ds = dataProvider.Query(sql);
+
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    fotoseries.Add(DataRowToObject(r));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+
+            return fotoseries;
+        }
+
         public Fotoserie Get(int id)
         {
             try
@@ -138,5 +160,6 @@ namespace FotoWebservice.Models
                 Key = Convert.ToString(row["fotoserie_key"]) 
             };
         }
+
     }
 }

@@ -33,6 +33,26 @@ namespace FotoWebservice.Controllers
             return fotoseries;
         }
 
+        [HttpGet]
+        [Route("api/klant/{klant_key}/fotoseries")]
+        public IEnumerable<Fotoserie> FindAllForKlant(string klant_key)
+        {
+            IEnumerable<Fotoserie> fotoseries = repository.FindAllForKlant();
+            Debug.WriteLine("fotoseries.count: " + fotoseries.Count().ToString());
+
+            if (fotoseries == null)
+            {
+                var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent("Er is iets mis gegaan."),
+                    ReasonPhrase = "Interne server fout"
+                };
+                //throw new HttpResponseException(resp);
+            }
+
+            return fotoseries;
+        }
+
         /*public IEnumerable<Fotoserie> GetAllForCustomer(int customer_id)
         {
             IEnumerable<Fotoserie> fotoseries = repository.GetAllForCustomer();

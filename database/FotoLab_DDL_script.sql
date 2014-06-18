@@ -29,7 +29,11 @@ go
 create table klanten (
    id               	int           		primary key identity not null,
    naam					varchar(45)			not null,
-   klant_key			varchar(50)			not null
+   klant_key			varchar(50)			not null,
+   straat				varchar(50)			,
+   huisnummer			varchar(10)			,
+   postcode				varchar(10)			,
+   woonplaats			varchar(50)			
 )
 go
 
