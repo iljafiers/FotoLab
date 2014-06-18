@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="245f0405-bba4-4b87-9638-63bd578b8b5c" name="FotoLab" linkedPackageId="a5975eee-0124-4aec-a5ca-721880142516" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="cbd5d9c6-6934-40b2-aa1e-bfabd559ad16">
+      <profileInstance Id="5d4230e3-dfe5-4be9-a8ea-d60f46d067b5" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="b244e602-051e-4126-917e-c722fa67379d">
+      <profileInstance Id="47b8789f-aa96-4538-96b5-79fcc60a4121" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="5f67f13b-37c0-4448-a8cc-15fd134a93af" name="Klant" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b25a1b07-2fb3-4d6c-bbd3-daecff0b4bcf" />
+        <ownedAttributesInternal>
+          <property Id="f4e9cb4f-362d-4f57-8e1c-c1813cf7eb3e" name="id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a6427486-3ea7-4c86-a972-ca1ebfe9c152" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="af7dea88-79bc-417b-a892-a96617c4c551" LastKnownName="integer" />
+            </type_NamedElement>
+          </property>
+          <property Id="a63ff655-5b0d-46da-ab67-890306315e07" name="naam" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="4c6b8c34-8640-49b0-842a-12cb30d180fc" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="8e486c9a-a502-4b2a-b73a-74de686414d2" LastKnownName="string" />
+            </type_NamedElement>
+          </property>
+          <property Id="a4253e50-2bc4-434b-a4e3-3a759d3fa8b5" name="klant_key" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6f6db37b-7a9c-4d8b-bd93-d53f8e5e6925" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="8e486c9a-a502-4b2a-b73a-74de686414d2" LastKnownName="string" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="af7dea88-79bc-417b-a892-a96617c4c551" name="integer" isAbstract="false" isLeaf="false" cachedFullName="integer">
+        <elementDefinition Id="4a8abea1-c95b-46b4-bbf4-a4a8c9f76418" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="8e486c9a-a502-4b2a-b73a-74de686414d2" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
+        <elementDefinition Id="a5fb1603-9ff5-4e96-ba7b-b687a87c8eff" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="30b2a3aa-a13e-4959-8340-686bcc61e1e7" name="fotos" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2f09b3b1-443d-4324-8b65-86b8e9a41966" />
+        <targetEnds>
+          <association Id="65b4c495-2eb9-4365-a5a8-c8df8a42901b" isDerived="false" sourceEndRoleName="fotos" targetEndRoleName="Fotograaf" isLeaf="false" isAbstract="false">
+            <classMoniker Id="4644a287-2c63-46b8-910b-9197365822ee" LastKnownName="Fotograaf" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="89dbbc2a-102a-4e9f-ab34-ea4f5808b118" name="fotos" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="b02fdffb-9c1c-4a76-82c5-288319069a25" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="89127b2d-ea0d-40b1-8a8e-944fb4c5a323" name="Fotograaf" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="04461036-3c9a-4c6d-94ac-b909678db001" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="cb4e5b94-5f4e-44c6-ae36-86428a6425e2" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="3f89ac3b-f75c-4e6e-8f85-9f3459fa07c3" name="id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d65be966-1580-4a4f-9c50-ba1dd30ee078" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="5ed3a286-6655-41c4-83a8-973a54dcd43d" LastKnownName="integer" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="5ed3a286-6655-41c4-83a8-973a54dcd43d" name="integer" isAbstract="false" isLeaf="false" cachedFullName="integer">
+        <elementDefinition Id="4a8abea1-c95b-46b4-bbf4-a4a8c9f76418" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="d36706f2-2481-4ddb-bf15-a2e5c68fcb18" name="bestellingen" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="3ab6b31b-2807-41e8-97e1-ca527fa9114d" />
+        <targetEnds>
+          <association Id="78719107-ee8c-4ae5-a6e6-60dbfd4be396" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="5f67f13b-37c0-4448-a8cc-15fd134a93af" LastKnownName="Klant" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="db834e9e-a3d9-4955-82ae-2ff4921fb6e8" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="a286d3e8-6add-47cf-ac4b-c3d51ce70a9f" name="Lower" value="*">
+                      <elementDefinition Id="48227ab6-3690-461a-818a-042d275b019e" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="56415c2f-bb68-4674-ab3c-1a8fe7889bf3" name="Upper" value="*">
+                      <elementDefinition Id="009444a1-d7d7-46ed-bb92-d3d72f447cb9" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="76bb9bc3-42e0-40c7-9192-7731c71ebc95" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b679994f-d8bb-4009-822d-f9f66bd92734" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="562a029a-5f5f-4e7b-97f3-c305fe105759" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="dff79024-484d-4eec-b9b3-4f8bd3324e94" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="a30f6a15-b5b5-4e98-8d66-364e5d839bfd" name="datum" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="fbbd5e83-ac9d-49f5-babc-854ddf5fa62b" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="57189bd8-c765-4f5c-adf3-04d4a360ca6f" LastKnownName="date" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="57189bd8-c765-4f5c-adf3-04d4a360ca6f" name="date" isAbstract="false" isLeaf="false" cachedFullName="date">
+        <elementDefinition Id="cc46ed99-ef21-492b-9368-94c1208d484a" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="6b7c4d1e-5475-40ca-a569-36f7bd28c651" name="Fotoproducten" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2b515760-03d0-4126-ae62-fa6df7e43ac4" />
+        <ownedAttributesInternal>
+          <property Id="e1d4aba6-5fa0-47a3-bd8b-6458b626a1fe" name="naam" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="9a3a82e8-71c8-47fd-b00a-9f26f7279017" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="8e486c9a-a502-4b2a-b73a-74de686414d2" LastKnownName="string" />
+            </type_NamedElement>
+          </property>
+          <property Id="e17db1bb-c4c6-4fe5-b7e4-ce5ffdeefe45" name="prijs" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="3c87139a-1d53-4f89-b1bd-667acb504525" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="81df0f96-5621-4841-81ce-231635a5cc43" LastKnownName="smallmoney" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="81df0f96-5621-4841-81ce-231635a5cc43" name="smallmoney" isAbstract="false" isLeaf="false" cachedFullName="smallmoney">
+        <elementDefinition Id="51515ec9-e185-4d22-9740-b2fc836254b3" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="63cbe120-d0b0-4207-8ff8-e43256eb1bcf" name="bestelregel" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b380af10-26b1-42c2-b9e8-de35e0afab89" />
+        <targetEnds>
+          <association Id="48a71d0d-9c9c-4e03-a55f-ac53bb144710" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="6b7c4d1e-5475-40ca-a569-36f7bd28c651" LastKnownName="Fotoproducten" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="87c76fbb-24c8-4a4d-a383-8005432489a2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="336ccb87-df60-47db-a0ba-d3dbad4be3f1" name="Lower" value="*">
+                      <elementDefinition Id="a667ecfb-8d8a-4c37-8a39-51cb8dade7c6" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="87929db5-e2af-4172-9840-b2681d939267" name="Upper" value="*">
+                      <elementDefinition Id="40ada623-7eee-4c27-a20a-2864bd622239" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="3bb0d3d0-e41d-4941-851e-f4ef3664ae21" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="559f4d99-1200-492e-8693-ecaf25e31537" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="95708f6a-c1e5-417f-a840-b4873b88b21c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="83d725cc-9fa2-4042-ad12-5cda96b10ea2" />
+          </association>
+          <association Id="70f0ba5a-bd38-403c-9a12-7e2cd9cfab74" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="30b2a3aa-a13e-4959-8340-686bcc61e1e7" LastKnownName="fotos" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="636d737c-f163-484b-889f-ed72057b877a" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="8db0d60b-9861-4dab-bf61-9896f9609045" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="921f838f-cbd3-4eb5-be89-3f0d2e4b974f" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="532d5d18-d75b-4fe1-b04c-07941c8619a4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="bbdf7934-afb6-4efd-970c-67a7972e84d0" />
+          </association>
+          <association Id="672e75fc-1c12-4773-a89f-a41103f46e1e" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="d36706f2-2481-4ddb-bf15-a2e5c68fcb18" LastKnownName="bestellingen" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d5707c2f-7541-438e-88c2-2b8a41b88f6e" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="6c013fd1-1eab-47ff-b3f8-883bee289b50" name="Lower" value="1">
+                      <elementDefinition Id="5824533c-d93e-4966-982f-96dcde6274df" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="0f1e69e3-332e-4fa5-b944-58824f8fcd86" name="Upper" value="*">
+                      <elementDefinition Id="a8a92567-c194-4d88-8d2d-62271ef32ac5" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="c4b7977b-c35a-4e6c-84f6-dfdfeaab0296" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="fa5e20d0-f911-4aa4-a218-ac0a7d06222c" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="dfc0663b-f234-44fe-ac56-090715ef9376" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c3f15175-c56c-4a48-9169-85ef439f5f12" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="f60e2eac-7d85-4ee5-95c2-18da237856dc" name="id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ca6f62b8-04f5-49ee-834b-4234ceb12b48" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="af7dea88-79bc-417b-a892-a96617c4c551" LastKnownName="integer" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="4644a287-2c63-46b8-910b-9197365822ee" name="Fotograaf" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="bbb45611-db64-46f8-9f95-30afa36ca577" />
+        <ownedAttributesInternal>
+          <property Id="8cc3cf6a-4386-485d-842e-9f5a1c86d555" name="naam" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="3abe92f2-f38a-40f1-8478-0b7f85c47567" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="8e486c9a-a502-4b2a-b73a-74de686414d2" LastKnownName="string" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="a5975eee-0124-4aec-a5ca-721880142516" name="Fotolab">
+    <elementDefinition Id="2967265d-f839-4211-bec8-a9756246ab1f" />
+  </package>
+</logicalClassDesignerModel>

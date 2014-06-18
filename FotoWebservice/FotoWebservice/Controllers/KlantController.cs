@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using FotoWebservice.Models;
 
 namespace FotoWebservice.Controllers
 {
@@ -16,9 +17,11 @@ namespace FotoWebservice.Controllers
         }
 
         // GET: api/Klant/5
-        public string Get(int id)
+        public Klant Get(int id)
         {
-            return "value";
+            SqlKlantRepository repo = new SqlKlantRepository();
+            Klant k = repo.Get(id);
+            return k;
         }
 
         // POST: api/Klant
