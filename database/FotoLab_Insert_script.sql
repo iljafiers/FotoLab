@@ -13,7 +13,7 @@ TRUNCATE TABLE fotos;
 TRUNCATE TABLE klanten_fotoseries;
 TRUNCATE TABLE fotoproducten;
 TRUNCATE TABLE bestellingen;
-TRUNCATE TABLE bestellingen_fotos;
+TRUNCATE TABLE bestellingregels;
 go
 
 /* Opmerking:
