@@ -30,17 +30,17 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Retrieve = new System.Windows.Forms.Button();
+            this.textBoxKlantID = new System.Windows.Forms.TextBox();
+            this.KlantKey = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.KlantNaam = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.KlantKey = new System.Windows.Forms.Label();
-            this.textBoxKlantID = new System.Windows.Forms.TextBox();
-            this.Retrieve = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.listBoxFotos = new System.Windows.Forms.ListBox();
-            this.buttonSelecteer = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.buttonSelecteer = new System.Windows.Forms.Button();
+            this.listBoxFotos = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -49,11 +49,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(48, 34);
+            this.label1.Location = new System.Drawing.Point(41, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Klant ID:";
+            this.label1.Text = "Klant Key:";
             // 
             // groupBox1
             // 
@@ -70,6 +70,41 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Klant informatie";
+            // 
+            // Retrieve
+            // 
+            this.Retrieve.Location = new System.Drawing.Point(389, 31);
+            this.Retrieve.Name = "Retrieve";
+            this.Retrieve.Size = new System.Drawing.Size(75, 23);
+            this.Retrieve.TabIndex = 7;
+            this.Retrieve.Text = "Ophalen";
+            this.Retrieve.UseVisualStyleBackColor = true;
+            this.Retrieve.Click += new System.EventHandler(this.OnClickOphalenKlant);
+            // 
+            // textBoxKlantID
+            // 
+            this.textBoxKlantID.Location = new System.Drawing.Point(150, 31);
+            this.textBoxKlantID.Name = "textBoxKlantID";
+            this.textBoxKlantID.Size = new System.Drawing.Size(73, 20);
+            this.textBoxKlantID.TabIndex = 6;
+            // 
+            // KlantKey
+            // 
+            this.KlantKey.AutoSize = true;
+            this.KlantKey.Location = new System.Drawing.Point(147, 92);
+            this.KlantKey.Name = "KlantKey";
+            this.KlantKey.Size = new System.Drawing.Size(13, 13);
+            this.KlantKey.TabIndex = 5;
+            this.KlantKey.Text = "--";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(42, 92);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(54, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Klant key:";
             // 
             // KlantNaam
             // 
@@ -89,41 +124,6 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Naam:";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 92);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Klant key:";
-            // 
-            // KlantKey
-            // 
-            this.KlantKey.AutoSize = true;
-            this.KlantKey.Location = new System.Drawing.Point(147, 92);
-            this.KlantKey.Name = "KlantKey";
-            this.KlantKey.Size = new System.Drawing.Size(13, 13);
-            this.KlantKey.TabIndex = 5;
-            this.KlantKey.Text = "--";
-            // 
-            // textBoxKlantID
-            // 
-            this.textBoxKlantID.Location = new System.Drawing.Point(150, 31);
-            this.textBoxKlantID.Name = "textBoxKlantID";
-            this.textBoxKlantID.Size = new System.Drawing.Size(73, 20);
-            this.textBoxKlantID.TabIndex = 6;
-            // 
-            // Retrieve
-            // 
-            this.Retrieve.Location = new System.Drawing.Point(389, 31);
-            this.Retrieve.Name = "Retrieve";
-            this.Retrieve.Size = new System.Drawing.Size(75, 23);
-            this.Retrieve.TabIndex = 7;
-            this.Retrieve.Text = "Ophalen";
-            this.Retrieve.UseVisualStyleBackColor = true;
-            this.Retrieve.Click += new System.EventHandler(this.OnClickOphalenKlant);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.textBox1);
@@ -137,13 +137,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Fotos";
             // 
-            // listBoxFotos
+            // textBox1
             // 
-            this.listBoxFotos.FormattingEnabled = true;
-            this.listBoxFotos.Location = new System.Drawing.Point(22, 65);
-            this.listBoxFotos.Name = "listBoxFotos";
-            this.listBoxFotos.Size = new System.Drawing.Size(340, 173);
-            this.listBoxFotos.TabIndex = 0;
+            this.textBox1.Location = new System.Drawing.Point(150, 25);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(212, 20);
+            this.textBox1.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(19, 28);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(102, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Naam van fotoserie:";
             // 
             // buttonSelecteer
             // 
@@ -155,21 +163,13 @@
             this.buttonSelecteer.UseVisualStyleBackColor = true;
             this.buttonSelecteer.Click += new System.EventHandler(this.OnClickBrowse);
             // 
-            // label4
+            // listBoxFotos
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 28);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(102, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Naam van fotoserie:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(150, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(212, 20);
-            this.textBox1.TabIndex = 9;
+            this.listBoxFotos.FormattingEnabled = true;
+            this.listBoxFotos.Location = new System.Drawing.Point(22, 65);
+            this.listBoxFotos.Name = "listBoxFotos";
+            this.listBoxFotos.Size = new System.Drawing.Size(340, 173);
+            this.listBoxFotos.TabIndex = 0;
             // 
             // button1
             // 
@@ -181,7 +181,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.OnClickUpload);
             // 
-            // Form1
+            // FormFotoProducent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -189,7 +189,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Form1";
+            this.Name = "FormFotoProducent";
             this.Text = "Foto producent - Client app";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

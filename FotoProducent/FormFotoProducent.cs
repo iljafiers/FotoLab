@@ -24,9 +24,9 @@ namespace FotoProducent
         private void OnClickOphalenKlant(object sender, EventArgs e)
         {
 
-            int id = Convert.ToInt32(this.textBoxKlantID.Text);
+            string klantKey = this.textBoxKlantID.Text;
 
-            string url = "http://localhost:2372/api/Klant/" + id;
+            string url = "http://localhost:2372/api/Klant/" + klantKey;
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             try

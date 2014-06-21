@@ -44,7 +44,7 @@ namespace FotoWebservice.Models
         {
             try
             {
-                string sql = "SELECT * FROM klanten WHERE klant_key = @Klant_key";
+                string sql = "SELECT * FROM klanten WHERE klant_key LIKE @Klant_key";
                 List<SqlParameter> parameters = new List<SqlParameter> {
                      new SqlParameter("Klant_key", key)
                  };
