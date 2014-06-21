@@ -21,9 +21,10 @@ namespace FotoProducent
         }
 
 
-        private void OnChangedKlantID(object sender, EventArgs e)
+        private void OnClickOphalenKlant(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(this.textBoxKlantID);
+
+            int id = Convert.ToInt32(this.textBoxKlantID.Text);
 
             string url = "http://localhost:2372/api/Klant/" + id;
 
@@ -61,10 +62,7 @@ namespace FotoProducent
             }
         }
 
-        private void OnClickOphalenKlant(object sender, EventArgs e)
-        {
 
-        }
 
         private void OnClickBrowse(object sender, EventArgs e)
         {
