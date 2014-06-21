@@ -21,7 +21,7 @@
     <packageHasNamedElement>
       <class
         Id="b25a1b07-2fb3-4d6c-bbd3-daecff0b4bcf"
-        name="Klant"
+        name="Klanten"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -104,19 +104,18 @@
           <association
             Id="cb4e5b94-5f4e-44c6-ae36-86428a6425e2"
             isDerived="false"
-            sourceEndRoleName="fotos"
-            targetEndRoleName="Fotograaf"
+            sourceEndRoleName=""
+            targetEndRoleName=""
             isLeaf="false"
             isAbstract="false">
             <classMoniker
               Id="bbb45611-db64-46f8-9f95-30afa36ca577"
-              LastKnownName="Fotograaf"
+              LastKnownName="Fotoproducenten"
               LastKnownLocation="Fotolab.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="b02fdffb-9c1c-4a76-82c5-288319069a25"
-                  name="fotos"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -129,7 +128,56 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="04461036-3c9a-4c6d-94ac-b909678db001"
-                  name="Fotograaf"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="1c21b84f-c074-4904-beac-aef848dea638"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="514005fc-329c-4932-afe5-da13b70e47c8"
+              LastKnownName="Fotoseries"
+              LastKnownLocation="Fotolab.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ea7672fd-200b-4806-b01d-1529e7760e53"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="69f37e70-0e31-41bc-b8cb-e5280dad6d3c"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="2a907557-0d27-439e-a6b8-06c9570edf83"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="731156bc-6d05-4feb-9a0f-da42c6cc22fc"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -180,7 +228,7 @@
             isAbstract="false">
             <classMoniker
               Id="b25a1b07-2fb3-4d6c-bbd3-daecff0b4bcf"
-              LastKnownName="Klant"
+              LastKnownName="Klanten"
               LastKnownLocation="Fotolab.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -312,7 +360,7 @@
     <packageHasNamedElement>
       <class
         Id="b380af10-26b1-42c2-b9e8-de35e0afab89"
-        name="bestelregel"
+        name="bestelregels"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -480,7 +528,7 @@
     <packageHasNamedElement>
       <class
         Id="bbb45611-db64-46f8-9f95-30afa36ca577"
-        name="Fotograaf"
+        name="Fotoproducenten"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -504,6 +552,67 @@
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="514005fc-329c-4932-afe5-da13b70e47c8"
+        name="Fotoseries"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="0d46172a-799b-4e7d-8473-9ffafeeec563"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="b25a1b07-2fb3-4d6c-bbd3-daecff0b4bcf"
+              LastKnownName="Klanten"
+              LastKnownLocation="Fotolab.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ddbbc79c-f6ed-4fe5-ae55-ac0b2b0cd558"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="e75e5f9c-0af4-474a-a6a8-3788b11cf79b"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="487d4cb1-2af8-4e1d-a14c-d4f86ecd1c82"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b46308b9-0b88-438b-8fd8-2861569cfee3"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
       </class>
     </packageHasNamedElement>
   </packagedElements>

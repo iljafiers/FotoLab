@@ -1,22 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="245f0405-bba4-4b87-9638-63bd578b8b5c" name="FotoLab" linkedPackageId="a5975eee-0124-4aec-a5ca-721880142516" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="cbd5d9c6-6934-40b2-aa1e-bfabd559ad16">
-      <profileInstance Id="5d4230e3-dfe5-4be9-a8ea-d60f46d067b5" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="b244e602-051e-4126-917e-c722fa67379d">
-      <profileInstance Id="47b8789f-aa96-4538-96b5-79fcc60a4121" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
-      <class Id="5f67f13b-37c0-4448-a8cc-15fd134a93af" name="Klant" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="5f67f13b-37c0-4448-a8cc-15fd134a93af" name="Klanten" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="b25a1b07-2fb3-4d6c-bbd3-daecff0b4bcf" />
         <ownedAttributesInternal>
           <property Id="f4e9cb4f-362d-4f57-8e1c-c1813cf7eb3e" name="id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -54,21 +40,47 @@
       <class Id="30b2a3aa-a13e-4959-8340-686bcc61e1e7" name="fotos" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="2f09b3b1-443d-4324-8b65-86b8e9a41966" />
         <targetEnds>
-          <association Id="65b4c495-2eb9-4365-a5a8-c8df8a42901b" isDerived="false" sourceEndRoleName="fotos" targetEndRoleName="Fotograaf" isLeaf="false" isAbstract="false">
-            <classMoniker Id="4644a287-2c63-46b8-910b-9197365822ee" LastKnownName="Fotograaf" />
+          <association Id="65b4c495-2eb9-4365-a5a8-c8df8a42901b" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="4644a287-2c63-46b8-910b-9197365822ee" LastKnownName="Fotoproducenten" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
-                <memberEnd Id="89dbbc2a-102a-4e9f-ab34-ea4f5808b118" name="fotos" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                <memberEnd Id="89dbbc2a-102a-4e9f-ab34-ea4f5808b118" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
                   <elementDefinition Id="b02fdffb-9c1c-4a76-82c5-288319069a25" />
                 </memberEnd>
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
-                <memberEnd Id="89127b2d-ea0d-40b1-8a8e-944fb4c5a323" name="Fotograaf" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                <memberEnd Id="89127b2d-ea0d-40b1-8a8e-944fb4c5a323" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="04461036-3c9a-4c6d-94ac-b909678db001" />
                 </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="cb4e5b94-5f4e-44c6-ae36-86428a6425e2" />
+          </association>
+          <association Id="9b19c295-1538-439b-9b22-b3d6d9b612b9" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="3d4e69d5-ebf7-4085-a024-5cadf8c8a24f" LastKnownName="Fotoseries" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a3c56f11-0baf-4691-a322-d9149bd676b5" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="8e0b3d6d-0cfc-4099-9ecf-4c15c40095c0" name="Lower" value="1">
+                      <elementDefinition Id="69f37e70-0e31-41bc-b8cb-e5280dad6d3c" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="7e211512-13df-4d7b-a785-e3da59be9b86" name="Upper" value="*">
+                      <elementDefinition Id="2a907557-0d27-439e-a6b8-06c9570edf83" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="ea7672fd-200b-4806-b01d-1529e7760e53" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="1a86662d-4d11-465d-8059-36dec4a888c4" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="731156bc-6d05-4feb-9a0f-da42c6cc22fc" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="1c21b84f-c074-4904-beac-aef848dea638" />
           </association>
         </targetEnds>
         <ownedAttributesInternal>
@@ -91,7 +103,7 @@
         <elementDefinition Id="3ab6b31b-2807-41e8-97e1-ca527fa9114d" />
         <targetEnds>
           <association Id="78719107-ee8c-4ae5-a6e6-60dbfd4be396" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
-            <classMoniker Id="5f67f13b-37c0-4448-a8cc-15fd134a93af" LastKnownName="Klant" />
+            <classMoniker Id="5f67f13b-37c0-4448-a8cc-15fd134a93af" LastKnownName="Klanten" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd Id="db834e9e-a3d9-4955-82ae-2ff4921fb6e8" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -157,7 +169,7 @@
       </referencedType>
     </packageHasNamedElement>
     <logicalClassDesignerModelHasTypes>
-      <class Id="63cbe120-d0b0-4207-8ff8-e43256eb1bcf" name="bestelregel" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="63cbe120-d0b0-4207-8ff8-e43256eb1bcf" name="bestelregels" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="b380af10-26b1-42c2-b9e8-de35e0afab89" />
         <targetEnds>
           <association Id="48a71d0d-9c9c-4e03-a55f-ac53bb144710" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
@@ -240,7 +252,7 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="4644a287-2c63-46b8-910b-9197365822ee" name="Fotograaf" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="4644a287-2c63-46b8-910b-9197365822ee" name="Fotoproducenten" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="bbb45611-db64-46f8-9f95-30afa36ca577" />
         <ownedAttributesInternal>
           <property Id="8cc3cf6a-4386-485d-842e-9f5a1c86d555" name="naam" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -252,8 +264,55 @@
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="3d4e69d5-ebf7-4085-a024-5cadf8c8a24f" name="Fotoseries" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="514005fc-329c-4932-afe5-da13b70e47c8" />
+        <targetEnds>
+          <association Id="32291bbc-0749-4b5e-be52-901fc25dfa6e" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="5f67f13b-37c0-4448-a8cc-15fd134a93af" LastKnownName="Klanten" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="00f38df5-7574-4782-885c-3aded0e2242a" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="2583068a-2489-4029-a366-27232106b9ea" name="Lower" value="*">
+                      <elementDefinition Id="e75e5f9c-0af4-474a-a6a8-3788b11cf79b" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="ad40b28a-6e3d-48c6-b11d-95573abd54db" name="Upper" value="*">
+                      <elementDefinition Id="487d4cb1-2af8-4e1d-a14c-d4f86ecd1c82" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="ddbbc79c-f6ed-4fe5-ae55-ac0b2b0cd558" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d02c8f2b-c8b4-48f6-b2f9-d9ae9448813e" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="b46308b9-0b88-438b-8fd8-2861569cfee3" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0d46172a-799b-4e7d-8473-9ffafeeec563" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="a5975eee-0124-4aec-a5ca-721880142516" name="Fotolab">
     <elementDefinition Id="2967265d-f839-4211-bec8-a9756246ab1f" />
+    <profileInstances>
+      <packageHasProfileInstances Id="cbd5d9c6-6934-40b2-aa1e-bfabd559ad16">
+        <profileInstance Id="5d4230e3-dfe5-4be9-a8ea-d60f46d067b5" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="b244e602-051e-4126-917e-c722fa67379d">
+        <profileInstance Id="47b8789f-aa96-4538-96b5-79fcc60a4121" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </logicalClassDesignerModel>
