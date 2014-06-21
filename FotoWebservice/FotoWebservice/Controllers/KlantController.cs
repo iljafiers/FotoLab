@@ -19,6 +19,8 @@ namespace FotoWebservice.Controllers
         }
 
         // GET: api/Klant/5
+        [HttpGet]
+        [Route("api/klant/{id:int}")]
         public Klant Get(int id)
         {
             SqlKlantRepository repo = new SqlKlantRepository();
