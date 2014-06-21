@@ -60,22 +60,14 @@ create table klanten_fotoseries (
 )
 go
 
-create table api_clients (
-	id 					int 				primary key identity not null,
-	api_key				varchar(50)			unique not null,
-	salt				varchar(50)			not null
-)
-go
-
 create table bestellingen (
 	id 					int 				primary key identity not null,
 	klant_id			int 				not null,
 	datum				datetime 			not null
-
 )
 go
 
-create table bestellingen_fotos (
+create table bestellingregels (
 	bestelling_id		int 				not null,
 	foto_id				int 				not null,
 	fotoproduct_id		int 				not null
