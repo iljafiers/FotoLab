@@ -12,6 +12,19 @@ namespace FotoWebservice.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class KlantController : ApiController
     {
+        private IKlantRepository repo;
+        public KlantController()
+        {
+            this.repo = new SqlKlantRepository();
+            // KlantController heeft een Repository Interface nodig omdat ik dan een Mock-Repository kan maken voor de unit-tests
+            // Ik gebruik expres 'this' omdat dan heel duidelijk is dat het een instance variabele is en geen lokale variabele
+        }
+
+        public KlantController(IKlantRepository repo)
+        {
+            this.repo = repo;
+        }
+
         // GET: api/Klant
         public IEnumerable<string> Get()
         {
@@ -23,8 +36,7 @@ namespace FotoWebservice.Controllers
         [Route("api/klant/{id:int}")]
         public Klant Get(int id)
         {
-            SqlKlantRepository repo = new SqlKlantRepository();
-            Klant k = repo.Get(id);
+            Klant k = this.repo.Get(id);
             return k;
         }
 
@@ -32,8 +44,7 @@ namespace FotoWebservice.Controllers
         [Route("api/klant/{klantkey}")]
         public Klant Get(string klantkey)
         {
-            SqlKlantRepository repo = new SqlKlantRepository();
-            Klant k = repo.GetByKey(klantkey);
+            Klant k = this.repo.GetByKey(klantkey);
             return k;
         }
 

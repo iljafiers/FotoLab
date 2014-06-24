@@ -102,7 +102,7 @@ function Klant() {
 
 	var getFotoseries = function(key) {
 		console.log("getFotoseries");
-		if( key.length > 5 ) {
+		if( key.length > 1 ) {
 			//$.getJSON("http://localhost:2372/api/klant/" + self.key() + "/fotoseries");
 			$.getJSON(Info.baseApiUrl + "api/fotoserie/", function(dataArr) {
 				var fss = $.map(dataArr, function(datarow) {
@@ -114,7 +114,7 @@ function Klant() {
 	};
 
 	var getKlantDetails = function(key) {
-		if( key.length > 5 ) {
+		if( key.length > 1 ) {
 			$.getJSON(Info.baseApiUrl + "api/klant/" + key, function(data) {
 				console.dir(data);
 				self.naam(data.Naam);

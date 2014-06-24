@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FotoWebservice.Models
 {
-    interface IFotoserieRepository
+    public interface IFotoserieRepository
     {
         IEnumerable<Fotoserie> GetAll();
         Fotoserie Get(int id);

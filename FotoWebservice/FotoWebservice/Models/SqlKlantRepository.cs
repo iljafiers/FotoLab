@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace FotoWebservice.Models
 {
-    public class SqlKlantRepository
+    public class SqlKlantRepository : IKlantRepository
     {
         private MSSqlDataProvider dataProvider;
 
