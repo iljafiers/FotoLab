@@ -23,6 +23,24 @@
               <referencedTypeMoniker Id="8e486c9a-a502-4b2a-b73a-74de686414d2" LastKnownName="string" />
             </type_NamedElement>
           </property>
+          <property Id="4aff0e40-b5f5-46cb-8a6b-a7913ff5bd55" name="straat" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="3c8483ae-dc12-44a0-b1a3-4d5286e0d26a" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="2a5ce589-8d9a-4705-a402-2afc51487db4" LastKnownName="string" />
+            </type_NamedElement>
+          </property>
+          <property Id="1d9952ba-e480-40bf-a2f8-73acbd5f6224" name="woonplaats" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a4e898f5-9074-4cf3-8d23-5e847ec3feca" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="8e486c9a-a502-4b2a-b73a-74de686414d2" LastKnownName="string" />
+            </type_NamedElement>
+          </property>
+          <property Id="b7d17727-3054-4a03-b563-6734a4141336" name="postcode" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5ef00e22-08b8-42b2-a503-fd2bfd822ae8" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="8e486c9a-a502-4b2a-b73a-74de686414d2" LastKnownName="string" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
@@ -88,6 +106,12 @@
             <elementDefinition Id="d65be966-1580-4a4f-9c50-ba1dd30ee078" />
             <type_NamedElement>
               <referencedTypeMoniker Id="5ed3a286-6655-41c4-83a8-973a54dcd43d" LastKnownName="integer" />
+            </type_NamedElement>
+          </property>
+          <property Id="05c54b3f-f6ed-4306-9758-18baca818a52" name="filenaam" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="af4141fa-a635-4cf3-9cbd-697669118e55" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="acdee26d-3ab6-4b67-b950-26530e5eabc1" LastKnownName="string" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -248,6 +272,12 @@
               <referencedTypeMoniker Id="af7dea88-79bc-417b-a892-a96617c4c551" LastKnownName="integer" />
             </type_NamedElement>
           </property>
+          <property Id="6ef00318-5601-4126-90f5-8cac76fd9580" name="aantal" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="51a77529-e5d5-41ed-bba7-ffa51bc8e647" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="59c0dff8-1933-4f11-b08b-1fc55dd80f01" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
@@ -259,6 +289,12 @@
             <elementDefinition Id="3abe92f2-f38a-40f1-8478-0b7f85c47567" />
             <type_NamedElement>
               <referencedTypeMoniker Id="8e486c9a-a502-4b2a-b73a-74de686414d2" LastKnownName="string" />
+            </type_NamedElement>
+          </property>
+          <property Id="c19f108b-7fd8-4936-a29e-27e00c0a7ff3" name="id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="3ab37297-3bad-4d94-aebc-5672abb066c1" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="40c45e35-1f48-482a-979f-309cd4734da9" LastKnownName="integer" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -295,8 +331,36 @@
             <elementDefinition Id="0d46172a-799b-4e7d-8473-9ffafeeec563" />
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="22be1ece-5287-4179-9ad4-5441fba0a836" name="naam" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="2decc421-15f4-4d26-8e7a-61dd8758dfc9" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="8e486c9a-a502-4b2a-b73a-74de686414d2" LastKnownName="string" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="59c0dff8-1933-4f11-b08b-1fc55dd80f01" name="int" isAbstract="false" isLeaf="false" cachedFullName="int">
+        <elementDefinition Id="0fba6f67-cb4b-4dce-a494-b4b69293a883" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="2a5ce589-8d9a-4705-a402-2afc51487db4" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
+        <elementDefinition Id="a5fb1603-9ff5-4e96-ba7b-b687a87c8eff" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="40c45e35-1f48-482a-979f-309cd4734da9" name="integer" isAbstract="false" isLeaf="false" cachedFullName="integer">
+        <elementDefinition Id="4a8abea1-c95b-46b4-bbf4-a4a8c9f76418" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="acdee26d-3ab6-4b67-b950-26530e5eabc1" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
+        <elementDefinition Id="a5fb1603-9ff5-4e96-ba7b-b687a87c8eff" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="a5975eee-0124-4aec-a5ca-721880142516" name="Fotolab">
     <elementDefinition Id="2967265d-f839-4211-bec8-a9756246ab1f" />

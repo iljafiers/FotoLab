@@ -80,6 +80,60 @@
                 LastKnownLocation="Fotolab.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="3c8483ae-dc12-44a0-b1a3-4d5286e0d26a"
+            name="straat"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="a5fb1603-9ff5-4e96-ba7b-b687a87c8eff"
+                LastKnownName="string"
+                LastKnownLocation="Fotolab.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="a4e898f5-9074-4cf3-8d23-5e847ec3feca"
+            name="woonplaats"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="a5fb1603-9ff5-4e96-ba7b-b687a87c8eff"
+                LastKnownName="string"
+                LastKnownLocation="Fotolab.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="5ef00e22-08b8-42b2-a503-fd2bfd822ae8"
+            name="postcode"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="a5fb1603-9ff5-4e96-ba7b-b687a87c8eff"
+                LastKnownName="string"
+                LastKnownLocation="Fotolab.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
@@ -205,6 +259,24 @@
               <undefinedTypeMoniker
                 Id="4a8abea1-c95b-46b4-bbf4-a4a8c9f76418"
                 LastKnownName="integer"
+                LastKnownLocation="Fotolab.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="af4141fa-a635-4cf3-9cbd-697669118e55"
+            name="filenaam"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="a5fb1603-9ff5-4e96-ba7b-b687a87c8eff"
+                LastKnownName="string"
                 LastKnownLocation="Fotolab.uml" />
             </type_NamedElement>
           </property>
@@ -522,6 +594,24 @@
                 LastKnownLocation="Fotolab.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="51a77529-e5d5-41ed-bba7-ffa51bc8e647"
+            name="aantal"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="0fba6f67-cb4b-4dce-a494-b4b69293a883"
+                LastKnownName="int"
+                LastKnownLocation="Fotolab.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
@@ -548,6 +638,24 @@
               <undefinedTypeMoniker
                 Id="a5fb1603-9ff5-4e96-ba7b-b687a87c8eff"
                 LastKnownName="string"
+                LastKnownLocation="Fotolab.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="3ab37297-3bad-4d94-aebc-5672abb066c1"
+            name="id"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="4a8abea1-c95b-46b4-bbf4-a4a8c9f76418"
+                LastKnownName="integer"
                 LastKnownLocation="Fotolab.uml" />
             </type_NamedElement>
           </property>
@@ -613,7 +721,37 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="2decc421-15f4-4d26-8e7a-61dd8758dfc9"
+            name="naam"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="a5fb1603-9ff5-4e96-ba7b-b687a87c8eff"
+                LastKnownName="string"
+                LastKnownLocation="Fotolab.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="0fba6f67-cb4b-4dce-a494-b4b69293a883"
+        name="int" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="24d2c393-4fec-43d2-b28b-7e48e4719e2f"
+        name="inetger" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
