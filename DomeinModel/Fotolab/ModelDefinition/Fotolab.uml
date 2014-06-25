@@ -740,6 +740,24 @@
                 LastKnownLocation="Fotolab.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="0e630535-fd51-4e1b-a45b-d46bffa796f7"
+            name="Datum"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="ddf54cc2-16ef-4582-8b97-49719d98e934"
+                LastKnownName="DateTime"
+                LastKnownLocation="Fotolab.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
@@ -752,6 +770,16 @@
       <undefinedType
         Id="24d2c393-4fec-43d2-b28b-7e48e4719e2f"
         name="inetger" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="eb2e28f8-7268-4957-b020-3aca60de8bdd"
+        name="dateTime" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="ddf54cc2-16ef-4582-8b97-49719d98e934"
+        name="DateTime" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

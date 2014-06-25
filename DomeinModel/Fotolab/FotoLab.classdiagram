@@ -338,6 +338,12 @@
               <referencedTypeMoniker Id="8e486c9a-a502-4b2a-b73a-74de686414d2" LastKnownName="string" />
             </type_NamedElement>
           </property>
+          <property Id="9c0b7bf4-97d7-4a2f-a9c5-fe46ee9b79b5" name="Datum" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="0e630535-fd51-4e1b-a45b-d46bffa796f7" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="90e8d5d1-e54a-408a-ae11-3cd13710edc4" LastKnownName="DateTime" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
@@ -359,6 +365,11 @@
     <packageHasNamedElement>
       <referencedType Id="acdee26d-3ab6-4b67-b950-26530e5eabc1" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
         <elementDefinition Id="a5fb1603-9ff5-4e96-ba7b-b687a87c8eff" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="90e8d5d1-e54a-408a-ae11-3cd13710edc4" name="DateTime" isAbstract="false" isLeaf="false" cachedFullName="DateTime">
+        <elementDefinition Id="ddf54cc2-16ef-4582-8b97-49719d98e934" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>
