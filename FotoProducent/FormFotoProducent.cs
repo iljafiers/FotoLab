@@ -6,18 +6,28 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Windows.Forms;
 using System.Web;
 using System.Web.Script.Serialization;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace FotoProducent
 {
     public partial class FormFotoProducent : Form
     {
+        private Fotoserie m_fotoserie;
+        private Klant m_klant;
+
         public FormFotoProducent()
         {
             InitializeComponent();
+
+            m_fotoserie = new Fotoserie();
+            m_klant = new Klant();
         }
 
 
@@ -41,11 +51,11 @@ namespace FotoProducent
 
                 // parse JSON
                 var serializer = new JavaScriptSerializer();
-                Klant kl = serializer.Deserialize<Klant>(JSON);
+                m_klant = serializer.Deserialize<Klant>(JSON);
 
-                if (kl != null)
+                if (m_klant != null)
                 {
-                    this.KlantNaam.Text = kl.Naam;
+                    this.KlantNaam.Text = m_klant.Naam;
                 }
 
             }
@@ -86,15 +96,14 @@ namespace FotoProducent
                 // maak een instantie van de klasse fotoserie zoals we die willen gaan 
                 // toevoegen aan de databse via de WebAPI.
 
-                Fotoserie fs = new Fotoserie();
-                fs.Naam = textBoxFotoSerieNaam.Text;
-                fs.KlantId = 0;
-                fs.FotoproducentId = 0;
-                fs.Datum = DateTime.Now;
+                m_fotoserie.Naam = textBoxFotoSerieNaam.Text;
+                m_fotoserie.KlantId = m_klant.Id;
+                m_fotoserie.FotoproducentId = 0;
+                m_fotoserie.Datum = DateTime.Now;
 
                 // Maak JSON text van de fotoserie
                 var serializer = new JavaScriptSerializer();
-                string JSON = serializer.Serialize(fs);
+                string JSON = serializer.Serialize(m_fotoserie);
 
                 // stuur deze naar de webapi, we krijgen een JSON string
                 // terug die de volledige Fotoserie wergeeft.
@@ -106,8 +115,9 @@ namespace FotoProducent
                 string responseJSON = cli.UploadString(url, JSON);
 
                 // response JSON vertalen naar een instantie van Klasse Fotoserie.
-                Fotoserie rspFS = serializer.Deserialize<Fotoserie>(responseJSON);
-                MessageBox.Show("Fotoserie aangemaakt met ID " + rspFS.Id);
+                m_fotoserie = serializer.Deserialize<Fotoserie>(responseJSON);
+                MessageBox.Show("Fotoserie aangemaakt met ID " + m_fotoserie.Id);
+
             }
             catch (Exception ex)
             {
@@ -132,7 +142,30 @@ namespace FotoProducent
                     byte[] fotoData = br.ReadBytes((int)numBytes);
                     br.Close();
 
-                    // fotodata is the bytes in memory, now upload.
+
+                    Uri webService = new Uri("http://localhost:2372/api/foto/" + m_fotoserie.Id + "/upload");
+                    HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, webService);
+                    requestMessage.Headers.ExpectContinue = false;
+
+                    MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----MyGreatBoundary");
+                    ByteArrayContent byteArrayContent = new ByteArrayContent( fotoData );
+                    byteArrayContent.Headers.Add("Content-Type", "application/octet-stream");
+                    multiPartContent.Add(byteArrayContent, Path.GetFileName(fotoFileName), fotoFileName);
+                    requestMessage.Content = multiPartContent;
+
+                    HttpClient httpClient = new HttpClient();
+                    Task<HttpResponseMessage> httpRequest = httpClient.SendAsync(requestMessage, HttpCompletionOption.ResponseContentRead, CancellationToken.None);
+                    HttpResponseMessage httpResponse = httpRequest.Result;
+
+                    HttpStatusCode statusCode = httpResponse.StatusCode;
+                    HttpContent responseContent = httpResponse.Content;
+
+                    if (responseContent != null)
+                    {
+                        Task<String> stringContentsTask = responseContent.ReadAsStringAsync();
+                        String stringContents = stringContentsTask.Result;
+                    }
+
 
                     fotoStream.Close();
                     fotoStream.Dispose();

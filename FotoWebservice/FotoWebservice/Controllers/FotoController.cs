@@ -78,6 +78,45 @@ namespace FotoWebservice.Controllers
             repository.Add(fotoserieId, fotoByteArray);
         }*/
 
+        //[HttpPost]
+        //[Route("api/Foto/upload")]
+        //public string UploadFile(byte[] f)
+        //{
+        //    // the byte array argument contains the content of the file
+        //    // the string argument contains the name and extension
+        //    // of the file passed in the byte array
+        //    try
+
+        //    {
+        //        string fileName = "test.jpg";
+        //        // instance a memory stream and pass the
+        //        // byte array to its constructor
+        //        MemoryStream ms = new MemoryStream(f);
+
+        //        // instance a filestream pointing to the
+        //        // storage folder, use the original file name
+        //        // to name the resulting file
+        //        FileStream fs = new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/TransientStorage/") + fileName, FileMode.Create);
+
+        //        // write the memory stream containing the original
+        //        // file as a byte array to the filestream
+        //        ms.WriteTo(fs);
+
+        //        // clean up
+        //        ms.Close();
+        //        fs.Close();
+        //        fs.Dispose();
+
+        //        // return OK if we made it this far
+        //        return "OK";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // return the error message if the operation fails
+        //        return ex.Message.ToString();
+        //    }
+        //}
+
         // DELETE: api/fotoserie/{fotoserie_id}/foto/5
         public void Delete(string fotoserieKey, int id)
         {
@@ -86,8 +125,59 @@ namespace FotoWebservice.Controllers
             repository.Remove(fotoserieId, id);
         }
 
-       /* [Route("~/fotoserie/{fotoserieId:int}/foto")]
-        [HttpPost]*/
+        [Route("api/foto/{fotoSerieID}/upload")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> UploadPhoto() 
+        {
+            int fotoSerieID     = Convert.ToInt32(Request.GetRouteData().Values["fotoSerieID"]);
+
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+
+            try
+            {
+                var provider = new MultipartFormDataStreamProvider(filerepo.TempPath);
+
+                // Read the form data.
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                // This illustrates how to get the file names.
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    string md5 = FileFotoRepository.CalculateMD5Hash(File.ReadAllBytes(file.LocalFileName));
+                    int id = repository.Add(fotoSerieID, md5);
+
+                    if (id != null && id >= 0) // id > 0 dus het plaatje is toegevoegd aan de database
+                    {
+                        string originalFilename = file.Headers.ContentDisposition.FileName.ToString().ToLower();
+                        originalFilename = FileFotoRepository.RemoveBadPathChars(originalFilename);
+
+                        string[] pointParts = originalFilename.Split('.'); //CommonUtils.GetFileExtension(originalFilename); //  Path.GetExtension(originalFilename);//info.Extension; // 
+                        string extension = "." + pointParts.Last();
+
+                        string fotoPath = filerepo.Add(file.LocalFileName, fotoSerieID, id, extension);
+
+                        return Request.CreateResponse(HttpStatusCode.Created);
+                    }
+                    else // Niet kunnen toevoegen aan de database, dus plaatje bestond al, dus temp file verwijderen
+                    {
+                        File.Delete(file.LocalFileName);
+                        return Request.CreateResponse(HttpStatusCode.Conflict);
+                    }
+                }
+
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [Route("api/fotoserie/{fotoserieId:int}/foto")]
+        [HttpPost]
         public async Task<HttpResponseMessage> Post() // parameter: fotoserie_key
         {
             // http://www.asp.net/web-api/overview/working-with-http/sending-html-form-data,-part-2
