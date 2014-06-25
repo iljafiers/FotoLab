@@ -87,6 +87,8 @@ namespace FotoWebservice.Controllers
         }
 
         // POST: api/Fotoserie
+        [HttpPost]
+        [Route("api/Fotoserie/add")]
         public HttpResponseMessage Post(Fotoserie fotoserie)
         {
             fotoserie = repository.Add(fotoserie);

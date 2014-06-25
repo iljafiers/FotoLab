@@ -37,7 +37,7 @@
             this.KlantNaam = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxFotoSerieNaam = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.buttonSelecteer = new System.Windows.Forms.Button();
             this.listBoxFotos = new System.Windows.Forms.ListBox();
@@ -128,7 +128,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.buttonVerwijder);
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.textBoxFotoSerieNaam);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.buttonSelecteer);
             this.groupBox2.Controls.Add(this.listBoxFotos);
@@ -139,12 +139,12 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Fotos";
             // 
-            // textBox1
+            // textBoxFotoSerieNaam
             // 
-            this.textBox1.Location = new System.Drawing.Point(150, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(212, 20);
-            this.textBox1.TabIndex = 9;
+            this.textBoxFotoSerieNaam.Location = new System.Drawing.Point(150, 25);
+            this.textBoxFotoSerieNaam.Name = "textBoxFotoSerieNaam";
+            this.textBoxFotoSerieNaam.Size = new System.Drawing.Size(212, 20);
+            this.textBoxFotoSerieNaam.TabIndex = 9;
             // 
             // label4
             // 
@@ -223,7 +223,7 @@
         private System.Windows.Forms.Label KlantKey;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxFotoSerieNaam;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button buttonSelecteer;
         private System.Windows.Forms.ListBox listBoxFotos;

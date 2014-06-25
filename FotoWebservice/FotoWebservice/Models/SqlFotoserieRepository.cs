@@ -5,7 +5,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using System.Web.Configuration; 
+using System.Web.Configuration;
+using System.Web.Http; 
 
 namespace FotoWebservice.Models
 {
@@ -104,7 +105,7 @@ namespace FotoWebservice.Models
             }
         }
 
-        public Fotoserie Add(string naam, int fotoProducentId, int klantId)
+        public Fotoserie Add([FromBody]string naam, [FromBody]int fotoProducentId, [FromBody]int klantId)
         {
             // relay to Add(FotoSerie)
             Fotoserie fs = new Fotoserie();

@@ -55,6 +55,7 @@
     <Compile Include="FormFotoProducent.Designer.cs">
       <DependentUpon>FormFotoProducent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fotoserie.cs" />
     <Compile Include="Klant.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

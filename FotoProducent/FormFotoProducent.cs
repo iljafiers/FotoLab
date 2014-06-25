@@ -83,6 +83,29 @@ namespace FotoProducent
         {
             try
             {
+                Fotoserie fs = new Fotoserie();
+                fs.Naam = textBoxFotoSerieNaam.Text;
+                fs.KlantId = 0;
+                fs.FotoproducentId = 0;
+                fs.Datum = DateTime.Now;
+
+                // create JSON
+                var serializer = new JavaScriptSerializer();
+                string JSON = serializer.Serialize(fs);
+
+                string url = "http://localhost:2372/api/Fotoserie/add";
+                var cli = new WebClient();
+                cli.Headers[HttpRequestHeader.ContentType] = "application/json";
+                string response = cli.UploadString(url, JSON);
+                MessageBox.Show(response);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.Write(ex.Message);
+            }
+
+            try
+            {
                 foreach (string fotoFileName in listBoxFotos.Items)
                 {
                     // read the foto into memory
