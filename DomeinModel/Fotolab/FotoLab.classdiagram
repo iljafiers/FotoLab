@@ -58,22 +58,6 @@
       <class Id="30b2a3aa-a13e-4959-8340-686bcc61e1e7" name="fotos" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="2f09b3b1-443d-4324-8b65-86b8e9a41966" />
         <targetEnds>
-          <association Id="65b4c495-2eb9-4365-a5a8-c8df8a42901b" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
-            <classMoniker Id="4644a287-2c63-46b8-910b-9197365822ee" LastKnownName="Fotoproducenten" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd Id="89dbbc2a-102a-4e9f-ab34-ea4f5808b118" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="b02fdffb-9c1c-4a76-82c5-288319069a25" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd Id="89127b2d-ea0d-40b1-8a8e-944fb4c5a323" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="04461036-3c9a-4c6d-94ac-b909678db001" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-            <elementDefinition Id="cb4e5b94-5f4e-44c6-ae36-86428a6425e2" />
-          </association>
           <association Id="9b19c295-1538-439b-9b22-b3d6d9b612b9" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
             <classMoniker Id="3d4e69d5-ebf7-4085-a024-5cadf8c8a24f" LastKnownName="Fotoseries" />
             <relationshipOwnedElementsInternal>
@@ -329,6 +313,32 @@
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="0d46172a-799b-4e7d-8473-9ffafeeec563" />
+          </association>
+          <association Id="0a878b70-4c29-4da6-97b8-427f4f6800d8" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="4644a287-2c63-46b8-910b-9197365822ee" LastKnownName="Fotoproducenten" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5c82f7f4-c326-423f-8d3c-1565229087fb" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="281bfcb2-58cf-43fa-9c2e-87a1b672c028" name="Lower" value="*">
+                      <elementDefinition Id="2c2ae469-35e4-4518-ab9b-5d506d36bc35" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="09744bb8-3368-4151-8470-5762a1ee4df0" name="Upper" value="*">
+                      <elementDefinition Id="238a1295-a99c-4805-8034-fb6322f64531" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="2488abba-1b21-4825-ba46-6e80b7284aa6" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cb366ded-2965-4b17-a524-b13857f630d7" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="8cf54b6a-b9cd-42f0-a566-0268316ec2d4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="9643765a-9b7d-4ab3-ba29-65b8eb209266" />
           </association>
         </targetEnds>
         <ownedAttributesInternal>

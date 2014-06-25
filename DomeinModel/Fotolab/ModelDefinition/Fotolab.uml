@@ -156,43 +156,6 @@
         isActiveClass="false">
         <targetEnds>
           <association
-            Id="cb4e5b94-5f4e-44c6-ae36-86428a6425e2"
-            isDerived="false"
-            sourceEndRoleName=""
-            targetEndRoleName=""
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="bbb45611-db64-46f8-9f95-30afa36ca577"
-              LastKnownName="Fotoproducenten"
-              LastKnownLocation="Fotolab.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="b02fdffb-9c1c-4a76-82c5-288319069a25"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="04461036-3c9a-4c6d-94ac-b909678db001"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-          <association
             Id="1c21b84f-c074-4904-beac-aef848dea638"
             isDerived="false"
             sourceEndRoleName=""
@@ -710,6 +673,56 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="b46308b9-0b88-438b-8fd8-2861569cfee3"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="9643765a-9b7d-4ab3-ba29-65b8eb209266"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="bbb45611-db64-46f8-9f95-30afa36ca577"
+              LastKnownName="Fotoproducenten"
+              LastKnownLocation="Fotolab.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2488abba-1b21-4825-ba46-6e80b7284aa6"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="2c2ae469-35e4-4518-ab9b-5d506d36bc35"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="238a1295-a99c-4805-8034-fb6322f64531"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="8cf54b6a-b9cd-42f0-a566-0268316ec2d4"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
