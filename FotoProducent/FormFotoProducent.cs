@@ -81,7 +81,35 @@ namespace FotoProducent
 
         private void OnClickUpload(object sender, EventArgs e)
         {
+            try
+            {
+                foreach (string fotoFileName in listBoxFotos.Items)
+                {
+                    // read the foto into memory
 
+                    // first found out how big it is
+                    // get the file information form the selected file
+                    FileInfo fotoFileInfo = new FileInfo(fotoFileName);
+                    long numBytes = fotoFileInfo.Length;
+
+                    FileStream fotoStream = new FileStream(fotoFileName, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fotoStream);
+
+                    // convert the file to a byte array
+                    byte[] fotoData = br.ReadBytes((int)numBytes);
+                    br.Close();
+
+                    // fotodata is the bytes in memory, now upload.
+
+                    fotoStream.Close();
+                    fotoStream.Dispose();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void buttonVerwijderClicked(object sender, EventArgs e)
