@@ -7,14 +7,13 @@ namespace FotoWebservice.Models
 {
     public class Fotoserie
     {
-        private int id;
         private List<Foto> fotos;
-        private string key;
-        private DateTime datum;
 
-        public int Id { get { return id; } set { id = value; } }
+        public int Id { get; set; } 
+        public string Naam { get; set;}
+        public int FotoproducentId { get; set;}
+        public int KlantId { get; set; }
+        public DateTime Datum { get; set; }
         public List<Foto> Fotos { get { return fotos; } set { fotos = value; } }
-        public string Key { get { return key; } set { key = value; } }
-        public DateTime Datum { get { return datum; } set { datum = value; } }
     }
 }

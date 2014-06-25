@@ -25,11 +25,9 @@ INSERT INTO klanten(naam, klant_key) VALUES ('Ilja Fiers', 'IF');
 INSERT INTO klanten(naam, klant_key) VALUES ('Marco Langenhuizen', 'ML');
 GO
 
-INSERT INTO fotoseries (fotoserie_key, datum, gepubliseerd) VALUES ('XAtC9lRSxmuiOjHJ7DGuPTFrhtO9MECY9Pgd1g2pdhUPKDGuwn', '2014-06-06', 1);
-INSERT INTO fotoseries (fotoserie_key, datum, gepubliseerd) VALUES ('e4bnWKw2aDxBuM69J814YW2kf9XYUKdWG5kczqjPPUgk4KOWkS', '2013-06-06', 0);
-INSERT INTO fotoseries (fotoserie_key, datum, gepubliseerd) VALUES ('x5pHg3Tg6x27v25LueHPLUXzer8jpnKcMBDhOvsizzCGVVMWkW', '2013-08-03', 0);
-INSERT INTO fotoseries (fotoserie_key, datum, gepubliseerd) VALUES ('hUIl4Q5gRJpznL7K7Zs7fVtAh15nk67zxnaNqh95egk4S8VLpx', '2012-09-15', 0);
-INSERT INTO fotoseries (fotoserie_key, datum, gepubliseerd) VALUES ('flappies_fotoserie_key', '2013-11-12', 0);
+INSERT INTO fotoseries (naam, datum, fotoproducent_id, klant_id) VALUES ('Klassefoto NOHi',			'2014-06-06',	0,	0);
+INSERT INTO fotoseries (naam, datum, fotoproducent_id, klant_id) VALUES ('Vakantie ISS',			'2013-06-06',	0,	1);
+INSERT INTO fotoseries (naam, datum, fotoproducent_id, klant_id) VALUES ('Groepsfoto teamuitje',	'2013-08-03',	0,  1);
 GO
 
 

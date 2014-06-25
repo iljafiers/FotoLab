@@ -78,24 +78,41 @@ namespace FotoWebservice.Models
             }
         }
 
-        public Fotoserie Add(Fotoserie fotoserie)
+        public Fotoserie Add(Fotoserie fs)
         {
             try
             {
-                string sql = "INSERT INTO fotoseries (serie_key) OUTPUT INSERTED.ID AS Id VALUES (@Key)";
+                string sql = "INSERT INTO fotoseries (naam, datum, fotoproducent_id, klant_id) " +
+                             "OUTPUT INSERTED.ID AS Id " +
+                             "VALUES (@naam, @datum, @fotoproducent_id, @klant_id)";
                 List<SqlParameter> parameters = new List<SqlParameter> { 
-                    new SqlParameter("Key", fotoserie.Key)
+                    new SqlParameter("naam", fs.Naam),
+                    new SqlParameter("datum", DateTime.Now),
+                    new SqlParameter("fotoproducent_id", fs.FotoproducentId),
+                    new SqlParameter("klant_id", fs.KlantId)
                 };
 
                 DataSet ds = dataProvider.Query(sql, parameters);
-                fotoserie.Id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"]);
+                fs.Id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"]);
 
-                return fotoserie;
+                return fs;
             }
             catch (Exception ex)
             {
+                Console.Error.Write( ex.Message );
                 return null;
             }
+        }
+
+        public Fotoserie Add(string naam, int fotoProducentId, int klantId)
+        {
+            // relay to Add(FotoSerie)
+            Fotoserie fs = new Fotoserie();
+            fs.Naam = naam;
+            fs.FotoproducentId = fotoProducentId;
+            fs.KlantId = klantId;
+
+            return Add(fs);
         }
 
         public void Remove(int id)
@@ -109,6 +126,7 @@ namespace FotoWebservice.Models
             }
             catch (Exception ex)
             {
+                Console.Error.Write(ex.Message);
                 return;
             }
         }
@@ -117,10 +135,10 @@ namespace FotoWebservice.Models
         {
             try
             {
-                string sql = "UPDATE fotoseries SET serie_key = @Key WHERE id = @Id";
+                string sql = "UPDATE fotoseries SET naam = @Naam WHERE id = @Id";
                 List<SqlParameter> parameters = new List<SqlParameter> { 
                     new SqlParameter("Id", fotoserie.Id),
-                    new SqlParameter("Key", fotoserie.Key)
+                    new SqlParameter("Naam", fotoserie.Naam)
                 };
 
                 dataProvider.Query(sql, parameters);
@@ -129,6 +147,7 @@ namespace FotoWebservice.Models
             }
             catch (Exception ex)
             {
+                Console.Error.Write(ex.Message);
                 return false;
             }
         }
@@ -156,8 +175,9 @@ namespace FotoWebservice.Models
         private Fotoserie DataRowToObject(DataRow row)
         {
             return new Fotoserie { 
-                Id  = Convert.ToInt32(row["id"]), 
-                Key = Convert.ToString(row["fotoserie_key"]) 
+                Id  = Convert.ToInt32(row["id"]),
+                Naam = Convert.ToString(row["naam"]),
+                Datum = Convert.ToDateTime(row["datum"])
             };
         }
 
