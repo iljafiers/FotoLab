@@ -53,24 +53,10 @@ namespace FotoWebservice.Controllers
             return fotoseries;
         }
 
-        /*public IEnumerable<Fotoserie> GetAllForCustomer(int customer_id)
-        {
-            IEnumerable<Fotoserie> fotoseries = repository.GetAllForCustomer();
-
-            if (fotoseries == null)
-            {
-                var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
-                {
-                    Content = new StringContent("Er is iets mis gegaan."),
-                    ReasonPhrase = "Interne server fout"
-                };
-                throw new HttpResponseException(resp);
-            }
-
-            return fotoseries;
-        } */
 
         // GET: api/Fotoserie/5
+        [HttpGet]
+        [Route("api/klant/fotoserie/{id:int}")]
         public Fotoserie Get(int id)
         {
             Fotoserie fotoserie = repository.Get(id);

@@ -83,25 +83,35 @@ namespace FotoProducent
         {
             try
             {
+                // maak een instantie van de klasse fotoserie zoals we die willen gaan 
+                // toevoegen aan de databse via de WebAPI.
+
                 Fotoserie fs = new Fotoserie();
                 fs.Naam = textBoxFotoSerieNaam.Text;
                 fs.KlantId = 0;
                 fs.FotoproducentId = 0;
                 fs.Datum = DateTime.Now;
 
-                // create JSON
+                // Maak JSON text van de fotoserie
                 var serializer = new JavaScriptSerializer();
                 string JSON = serializer.Serialize(fs);
 
+                // stuur deze naar de webapi, we krijgen een JSON string
+                // terug die de volledige Fotoserie wergeeft.
+                // Dat is nodig om de Id te kunnen bepalen, we gaan er zo direct fotos
+                // aan hangen.
                 string url = "http://localhost:2372/api/Fotoserie/add";
                 var cli = new WebClient();
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
-                string response = cli.UploadString(url, JSON);
-                MessageBox.Show(response);
+                string responseJSON = cli.UploadString(url, JSON);
+
+                // response JSON vertalen naar een instantie van Klasse Fotoserie.
+                Fotoserie rspFS = serializer.Deserialize<Fotoserie>(responseJSON);
+                MessageBox.Show("Fotoserie aangemaakt met ID " + rspFS.Id);
             }
             catch (Exception ex)
             {
-                Console.Error.Write(ex.Message);
+                MessageBox.Show(ex.Message);
             }
 
             try

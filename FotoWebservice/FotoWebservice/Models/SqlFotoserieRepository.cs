@@ -79,7 +79,7 @@ namespace FotoWebservice.Models
             }
         }
 
-        public Fotoserie Add(Fotoserie fs)
+        public Fotoserie Add([FromBody]Fotoserie fs)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace FotoWebservice.Models
                              "VALUES (@naam, @datum, @fotoproducent_id, @klant_id)";
                 List<SqlParameter> parameters = new List<SqlParameter> { 
                     new SqlParameter("naam", fs.Naam),
-                    new SqlParameter("datum", DateTime.Now),
+                    new SqlParameter("datum", fs.Datum),
                     new SqlParameter("fotoproducent_id", fs.FotoproducentId),
                     new SqlParameter("klant_id", fs.KlantId)
                 };
@@ -105,16 +105,15 @@ namespace FotoWebservice.Models
             }
         }
 
-        public Fotoserie Add([FromBody]string naam, [FromBody]int fotoProducentId, [FromBody]int klantId)
-        {
-            // relay to Add(FotoSerie)
-            Fotoserie fs = new Fotoserie();
-            fs.Naam = naam;
-            fs.FotoproducentId = fotoProducentId;
-            fs.KlantId = klantId;
+        //public Fotoserie Add([FromBody]string naam, [FromBody]int klantId)
+        //{
+        //    // relay to Add(FotoSerie)
+        //    Fotoserie fs = new Fotoserie();
+        //    fs.Naam = naam;
+        //    fs.KlantId = klantId;
 
-            return Add(fs);
-        }
+        //    return Add(fs);
+        //}
 
         public void Remove(int id)
         {

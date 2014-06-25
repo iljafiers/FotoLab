@@ -11,7 +11,6 @@ namespace FotoWebservice.Models
         IEnumerable<Fotoserie> GetAll();
         Fotoserie Get(int id);
         Fotoserie Add(Fotoserie fs);
-        Fotoserie Add(string naam, int fotoProducentId, int klantId);
 
         void Remove(int id);
         bool Update(Fotoserie item);

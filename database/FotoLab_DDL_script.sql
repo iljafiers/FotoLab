@@ -40,8 +40,8 @@ go
 create table fotoseries (
 	id 					int 				primary key identity not null,
 	naam  			    varchar(50)			not null,
-	fotoproducent_id	int 				,
 	klant_id			int 				,
+	fotoproducent_id	int					,				
 	datum				datetime 			not null
 )
 go
