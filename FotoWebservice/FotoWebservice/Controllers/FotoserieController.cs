@@ -75,15 +75,9 @@ namespace FotoWebservice.Controllers
         // POST: api/Fotoserie
         [HttpPost]
         [Route("api/Fotoserie/add")]
-        public HttpResponseMessage Post(Fotoserie fotoserie)
+        public Fotoserie Post(Fotoserie fotoserie)
         {
-            fotoserie = repository.Add(fotoserie);
-
-            var response = Request.CreateResponse<Fotoserie>(HttpStatusCode.Created, fotoserie);
-
-            string uri = Url.Link("FotoserieApi", new { id = fotoserie.Id });
-            response.Headers.Location = new Uri(uri);
-            return response;
+            return repository.Add(fotoserie);
         }
 
         // PUT: api/Fotoserie/5
