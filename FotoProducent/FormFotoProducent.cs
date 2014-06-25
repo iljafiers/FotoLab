@@ -59,12 +59,45 @@ namespace FotoProducent
 
         private void OnClickBrowse(object sender, EventArgs e)
         {
+            // Displays an OpenFileDialog so the user can select a Cursor.
+            OpenFileDialog fotos = new OpenFileDialog();
+            fotos.Filter = "Fotos|*.jpg";
+            fotos.Title = "Selecteer de fotos";
+            fotos.Multiselect = true;
 
+            // Show the Dialog.
+            // If the user clicked OK in the dialog and
+            // a .CUR file was selected, open it.
+            if (fotos.ShowDialog() == DialogResult.OK)
+            {
+                // voeg alle geselecteerde fotos to aan de listbox
+                foreach (string fotoFile in fotos.FileNames)
+                {
+                    if (listBoxFotos.FindStringExact( fotoFile) == -1)
+                        listBoxFotos.Items.Add(fotoFile);
+                }
+            }
         }
 
         private void OnClickUpload(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonVerwijderClicked(object sender, EventArgs e)
+        {
+            int index=0;
+            while (index < listBoxFotos.Items.Count)
+            {
+                if (listBoxFotos.GetSelected(index))
+                {
+                    listBoxFotos.Items.RemoveAt(index);
+                }
+                else
+                {
+                    index++;
+                }
+            }
         }
     }
 }

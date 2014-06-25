@@ -42,6 +42,7 @@
             this.buttonSelecteer = new System.Windows.Forms.Button();
             this.listBoxFotos = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.buttonVerwijder = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -126,6 +127,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonVerwijder);
             this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.buttonSelecteer);
@@ -168,6 +170,7 @@
             this.listBoxFotos.FormattingEnabled = true;
             this.listBoxFotos.Location = new System.Drawing.Point(22, 65);
             this.listBoxFotos.Name = "listBoxFotos";
+            this.listBoxFotos.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBoxFotos.Size = new System.Drawing.Size(340, 173);
             this.listBoxFotos.TabIndex = 0;
             // 
@@ -180,6 +183,16 @@
             this.button1.Text = "Upload";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.OnClickUpload);
+            // 
+            // buttonVerwijder
+            // 
+            this.buttonVerwijder.Location = new System.Drawing.Point(389, 94);
+            this.buttonVerwijder.Name = "buttonVerwijder";
+            this.buttonVerwijder.Size = new System.Drawing.Size(75, 23);
+            this.buttonVerwijder.TabIndex = 10;
+            this.buttonVerwijder.Text = "Verwijder...";
+            this.buttonVerwijder.UseVisualStyleBackColor = true;
+            this.buttonVerwijder.Click += new System.EventHandler(this.buttonVerwijderClicked);
             // 
             // FormFotoProducent
             // 
@@ -215,6 +228,7 @@
         private System.Windows.Forms.Button buttonSelecteer;
         private System.Windows.Forms.ListBox listBoxFotos;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonVerwijder;
     }
 }
 
