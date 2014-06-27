@@ -86,3 +86,32 @@
         });
     };
 </script>
+
+<div id="DeleteFoto" style="border: 1px solid red;">
+    <form id="DeleteFotoForm" method="delete" action="">
+        <input type="text" id="DeleteFotoFotoserieKey" name="DeleteFotoFotoserieKey" value="flappies_fotoserie_key" />
+        <input type="text" id="DeleteFotoId" name="DeleteFotoId" value="1"/>
+        <input type="submit" value="Verwijderen"/>
+    </form>
+    <script type="text/javascript">
+        $("#DeleteFotoForm").submit(function (event) {
+            event.preventDefault();
+
+            var fotoserieKey = $("#DeleteFotoFotoserieKey").val();
+            var fotoId = $("#DeleteFotoId").val();
+
+            $.ajax({
+                type: "DELETE",
+                url: "@{Request.ApplicationPath.ToString();}/api/fotoserie/" + fotoserieKey + "/foto/" + fotoId,
+                //dataType: "json",
+                success: function (data) {
+                    console.log("foto verwijderd! " + data);
+                },
+                error: function (data) {
+                    console.log("foto kon niet verwijderd worden! " + data);
+                }
+            })
+        });
+    </script>
+   
+</div>
