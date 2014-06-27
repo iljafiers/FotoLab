@@ -45,7 +45,7 @@ namespace FotoWebservice.Controllers
         }
 
         [HttpGet]
-        [Route("api/fotoserie/{fotoserieKey}/foto/{id:int}")]
+        [Route("api/fotoserie/{fotoserieKey}/foto/{fotoId:int}")]
         public HttpResponseMessage Get(string fotoserieKey, int fotoId)
         {
             //string fotoserieKey = this.FotoserieKey();
