@@ -149,7 +149,7 @@ namespace FotoWebservice.Controllers
                     string md5 = FileFotoRepository.CalculateMD5Hash(File.ReadAllBytes(file.LocalFileName));
                     int id = repository.Add(fotoSerieID, md5);
 
-                    if (id != null && id >= 0) // id > 0 dus het plaatje is toegevoegd aan de database
+                    if (id != null && id > 0) // id > 0 dus het plaatje is toegevoegd aan de database
                     {
                         string originalFilename = file.Headers.ContentDisposition.FileName.ToString().ToLower();
                         originalFilename = FileFotoRepository.RemoveBadPathChars(originalFilename);

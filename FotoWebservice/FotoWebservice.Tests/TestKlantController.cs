@@ -26,9 +26,42 @@ namespace FotoWebservice.Tests
             List<Klant> klanten = GetTestKlanten();
             KlantController controller = new KlantController(new MockKlantRepository(klanten));
 
-            Klant result = controller.Get(3);
+            Klant resultKlant = controller.Get("henkieskey");
 
-            Assert.AreEqual(1, 1);
+            Assert.AreEqual(resultKlant.Id, 1);
+        }
+
+        [TestMethod]
+        public void GetWithId_ShouldReturnKlant()
+        {
+            List<Klant> klanten = GetTestKlanten();
+            KlantController controller = new KlantController(new MockKlantRepository(klanten));
+
+            Klant resultKlant = controller.Get(3);
+
+            Assert.AreEqual(resultKlant.Klant_key, "klaasjeskey");
+        }
+
+        [TestMethod]
+        public void GetWithWrongString_ShouldReturnNull()
+        {
+            List<Klant> klanten = GetTestKlanten();
+            KlantController controller = new KlantController(new MockKlantRepository(klanten));
+
+            Klant resultKlant = controller.Get("Dezeklantkeybestaatniet");
+
+            Assert.AreEqual(resultKlant, null);
+        }
+
+        [TestMethod]
+        public void GetWithWrongId_ShouldReturnNull()
+        {
+            List<Klant> klanten = GetTestKlanten();
+            KlantController controller = new KlantController(new MockKlantRepository(klanten));
+
+            Klant resultKlant = controller.Get(9999);
+
+            Assert.AreEqual(resultKlant, null);
         }
 
         private List<Klant> GetTestKlanten()
