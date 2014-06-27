@@ -15,6 +15,8 @@ namespace FotoWebservice.Controllers
     {
         IFotoserieRepository repository = new SqlFotoserieRepository();
         // GET: api/Fotoserie
+        [HttpGet]
+        [Route("api/fotoserie")]
         public IEnumerable<Fotoserie> GetAll()
         {
             IEnumerable<Fotoserie> fotoseries = repository.GetAll();
@@ -34,7 +36,7 @@ namespace FotoWebservice.Controllers
         }
 
         [HttpGet]
-        [Route("api/klant/{klant_key}/fotoseries")]
+        [Route("api/klant/{klant_key}/fotoserie")]
         public IEnumerable<Fotoserie> FindAllForKlant(string klant_key)
         {
             IEnumerable<Fotoserie> fotoseries = repository.FindAllForKlant();
@@ -74,13 +76,15 @@ namespace FotoWebservice.Controllers
 
         // POST: api/Fotoserie
         [HttpPost]
-        [Route("api/Fotoserie/add")]
+        [Route("api/fotoserie/add")]
         public Fotoserie Post(Fotoserie fotoserie)
         {
             return repository.Add(fotoserie);
         }
 
         // PUT: api/Fotoserie/5
+        [HttpPut]
+        [Route("api/fotoserie/{id:int}")]
         public void Put(int id, Fotoserie fotoserie)
         {
             fotoserie.Id = id;
@@ -91,6 +95,8 @@ namespace FotoWebservice.Controllers
         }
 
         // DELETE: api/Fotoserie/5
+        [HttpDelete]
+        [Route("api/fotoserie/{id:int}")]
         public void Delete(int id)
         {
             repository.Remove(id);

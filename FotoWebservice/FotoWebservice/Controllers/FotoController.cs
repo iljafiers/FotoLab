@@ -11,18 +11,22 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
+using FotoWebservice.Models;
 
 namespace FotoWebservice.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class FotoController : ApiController
     {
         SqlFotoRepository repository = new SqlFotoRepository();
         FileFotoRepository filerepo = new FileFotoRepository();
 
-        // GET: api/fotoserie/{fotoserie_id}/foto/all
-        public IEnumerable<int> GetAll()
+        [HttpGet]
+        [Route("api/fotoserie/{fotoserieKey}/foto/all")]
+        public IEnumerable<int> GetAll(string fotoserieKey)
         {
-            string fotoserieKey = this.FotoserieKey();
+            //string fotoserieKey = this.FotoserieKey();
 
             int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
             IEnumerable<int> fotoIds = repository.GetAll(fotoserieId);
@@ -40,13 +44,12 @@ namespace FotoWebservice.Controllers
             return fotoIds;
         }
 
-        // GET: api/fotoserie/{fotoserie_id}/foto/5
-/*        [HttpGet]
-        [Route("~/fotoserie/{fotoserie_key}/foto/{id}")]*/
-        public HttpResponseMessage Get()
+        [HttpGet]
+        [Route("api/fotoserie/{fotoserieKey}/foto/{id:int}")]
+        public HttpResponseMessage Get(string fotoserieKey, int fotoId)
         {
-            string fotoserieKey = this.FotoserieKey();
-            int fotoId = this.Id();
+            //string fotoserieKey = this.FotoserieKey();
+            //int fotoId = this.Id();
 
             int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
             string fullPath = filerepo.Get(fotoserieId, fotoId);
@@ -117,7 +120,8 @@ namespace FotoWebservice.Controllers
         //    }
         //}
 
-        // DELETE: api/fotoserie/{fotoserie_id}/foto/5
+        [HttpDelete]
+        [Route("api/fotoserie/{fotoserieKey}/foto/{id:int}")]
         public void Delete(string fotoserieKey, int id)
         {
             int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
@@ -125,11 +129,19 @@ namespace FotoWebservice.Controllers
             repository.Remove(fotoserieId, id);
         }
 
-        [Route("api/foto/{fotoSerieID}/upload")]
         [HttpPost]
-        public async Task<HttpResponseMessage> UploadPhoto() 
+        [Route("api/fotoserie/{fotoserieKey}/foto")]
+        public async Task<HttpResponseMessage> UploadPhoto(string fotoserieKey)
         {
-            int fotoSerieID     = Convert.ToInt32(Request.GetRouteData().Values["fotoSerieID"]);
+            int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
+            return await UploadPhoto(fotoserieId);
+        }
+
+        [HttpPost]
+        [Route("api/foto/{fotoserieId:int}/upload")]
+        public async Task<HttpResponseMessage> UploadPhoto(int fotoSerieID) 
+        {
+            //int fotoSerieID     = Convert.ToInt32(Request.GetRouteData().Values["fotoSerieID"]);
 
             if (!Request.Content.IsMimeMultipartContent())
             {
@@ -176,7 +188,7 @@ namespace FotoWebservice.Controllers
             }
         }
 
-        [Route("api/fotoserie/{fotoserieId:int}/foto")]
+        /*[Route("api/fotoserie/{fotoserieId:int}/foto")]
         [HttpPost]
         public async Task<HttpResponseMessage> Post() // parameter: fotoserie_key
         {
@@ -228,7 +240,7 @@ namespace FotoWebservice.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
-        }
+        }*/
 
         private int Id()
         {

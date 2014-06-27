@@ -23,7 +23,7 @@ namespace FotoWebservice
 
 
             // Foto all
-            config.Routes.MapHttpRoute(
+            /*config.Routes.MapHttpRoute(
                 name: "FotoApiAll",
                 routeTemplate: "api/fotoserie/{fotoserie_key}/foto/all",
                 defaults: new { controller = "Foto", action = "GetAll" }
@@ -55,7 +55,7 @@ namespace FotoWebservice
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-            );
+            );*/
 
             /* Opmerking Pieter 18-06-2014: 
              * Ik weet denk ik al waar het fout ging in de attribute routing. Ik gebruikte een variabele met een underscore. Dat mag waarschijnlijk niet.

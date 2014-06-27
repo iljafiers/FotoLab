@@ -25,10 +25,6 @@
 
 <div class="row">
     <div class="col-md-12">
-        <!--<select id="page_select">
-            <option value="@Url.RouteUrl("FotoserieApi", new { httproute = "", controller = "fotoserie" })">Alle fotoseries</option>
-            <option value="@Url.RouteUrl("FotoserieApi", new { httproute = "", controller = "fotoserie" })">Alle fotoseries</option>
-        </select>-->
         <form id="addFotoserie">
             <input type="text" name="key" />
             <input type="submit" value="Toevoegen"/>
@@ -45,7 +41,7 @@
     </div>
 </div>
 <hr />
-<form name="form1" method="post" enctype="multipart/form-data" action="~/api/Fotoserie/flappies_fotoserie_key/Foto">
+<form name="form1" method="post" enctype="multipart/form-data" action="~/api/Fotoserie/flappies_fotoserie_key/foto/">
     <div>
         <label for="image1">Image File</label>
         <input name="image1" type="file" />
@@ -62,25 +58,25 @@
 <script>
     window.onload = function () {
         $(document).ready(function () {
-            $("#addFotoserie").submit(function (event) {
-                event.preventDefault();
-
-                var serie_key = $("input[name='key']").val();
-
-                $.ajax({
-                    type: "GET",
-                    url: "@Url.RouteUrl("FotoserieApi", new { httproute = "", controller = "fotoserie" })",
-                    dataType: "json",
-                    success: function (data) {
-                        $("#values").text(data);
-                    }
-                })
-            });
+            //$("#addFotoserie").submit(function (event) {
+             //   event.preventDefault();
+            //
+           //     var serie_key = $("input[name='key']").val();
+//
+           //     $.ajax({
+           //         type: "GET",
+           //         url: "",
+           //         dataType: "json",
+           //         success: function (data) {
+            //            $("#values").text(data);
+            //        }
+            //    })
+           // });
 
             $("#getAllIdsButton").click(function () {
                 $.ajax({
                     type: "GET",
-                    url: "@{Request.ApplicationPath.ToString();}/api/Fotoserie/flappies_fotoserie_key/Foto/All", // http://localhost:2372/api/Fotoserie/flappies_fotoserie_key/Foto/All
+                    url: "@{Request.ApplicationPath.ToString();}/api/fotoserie/flappies_fotoserie_key/foto/", // http://localhost:2372/api/Fotoserie/flappies_fotoserie_key/Foto/All
                     dataType: "json",
                     success: function (data) {
                         $("#fotoids_values").text(data);
