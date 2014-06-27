@@ -64,6 +64,7 @@
     <Compile Include="Klant.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility.cs" />
     <EmbeddedResource Include="FormFotoProducent.resx">
       <DependentUpon>FormFotoProducent.cs</DependentUpon>
     </EmbeddedResource>

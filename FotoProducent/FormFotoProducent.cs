@@ -100,6 +100,7 @@ namespace FotoProducent
                 m_fotoserie.KlantId = m_klant.Id;
                 m_fotoserie.FotoproducentId = 0;
                 m_fotoserie.Datum = DateTime.Now;
+                m_fotoserie.Key = Utility.GenerateRandomString(20);
 
                 // Maak JSON text van de fotoserie
                 var serializer = new JavaScriptSerializer();

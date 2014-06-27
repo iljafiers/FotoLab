@@ -14,6 +14,7 @@ namespace FotoWebservice.Models
         public int KlantId { get; set; }
         public int FotoproducentId { get; set; }
         public DateTime Datum { get; set; }
+        public string Key { get; set; }
         public List<Foto> Fotos { get { return fotos; } set { fotos = value; } }
     }
 }

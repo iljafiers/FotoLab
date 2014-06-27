@@ -25,9 +25,9 @@ INSERT INTO klanten(naam, klant_key) VALUES ('Ilja Fiers', 'IF');
 INSERT INTO klanten(naam, klant_key) VALUES ('Marco Langenhuizen', 'ML');
 GO
 
-INSERT INTO fotoseries (naam, datum, klant_id) VALUES ('Klassefoto NOHi',		'2014-06-06',	0);
-INSERT INTO fotoseries (naam, datum, klant_id) VALUES ('Vakantie',			    '2013-06-06',	1);
-INSERT INTO fotoseries (naam, datum, klant_id) VALUES ('Groepsfoto teamuitje',	'2013-08-03',	1);
+INSERT INTO fotoseries (naam, datum, klant_id, fotoserie_key) VALUES ('Klassefoto NOHi',		'2014-06-06',	0, 'DitIsEenFotoserieKey');
+INSERT INTO fotoseries (naam, datum, klant_id, fotoserie_key) VALUES ('Vakantie',			    '2013-06-06',	1, 'OoknnEenFotoserieKey');
+INSERT INTO fotoseries (naam, datum, klant_id, fotoserie_key) VALUES ('Groepsfoto teamuitje',	'2013-08-03',	1, 'EnNogEenFotoserieKey');
 GO
 
 

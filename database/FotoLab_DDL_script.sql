@@ -42,7 +42,8 @@ create table fotoseries (
 	naam  			    varchar(50)			not null,
 	klant_id			int 				,
 	fotoproducent_id	int					,				
-	datum				datetime 			not null
+	datum				datetime 			not null,
+	fotoserie_key		varchar(20)			unique not null
 )
 go
 

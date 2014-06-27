@@ -12,5 +12,6 @@ namespace FotoProducent
         public int FotoproducentId { get; set;}
         public int KlantId { get; set; }
         public DateTime Datum { get; set; }
+        public string Key { get; set; }
     }
 }

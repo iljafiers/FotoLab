@@ -83,14 +83,15 @@ namespace FotoWebservice.Models
         {
             try
             {
-                string sql = "INSERT INTO fotoseries (naam, datum, fotoproducent_id, klant_id) " +
+                string sql = "INSERT INTO fotoseries (naam, datum, fotoproducent_id, klant_id, fotoserie_key) " +
                              "OUTPUT INSERTED.ID AS Id " +
-                             "VALUES (@naam, @datum, @fotoproducent_id, @klant_id)";
+                             "VALUES (@naam, @datum, @fotoproducent_id, @klant_id, @fotoserie_key)";
                 List<SqlParameter> parameters = new List<SqlParameter> { 
                     new SqlParameter("naam", fs.Naam),
                     new SqlParameter("datum", fs.Datum),
                     new SqlParameter("fotoproducent_id", fs.FotoproducentId),
-                    new SqlParameter("klant_id", fs.KlantId)
+                    new SqlParameter("klant_id", fs.KlantId),
+                    new SqlParameter("fotoserie_key", fs.Key)
                 };
 
                 DataSet ds = dataProvider.Query(sql, parameters);
