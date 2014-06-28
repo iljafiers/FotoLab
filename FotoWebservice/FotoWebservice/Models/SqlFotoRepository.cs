@@ -5,12 +5,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Configuration;
 
 namespace FotoWebservice.Models
 {
-    public class SqlFotoRepository
+    public class SqlFotoRepository : FotoWebservice.Models.IFotoRepository
     {
         private MSSqlDataProvider dataProvider;
         public SqlFotoRepository()
@@ -39,6 +40,59 @@ namespace FotoWebservice.Models
                 throw new Exception(ex.Message, ex);
             }
             return fotoIds;
+        }
+
+        public void GetAllForFotoserieList(List<Fotoserie> fotoseries)
+        {
+            if (fotoseries == null)
+            {
+                return;
+            }
+
+            try
+            {
+                StringBuilder sql = new StringBuilder("SELECT id, fotoserie_id FROM fotos WHERE fotoserie_id IN (");
+                List<SqlParameter> parameters = new List<SqlParameter>();
+
+                for (int i = 0; i < fotoseries.Count; i++)
+                {
+                    Fotoserie fs = fotoseries[i];
+                    parameters.Add(new SqlParameter(i.ToString(), fs.Id));
+                    sql.Append("@" + i.ToString());
+
+                    if (i < fotoseries.Count - 1)
+                    {
+                        sql.Append(",");
+                    }
+                }
+
+                //SqlParameter parameter = new SqlParameter("fotoserieIds", String.Join(",", fotoserieIds));
+
+                sql.Append(")");
+
+                DataSet ds = dataProvider.Query(sql.ToString(), parameters);
+
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    int fotoId = Convert.ToInt32(r["id"]);
+                    int fotoserieId = Convert.ToInt32(r["fotoserie_id"]);
+
+                    foreach (Fotoserie fs in fotoseries)
+                    {
+                        if (fs.Id == fotoserieId)
+                        {
+                            fs.Fotos.Add( new Foto { Id = fotoId } );
+                            break;
+                        }
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                //throw new Exception(ex.Message, ex);
+            }
         }
 
         /* Vraag een foto op */

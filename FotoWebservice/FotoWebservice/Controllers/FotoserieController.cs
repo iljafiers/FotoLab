@@ -13,7 +13,21 @@ namespace FotoWebservice.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class FotoserieController : ApiController
     {
-        IFotoserieRepository repository = new SqlFotoserieRepository();
+        IFotoserieRepository repository;
+        IFotoRepository fotoRepo;
+
+        public FotoserieController()
+        {
+            this.repository = new SqlFotoserieRepository();
+            this.fotoRepo = new SqlFotoRepository();
+        }
+
+        public FotoserieController(IFotoserieRepository repository, IFotoRepository fotoRepo)
+        {
+            this.repository = repository;
+            this.fotoRepo = fotoRepo;
+        }
+
         // GET: api/Fotoserie
         [HttpGet]
         [Route("api/fotoserie")]
@@ -36,11 +50,12 @@ namespace FotoWebservice.Controllers
         }
 
         [HttpGet]
-        [Route("api/klant/{klant_key}/fotoserie")]
-        public IEnumerable<Fotoserie> FindAllForKlant(string klant_key)
+        [Route("api/klant/{klantKey}/fotoserie")]
+        public IEnumerable<Fotoserie> FindAllForKlant(string klantKey)
         {
-            IEnumerable<Fotoserie> fotoseries = repository.FindAllForKlant();
+            IEnumerable<Fotoserie> fotoseries = repository.FindAllForKlant(klantKey);
             Debug.WriteLine("fotoseries.count: " + fotoseries.Count().ToString());
+            fotoRepo.GetAllForFotoserieList(fotoseries.ToList());
 
             if (fotoseries == null)
             {

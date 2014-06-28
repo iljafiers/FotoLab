@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -40,14 +41,19 @@ namespace FotoWebservice.Models
             return fotoseries;
         }
 
-        public IEnumerable<Fotoserie> FindAllForKlant()
+        public IEnumerable<Fotoserie> FindAllForKlant(string klantKey)
         {
             List<Fotoserie> fotoseries = new List<Fotoserie>();
             try
             {
-                string sql = "SELECT * FROM fotoseries";
+                string sql = 
+                    "SELECT f.* FROM fotoseries f " +
+                    "JOIN klanten k ON (f.klant_id = k.id) " + 
+                    "WHERE k.klant_key = @KlantKey";
 
-                DataSet ds = dataProvider.Query(sql);
+                SqlParameter parameter = new SqlParameter("KlantKey", klantKey);
+
+                DataSet ds = dataProvider.Query(sql, parameter);
 
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
@@ -56,7 +62,8 @@ namespace FotoWebservice.Models
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                //throw new Exception(ex.Message, ex);
+                Debug.WriteLine(ex.Message);
             }
 
             return fotoseries;
@@ -181,7 +188,10 @@ namespace FotoWebservice.Models
             return new Fotoserie { 
                 Id  = Convert.ToInt32(row["id"]),
                 Naam = Convert.ToString(row["naam"]),
-                Datum = Convert.ToDateTime(row["datum"])
+                Datum = Convert.ToDateTime(row["datum"]),
+                Key = Convert.ToString(row["fotoserie_key"]),
+                KlantId = Convert.ToInt32(row["klant_id"]),
+                Fotos = new List<Foto>()
             };
         }
 

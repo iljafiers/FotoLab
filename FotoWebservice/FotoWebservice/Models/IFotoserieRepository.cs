@@ -15,6 +15,6 @@ namespace FotoWebservice.Models
         void Remove(int id);
         bool Update(Fotoserie item);
 
-        IEnumerable<Fotoserie> FindAllForKlant();
+        IEnumerable<Fotoserie> FindAllForKlant(string klantKey);
     }
 }

@@ -121,14 +121,14 @@ namespace FotoWebservice.Controllers
         //}
 
         [HttpDelete]
-        [Route("api/fotoserie/{fotoserieKey}/foto/{id:int}")]
-        public void Delete(string fotoserieKey, int id)
+        [Route("api/fotoserie/{fotoserieKey}/foto/{fotoId:int}")]
+        public void Delete(string fotoserieKey, int fotoId)
         {
             int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
             Debug.WriteLine("fotoserieKey: " + fotoserieKey);
-            Debug.WriteLine("id: " + id);
+            Debug.WriteLine("fotoId: " + fotoId);
 
-            repository.Remove(fotoserieId, id);
+            repository.Remove(fotoserieId, fotoId);
         }
 
         [HttpPost]
