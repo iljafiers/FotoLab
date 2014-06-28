@@ -5,10 +5,10 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5cc4702b-6746-4271-ad86-e4b17e0a25c3}</ProjectGuid>
+    <ProjectGuid>{66127721-3d5e-4dbc-808d-e2a6600d4ef4}</ProjectGuid>
     <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
-    <Name>Fotolab</Name>
-    <RootNamespace>Fotolab</RootNamespace>
+    <Name>UML Model</Name>
+    <RootNamespace>ModelingProject1</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -22,22 +22,15 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
   <ItemGroup>
-    <Content Include="UMLComponentDiagram2.componentdiagram">
+    <Content Include="UMLClassDiagram1.classdiagram">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="UMLComponentDiagram2.componentdiagram.layout">
+    <Content Include="UMLClassDiagram1.classdiagram.layout">
       <SubType>Content</SubType>
-      <DependentUpon>UMLComponentDiagram2.componentdiagram</DependentUpon>
+      <DependentUpon>UMLClassDiagram1.classdiagram</DependentUpon>
     </Content>
     <Folder Include="ModelDefinition\" />
-    <Content Include="FotoLab.classdiagram">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="FotoLab.classdiagram.layout">
-      <SubType>Content</SubType>
-      <DependentUpon>FotoLab.classdiagram</DependentUpon>
-    </Content>
-    <Content Include="ModelDefinition\Fotolab.uml">
+    <Content Include="ModelDefinition\ModelingProject1.uml">
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>

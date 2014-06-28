@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="7ea4d6ff-cd15-4c65-8f48-251e10998e70" name="UMLClassDiagram1" linkedPackageId="d5bd3084-15a7-4066-8938-ce0ffa3a5f3b" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="5129568e-1c4d-446f-a02b-b747701dcefe">
+      <profileInstance Id="ee4f5a3f-556d-4071-832b-bb3a473326b5" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="a70fddf1-e6f2-4695-9604-00ed0593ca09">
+      <profileInstance Id="a799a56b-9c4a-41af-a8fd-dd5955b8a021" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="67d8c800-c9c8-4432-9710-1eff0597dc6f" name="FotoController" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="eb48650d-bd5a-4da6-8f09-ffbe67ee8af0" />
+        <generalsInternal>
+          <generalization Id="cb29da24-528f-433a-98da-77614dbc3fb3" isSubstitutable="false">
+            <classMoniker Id="6ed08d8a-ed5f-4a4b-ba27-716fb21f0062" LastKnownName="ApiController" />
+            <elementDefinition Id="7d35ae76-eedd-4d07-9310-bf25a7d48843" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="6ed08d8a-ed5f-4a4b-ba27-716fb21f0062" name="ApiController" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="18d3153b-d5d9-49fe-b7d6-b575f2b3e6d0" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="3ebbbcc5-1e48-4623-9e5b-44b4e86b7a1d" name="FotoSerieController" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="44f6be63-ee8b-4b30-8a78-fe80d97f5593" />
+        <generalsInternal>
+          <generalization Id="345cda1c-f54a-4efa-9b76-0dc95b69ae3f" isSubstitutable="false">
+            <classMoniker Id="6ed08d8a-ed5f-4a4b-ba27-716fb21f0062" LastKnownName="ApiController" />
+            <elementDefinition Id="289d7467-7e31-4082-8210-9cf65d96db97" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="906393ca-736d-4326-85ec-85e9b8b70f0f" name="KlantController" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="7c4d9d4c-29f6-48d0-a0f9-5b77098e9aa1" />
+        <generalsInternal>
+          <generalization Id="0c5b53af-7af4-41eb-a08e-c98335968f83" isSubstitutable="false">
+            <classMoniker Id="6ed08d8a-ed5f-4a4b-ba27-716fb21f0062" LastKnownName="ApiController" />
+            <elementDefinition Id="307516a0-6cd3-420d-adc2-6539937440e3" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="df4cdb4e-d329-4af3-8ad5-21006aa453ad" name="SqlFotoserieRepository" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="23770fb8-bcb4-4084-b370-e6b0843588c7" />
+        <ownedAttributesInternal>
+          <property Id="2aaa7b08-ebc4-47b6-9177-6a744127aecd" name="dataProvider" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="fc1801f2-dd66-45ae-8471-5a6f0b631c77" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="7bbd4a7a-eaa6-4ff1-8cb3-ba171d33b011" LastKnownName="MSSqlDataProvider" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="7bbd4a7a-eaa6-4ff1-8cb3-ba171d33b011" name="MSSqlDataProvider" isAbstract="false" isLeaf="false" cachedFullName="MSSqlDataProvider">
+        <elementDefinition Id="79663b72-1c23-4e16-8b75-9b7498266d11" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="e9fe1044-e2ea-459a-8214-1de1465445a0" name="MSSqlDataProvider" isAbstract="false" isLeaf="false" cachedFullName="MSSqlDataProvider">
+        <elementDefinition Id="79663b72-1c23-4e16-8b75-9b7498266d11" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="50625f9b-2b40-47fa-a002-76ac69feb473" name="SqlFotoRepository" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="5efd215c-b3af-44b2-9276-c78f2868397b" />
+        <ownedAttributesInternal>
+          <property Id="8a9d104c-8d2a-4fcf-a415-6adcb5765e24" name="dataProvider" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="1da826db-bcf0-4f24-905d-0fb48e9061a0" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="e9fe1044-e2ea-459a-8214-1de1465445a0" LastKnownName="MSSqlDataProvider" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="5572e2f5-21cd-47f7-bbe4-24e031573ec7" name="MSSqlDataProvider" isAbstract="false" isLeaf="false" cachedFullName="MSSqlDataProvider">
+        <elementDefinition Id="79663b72-1c23-4e16-8b75-9b7498266d11" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c3d2c9de-eaae-4a01-a049-b5652a7a56c0" name="SqlKlantRepository" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="8ec40032-85a1-49c3-b63a-6a28954b3c86" />
+        <ownedAttributesInternal>
+          <property Id="2c933b81-ef3e-474c-9816-21aca0b3250a" name="dataProvider" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="0f2b09a1-a9be-49ee-afc3-530ba2ff4efc" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="5572e2f5-21cd-47f7-bbe4-24e031573ec7" LastKnownName="MSSqlDataProvider" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="d5bd3084-15a7-4066-8938-ce0ffa3a5f3b" name="ModelingProject1">
+    <elementDefinition Id="1a3ccf9d-4f30-4449-a3a5-02e2aa09a462" />
+  </package>
+</logicalClassDesignerModel>
