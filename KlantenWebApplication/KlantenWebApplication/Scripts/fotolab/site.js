@@ -104,7 +104,7 @@ function Klant() {
 		console.log("getFotoseries");
 		if( key.length > 1 ) {
 			//$.getJSON("http://localhost:2372/api/klant/" + self.key() + "/fotoseries");
-			$.getJSON(Info.baseApiUrl + "api/fotoserie/", function(dataArr) {
+			$.getJSON(Info.baseApiUrl + "api/klant/" + key + "/fotoserie/", function(dataArr) {
 				var fss = $.map(dataArr, function(datarow) {
 					return new Fotoserie(datarow.serie_key, datarow.naam, datarow.fotos);
 				});
@@ -138,6 +138,7 @@ function Klant() {
 	};
 
 	self.key.subscribe(getKlantDetails);
+	self.key.subscribe(getFotoseries);
 }
 
 function Order(klant) {
