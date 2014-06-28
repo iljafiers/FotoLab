@@ -135,10 +135,13 @@ namespace FotoWebservice.Models
         {
             try
             {
-                string sql = "DELETE FROM fotoserie WHERE id = @Id";
-                SqlParameter parameter = new SqlParameter("Id", id);
+                string sql = "DELETE FROM fotos WHERE fotoserie_id = @FotoserieId AND id = @Id";
+                List<SqlParameter> parameters = new List<SqlParameter> { 
+                    new SqlParameter("Id", id),
+                    new SqlParameter("FotoserieId", fotoserieId)
+                };
 
-                dataProvider.Query(sql, parameter);
+                dataProvider.Query(sql, parameters);
             }
             catch (Exception ex)
             {

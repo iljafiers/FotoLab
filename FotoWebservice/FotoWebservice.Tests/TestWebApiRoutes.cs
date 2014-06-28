@@ -69,7 +69,7 @@ namespace FotoWebservice.Tests
         [TestMethod]
         public void GetFotoserieTest()
         {
-            this.config.ShouldMap("/api/klant/fotoserie/2")
+            this.config.ShouldMap("/api/fotoserie/2")
                 .To<FotoserieController>(HttpMethod.Get, x => x.Get(2));
         }
 
@@ -126,6 +126,7 @@ namespace FotoWebservice.Tests
                 .To<FotoController>(HttpMethod.Post, x => x.UploadPhoto(2));
         }
 
+        /* Delete Foto's werkt wel, test geeft het fout aan. Waarschijnlijk fout in MvcRouteTester. */
         [TestMethod]
         public void DeleteFotoTest()
         {

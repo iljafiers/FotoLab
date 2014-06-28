@@ -125,6 +125,8 @@ namespace FotoWebservice.Controllers
         public void Delete(string fotoserieKey, int id)
         {
             int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
+            Debug.WriteLine("fotoserieKey: " + fotoserieKey);
+            Debug.WriteLine("id: " + id);
 
             repository.Remove(fotoserieId, id);
         }

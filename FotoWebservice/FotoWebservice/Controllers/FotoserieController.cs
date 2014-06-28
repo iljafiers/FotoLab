@@ -58,7 +58,7 @@ namespace FotoWebservice.Controllers
 
         // GET: api/Fotoserie/5
         [HttpGet]
-        [Route("api/klant/fotoserie/{id:int}")]
+        [Route("api/fotoserie/{id:int}")]
         public Fotoserie Get(int id)
         {
             Fotoserie fotoserie = repository.Get(id);

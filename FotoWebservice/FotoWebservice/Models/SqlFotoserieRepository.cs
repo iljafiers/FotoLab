@@ -163,7 +163,10 @@ namespace FotoWebservice.Models
                 SqlParameter parameter = new SqlParameter("FotoserieKey", fotoserieKey);
 
                 DataSet ds = dataProvider.Query(sql, parameter);
-                id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"]);
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0 && ds.Tables[0].Rows[0]["Id"] != null)
+                {
+                    id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"]);
+                }
             }
             catch (Exception ex)
             {
