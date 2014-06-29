@@ -52,14 +52,14 @@ namespace FotoWebservice.Tests
         public void PostKlantWithIdTest()
         {
             this.config.ShouldMap("/api/klant/5")
-                .To<KlantController>(HttpMethod.Put, x => x.Put(5));
+                .To<KlantController>(HttpMethod.Put, x => x.WijzigKlant(5, new Klant()));
         }
 
         [TestMethod]
         public void PostKlantWithStringTest()
         {
             this.config.ShouldMap("/api/klant/DitIsEenKlantKey")
-                .To<KlantController>(HttpMethod.Put, x => x.Put("DitIsEenKlantKey"));
+                .To<KlantController>(HttpMethod.Put, x => x.WijzigKlant("DitIsEenKlantKey", new Klant()));
         }
     }
 
