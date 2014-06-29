@@ -33,6 +33,27 @@ ko.bindingHandlers.fadeHidden = {
     }
 };
 
+ko.bindingHandlers.lightgreenbackground = {
+    init: function(element, valueAccessor) {
+        // Initially set the element to be instantly visible/hidden depending on the value
+        var value = valueAccessor();
+        if( ko.unwrap(value) ) {
+        	$(element).css('background-color', 'LightGreen')
+        } else {
+        	$(element).css('background-color', '')
+        }
+    },
+    update: function(element, valueAccessor) {
+        // Whenever the value subsequently changes, slowly fade the element in or out
+        var value = valueAccessor();
+        if( ko.unwrap(value) ) {
+        	$(element).css('background-color', 'LightGreen')
+        } else {
+        	$(element).css('background-color', '')
+        }
+    }
+};
+
 ko.bindingHandlers.href = {
     update: function (element, valueAccessor) {
         ko.bindingHandlers.attr.update(element, function () {
@@ -45,6 +66,14 @@ ko.bindingHandlers.src = {
     update: function (element, valueAccessor) {
         ko.bindingHandlers.attr.update(element, function () {
             return { src: valueAccessor()}
+        });
+    }
+};
+
+ko.bindingHandlers.data_key = {
+    update: function (element, valueAccessor) {
+        ko.bindingHandlers.attr.update(element, function () {
+            return { 'data-key': valueAccessor()}
         });
     }
 };
@@ -141,6 +170,7 @@ function Fotoserie(key, naam, datum, fotos) {
 	self.naam = naam;
 	self.datum = datum;
 	self.fotos = fotos;
+	self.isActive = ko.observable(false);
 
 	/*self.getFotos = function() {
 		$.getJSON("http://localhost:2372/api/fotoserie/", function(dataArr) {
@@ -220,14 +250,26 @@ function Klant() {
             $.ajax({
                 type: "PUT",
                 url: Info.baseApiUrl + "api/klant/" + self.key(),
-                data: {
-                	Key: self.key(),
+             //   dataType: 'json',
+              //  contentType: "application/json",
+                /*data: JSON.stringify({
+                	Id: 0,
                 	Naam: self.naam(),
+                	Klant_key: self.key(),
                 	Straat: self.straat(),
                 	Huisnummer: self.huisnummer(),
                 	Postcode: self.postcode(),
                 	Woonplaats: self.woonplaats()
-                },
+                }),*/
+            	data: { "": JSON.stringify({
+                	Id: 0,
+                	Naam: self.naam(),
+                	Klant_key: self.key(),
+                	Straat: self.straat(),
+                	Huisnummer: self.huisnummer(),
+                	Postcode: self.postcode(),
+                	Woonplaats: self.woonplaats()
+                }) },
                 //dataType: "json",
                 success: function (data) {
                     fotolab.vm.flashmessage.addMessage("Uw gegevens zijn opgeslagen!", "success");
@@ -285,7 +327,7 @@ function fotolabViewModel() {
 
 	self.klant = new Klant();
 	self.order = new Order(self.klant);
-	self.fotoserie = ko.observable();
+	self.activeFotoserie = ko.observable();
 
 	self.validations = {
 		validateLogin: function() {
@@ -364,7 +406,22 @@ function fotolabViewModel() {
 		return "Stap " + (self.currentSectionKey() + 1) + ": " + self.currentSection().titel();
 	});
 
+	self.setActiveFotoserie = function(fotoserie) {
+		self.activeFotoserie().isActive(false);
 
+		self.activeFotoserie(fotoserie);
+		fotoserie.isActive(true);
+	}
+
+	/*self.isActiveFotoserie = ko.computed(function(fotoserieKey) {
+		console.log("BEGIN isActiveFotoserie");
+		console.dir(self.activeFotoserie());
+		console.dir(fotoserieKey);
+		console.log("END isActiveFotoserie");
+		return (self.activeFotoserie() !== null && 
+				typeof self.activeFotoserie() !== "undefined" &&
+				self.activeFotoserie().key == fotoserieKey);
+	});*/
 }
 
 var fotolab = { vm: new fotolabViewModel() };

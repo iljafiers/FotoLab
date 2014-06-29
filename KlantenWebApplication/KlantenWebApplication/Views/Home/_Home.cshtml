@@ -99,8 +99,8 @@
 	    	</script>
 
 			<script type="text/html" id="fotoserieImage">
-				<div class="fotoserieImage">
-					<h4 data-bind="text: naam"></h4>
+				<div class="fotoserieImage" data-bind="data_key: key, click: $root.setActiveFotoserie, lightgreenbackground: isActive">
+					<h5 data-bind="text: naam"></h5>
 					<img data-bind="src: randomFotoSrc()"/>
 				</div>
 			</script>
@@ -143,6 +143,8 @@
 </table>
 
 <img src="/Content/Images/Circle-question-red.svg" width="20px" />
+
+<span data-bind="text: activeFotoserie()"></span>
 
 
 

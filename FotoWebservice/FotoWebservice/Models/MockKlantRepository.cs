@@ -40,7 +40,7 @@ namespace FotoWebservice.Models
 
         public void SaveKlant(Klant newKlant)
         {
-            throw new NotImplementedException();
+            this.klanten.Add(newKlant);
         }
     }
 }

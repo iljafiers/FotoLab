@@ -65,8 +65,23 @@ textarea {
 
 .fotoserieImage {
     float: left;
-    width: 200px;
+    width: 180px;
+    border: 1px solid black;
+    border-radius: 15px;
+    text-align: center;
+    padding: 5px;
+    height: 150px;
+}
+.fotoserieImage h5 {
+    border-bottom: 1px solid black;
+    padding-bottom: 4px;
 }
 .fotoserieImage img {
-    width: 60px;
+    max-width: 160px;
+    max-height: 90px;
+    border-radius: 5px;
+}
+.fotoserieImage:hover {
+    background-color: #12C8F8;
+    cursor: pointer;
 }

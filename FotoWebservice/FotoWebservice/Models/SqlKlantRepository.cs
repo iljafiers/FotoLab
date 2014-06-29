@@ -72,7 +72,7 @@ namespace FotoWebservice.Models
                     "straat = @Straat, " +
                     "huisnummer = @Huisnummer, " +
                     "postcode = @Postcode, " +
-                    "woonplaats = @Woonplaats, " +
+                    "woonplaats = @Woonplaats " +
                     "WHERE id = @Id";
 
                 List<SqlParameter> parameters = new List<SqlParameter> {

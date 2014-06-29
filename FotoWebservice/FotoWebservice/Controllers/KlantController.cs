@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using FotoWebservice.Models;
 using System.Web.Http.Cors;
+using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace FotoWebservice.Controllers
 {
@@ -55,16 +57,26 @@ namespace FotoWebservice.Controllers
 
         [HttpPut]
         [Route("api/klant/{klantkey}")]
-        public HttpResponseMessage UpdateKlant(string klantKey, [FromBody]Klant newKlant)
+        public HttpResponseMessage UpdateKlant(string klantKey, [FromBody]string newKlantJSON) //
         {
+            Debug.WriteLine("UpdateKlant");
+            Debug.WriteLine("klantKey: " + klantKey);
+            Debug.WriteLine("string: " + newKlantJSON);
             try
             {
+                Klant newKlant = JsonConvert.DeserializeObject<Klant>(newKlantJSON);
+
+                Debug.WriteLine("klant.naam: " + newKlant.Naam);
+                Debug.WriteLine("klant.key: " + newKlant.Klant_key);
+                Debug.WriteLine("klant.id: " + newKlant.Id);
+                Debug.WriteLine("klant.Straat: " + newKlant.Straat);
+
                 Klant klant = repo.GetByKey(klantKey);
-                if (klant.Klant_key == newKlant.Klant_key)
+                if (klant.Klant_key.ToLower() == newKlant.Klant_key.ToLower())
                 {
                     newKlant.Id = klant.Id;
                     repo.SaveKlant(newKlant);
-                    return Request.CreateResponse(HttpStatusCode.Created);
+                    return Request.CreateResponse(HttpStatusCode.OK);
                 }
                 else
                 {
@@ -81,10 +93,19 @@ namespace FotoWebservice.Controllers
 
         [HttpPut]
         [Route("api/klant/{id:int}")]
-        public void UpdateKlant(int id, [FromBody]Klant newKlant)
+        public HttpResponseMessage UpdateKlant(int id, [FromBody]Klant newKlant)
         {
-            newKlant.Id = id;
-            repo.SaveKlant(newKlant);
+            try
+            {
+                newKlant.Id = id;
+                repo.SaveKlant(newKlant);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+
         }
 
         // DELETE: api/Klant/5
