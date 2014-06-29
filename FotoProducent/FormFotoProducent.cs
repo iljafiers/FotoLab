@@ -56,6 +56,8 @@ namespace FotoProducent
                 if (m_klant != null)
                 {
                     this.KlantNaam.Text = m_klant.Naam;
+                    this.labelAdres.Text = m_klant.Straat + " " + m_klant.Huisnummer;
+                    this.labelWoonplaats.Text = m_klant.Postcode + " " + m_klant.Woonplaats;
                 }
 
             }
@@ -201,5 +203,6 @@ namespace FotoProducent
                 }
             }
         }
+
     }
 }
