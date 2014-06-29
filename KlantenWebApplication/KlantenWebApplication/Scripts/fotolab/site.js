@@ -1,3 +1,26 @@
+ko.bindingHandlers.fadeVisible = {
+    init: function(element, valueAccessor) {
+        // Initially set the element to be instantly visible/hidden depending on the value
+        var value = valueAccessor();
+        $(element).toggle(ko.unwrap(value)); // Use "unwrapObservable" so we can handle values that may or may not be observable
+    },
+    update: function(element, valueAccessor) {
+        // Whenever the value subsequently changes, slowly fade the element in or out
+        var value = valueAccessor();
+        ko.unwrap(value) ? $(element).fadeIn() : $(element).fadeOut();
+    }
+};
+
+var Utility = {
+	random: function(min, max) {
+		if(typeof min === "undefined") { min = 0; }
+		if(typeof max === "undefined") { max = 10; }
+
+		return Math.floor( Math.random() * ( max - min + 1 ) + min);
+	}
+};
+
+
 var Info = {
 	baseApiUrl: "http://localhost:2372/"
 };
@@ -11,7 +34,7 @@ function FlashMessages() {
 
 	self.addMessage = function(message, bootstrapColor, time) {
 		if(typeof bootstrapColor === "undefined") { bootstrapColor = "danger"; }
-		if(typeof time === "undefined" || time === 0 ) { time = 4000; }
+		if(typeof time === "undefined" || time === 0 ) { time = 5000; }
 		self.messages.push( { message: message, bootstrapColor: bootstrapColor, time: time } );
 		self.nextMessage();
 	};
@@ -34,17 +57,13 @@ function FlashMessages() {
 	};
 }
 
-function Validation() {
-	
-}
-
-
 function Section(template, titel, enableNext) {
 	var self = this;
 
 	self.template = template;
 	self.titel = ko.observable(titel);
-	self.enableNext = enableNext; // function
+	self.enableNext = enableNext; // function to validate if next step should be enabled
+	//self.onNext = onNext; 		  // function to fire on next
 }
 
 function Extra(naam, bedrag) {
@@ -72,12 +91,13 @@ function Item(foto) {
 
 }*/
 
-function Fotoserie(key, naam, fotoIds) {
+function Fotoserie(key, naam, datum, fotos) {
 	var self = this;
 
 	self.key = key;
 	self.naam = naam;
-	self.fotoIds = fotoIds;
+	self.datum = datum;
+	self.fotos = fotos;
 
 	/*self.getFotos = function() {
 		$.getJSON("http://localhost:2372/api/fotoserie/", function(dataArr) {
@@ -87,6 +107,15 @@ function Fotoserie(key, naam, fotoIds) {
 			self.fotoseries(fss);
 		});
 	};*/
+
+	self.randomFotoId = ko.computed(function() {
+		if( self.fotos.length > 0) {
+			var fotosKey = Utility.random(0, self.fotos.length - 1);
+			return self.fotos[fotosKey].Id;
+		} else {
+			return false;
+		}
+	});
 }
 
 function Klant() {
@@ -101,12 +130,13 @@ function Klant() {
 	self.woonplaats = ko.observable("");
 
 	var getFotoseries = function(key) {
-		console.log("getFotoseries");
 		if( key.length > 1 ) {
 			//$.getJSON("http://localhost:2372/api/klant/" + self.key() + "/fotoseries");
 			$.getJSON(Info.baseApiUrl + "api/klant/" + key + "/fotoserie/", function(dataArr) {
+				console.dir(dataArr);
 				var fss = $.map(dataArr, function(datarow) {
-					return new Fotoserie(datarow.serie_key, datarow.naam, datarow.fotos);
+					console.dir(datarow);
+					return new Fotoserie(datarow.Key, datarow.Naam, datarow.Datum, datarow.Fotos);
 				});
 				self.fotoseries(fss);
 			});
@@ -116,29 +146,62 @@ function Klant() {
 	var getKlantDetails = function(key) {
 		if( key.length > 1 ) {
 			$.getJSON(Info.baseApiUrl + "api/klant/" + key, function(data) {
-				console.dir(data);
-				self.naam(data.Naam);
-				self.straat(data.Straat);
-				self.huisnummer(data.Huisnummer);
-				self.postcode(data.Postcode);
-				self.woonplaats(data.Woonplaats);				
+				if(data !== null) {
+					if( data.Naam !== null ) { self.naam(data.Naam); };
+					if( data.Straat !== null ) { self.straat(data.Straat); };
+					if( data.Huisnummer !== null ) { self.huisnummer(data.Huisnummer); };
+					if( data.Postcode !== null ) { self.postcode(data.Postcode); };
+					if( data.Woonplaats !== null ) { self.woonplaats(data.Woonplaats); };
+				} else {
+					fotolab.vm.flashmessage.addMessage("Klantcode bestaat niet!", "danger");
+				}
 			});
 		}
 	};
 
+	var saveKlantDetails = function() {
+		if( fotolab.vm.validations.validateKlantGegevens() ) {
+            $.ajax({
+                type: "PUT",
+                url: Info.baseApiUrl + "api/klant/" + self.key(),
+                data: {
+                	Key: self.key(),
+                	Naam: self.naam(),
+                	Straat: self.straat(),
+                	Huisnummer: self.huisnummer(),
+                	Postcode: self.postcode(),
+                	Woonplaats: self.woonplaats()
+                },
+                //dataType: "json",
+                success: function (data) {
+                    fotolab.vm.flashmessage.addMessage("Klant opgeslagen!", "success");
+                },
+                error: function (data) {
+                    fotolab.vm.flashmessage.addMessage("Klant kon niet opgeslagen worden!", "danger");
+                }
+            })
+		}
+	};
+
 	self.reset = function() {
-		self.key = ko.observable("");
+		self.key("");
 		self.fotoseries = ko.observableArray().removeAll();
 
-		self.naam = ko.observable("");
-		self.straat = ko.observable("");
-		self.huisnummer = ko.observable("");
-		self.postcode = ko.observable("");
-		self.woonplaats = ko.observable("");
+		self.naam("");
+		self.straat("");
+		self.huisnummer("");
+		self.postcode("");
+		self.woonplaats("");
 	};
 
 	self.key.subscribe(getKlantDetails);
 	self.key.subscribe(getFotoseries);
+
+	self.naam.subscribe(saveKlantDetails);
+	self.straat.subscribe(saveKlantDetails);
+	self.huisnummer.subscribe(saveKlantDetails);
+	self.postcode.subscribe(saveKlantDetails);
+	self.woonplaats.subscribe(saveKlantDetails);
 }
 
 function Order(klant) {
@@ -167,14 +230,32 @@ function fotolabViewModel() {
 	self.order = new Order(self.klant);
 	self.fotoserie = ko.observable();
 
+	self.validations = {
+		validateLogin: function() {
+			return ( 
+				(self.klant.key().length > 0) && 
+				(self.klant.naam().length > 0)
+			);
+		},
+		validateKlantGegevens: function() {
+			return (
+				(self.klant.naam().length > 0) &&
+				(self.klant.straat().length > 0) &&
+				(self.klant.huisnummer().length > 0) &&
+				(self.klant.postcode().length > 0) &&
+				(self.klant.woonplaats().length > 0)
+			);
+		}
+	};
+
 	self.sections = ko.observableArray([
-		new Section("fotolab_login", "Login", function() {  return ( (self.klant.key().length > 0) && (self.klant.naam().length > 0) ); } ),
-		new Section("fotolab_klantgegevens", "Klantgegevens", function() { return true; } ),
+		new Section("fotolab_login", "Login", self.validations.validateLogin ),
+		new Section("fotolab_klantgegevens", "Klantgegevens", self.validations.validateKlantGegevens ),
 		new Section("fotolab_select_fotoserie", "Selecteer fotoserie", function() { return true; } ),
 		new Section("fotolab_select_fotos", "Selecteer foto's", function() { return true; } ),
 		new Section("fotolab_productlist", "Productenlijst", function() { return true; } ),
 		new Section("fotolab_payment", "Betaalmethode", function() { return true; } ),
-		new Section("fotolab_thanks", "Bedankt voor uw bestelling", function() { return true; } )
+		new Section("fotolab_thanks", "Bedankt voor uw bestelling!", function() { return true; } )
 	]);
 	self.currentSectionKey = ko.observable(0);
 
@@ -201,6 +282,7 @@ function fotolabViewModel() {
 		}
 	};
 	self.reset = function() {
+		self.klant.key("");
 		self.currentSectionKey(0);
 		self.klant.reset();
 		self.order.reset();
@@ -225,9 +307,13 @@ function fotolabViewModel() {
 	self.headingTitle = ko.computed(function() {
 		return "Stap " + (self.currentSectionKey() + 1) + ": " + self.currentSection().titel();
 	});
+
+
 }
 
+var fotolab = { vm: new fotolabViewModel() };
 
 $(document).ready(function() {
-	ko.applyBindings(new fotolabViewModel());
+	ko.applyBindings(fotolab.vm);
 });
+

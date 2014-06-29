@@ -5,7 +5,7 @@
 			<div class="panel-heading">
 				<h3 class="panel-title" data-bind="text: headingTitle"></h3>
 			</div>
-			<div id="flashMessage" data-bind="visible: flashmessage.message().length > 0, text: flashmessage.message" class="alert alert-danger"></div>
+			<div id="flashMessage" data-bind="fadeVisible: flashmessage.message().length > 0, text: flashmessage.message" class="alert alert-danger"></div>
 			<div class="panel-body" data-bind="template: { name: displaySection }">
 			</div>
 			<div class="btn-group" id="navControls">
@@ -23,7 +23,7 @@
 	    	<div id="fotolab_login" class="section">
 	    		<div class="row">
 	    			<div class="form-group col-md-12">
-		    			<label class="control-label" for="klantkey">Key</label>
+		    			<label class="control-label" for="klantkey">Voer uw klantcode in:</label>
 			    		<input id="klantkey" class="form-control" data-bind="value: klant.key" placeholder="bv. 3653695KL"/>
 		    		</div>
 	    		</div>
@@ -105,6 +105,29 @@
 
 	    <button data-bind="click: showDebug">showDebug</button>
 
+<h4>Fotoseries</h4>
+<table>
+    <thead>
+        <tr>
+        	<th>Key</th>
+        	<th>Naam</th>
+        	<th>Datum</th>
+        	<th>Fotos</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: klant.fotoseries">
+        <tr>
+            <td data-bind="text: key"></td>
+            <td data-bind="text: naam"></td>
+            <td data-bind="text: datum"></td>
+            <td data-bind="foreach: fotos">
+            	<span data-bind="text: Id"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<img src="/Content/Images/Circle-question-red.svg" width="20px" />
 
 
 

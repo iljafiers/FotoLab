@@ -19,8 +19,23 @@ namespace FotoWebservice.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class FotoController : ApiController
     {
-        SqlFotoRepository repository = new SqlFotoRepository();
-        FileFotoRepository filerepo = new FileFotoRepository();
+        IFotoRepository repository;
+        FileFotoRepository filerepo;
+        IFotoserieRepository fotoserieRepo;
+
+        public FotoController()
+        {
+            repository = new SqlFotoRepository();
+            filerepo = new FileFotoRepository();
+            fotoserieRepo = new SqlFotoserieRepository();
+        }
+
+        public FotoController(IFotoRepository repository, FileFotoRepository filerepo, IFotoserieRepository fotoserieRepo)
+        {
+            this.repository = repository;
+            this.filerepo = filerepo;
+            this.fotoserieRepo = fotoserieRepo;
+        }
 
         [HttpGet]
         [Route("api/fotoserie/{fotoserieKey}/foto/all")]
@@ -28,7 +43,7 @@ namespace FotoWebservice.Controllers
         {
             //string fotoserieKey = this.FotoserieKey();
 
-            int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
+            int fotoserieId = fotoserieRepo.FindIdForKey(fotoserieKey);
             IEnumerable<int> fotoIds = repository.GetAll(fotoserieId);
 
             if (fotoIds == null)
@@ -51,7 +66,7 @@ namespace FotoWebservice.Controllers
             //string fotoserieKey = this.FotoserieKey();
             //int fotoId = this.Id();
 
-            int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
+            int fotoserieId = fotoserieRepo.FindIdForKey(fotoserieKey);
             string fullPath = filerepo.Get(fotoserieId, fotoId);
 
             /*Debug.WriteLine("fullPath: " + fullPath);
@@ -124,7 +139,7 @@ namespace FotoWebservice.Controllers
         [Route("api/fotoserie/{fotoserieKey}/foto/{fotoId:int}")]
         public void Delete(string fotoserieKey, int fotoId)
         {
-            int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
+            int fotoserieId = fotoserieRepo.FindIdForKey(fotoserieKey);
             Debug.WriteLine("fotoserieKey: " + fotoserieKey);
             Debug.WriteLine("fotoId: " + fotoId);
 
@@ -135,7 +150,7 @@ namespace FotoWebservice.Controllers
         [Route("api/fotoserie/{fotoserieKey}/foto")]
         public async Task<HttpResponseMessage> UploadPhoto(string fotoserieKey)
         {
-            int fotoserieId = new SqlFotoserieRepository().FindIdForKey(fotoserieKey);
+            int fotoserieId = fotoserieRepo.FindIdForKey(fotoserieKey);
             return await UploadPhoto(fotoserieId);
         }
 

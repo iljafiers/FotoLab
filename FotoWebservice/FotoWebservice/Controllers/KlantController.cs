@@ -53,9 +53,18 @@ namespace FotoWebservice.Controllers
         {
         }
 
-        // PUT: api/Klant/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        [Route("api/klant/{klantkey}")]
+        public void WijzigKlant(string klantKey, [FromBody]Klant klant)
         {
+
+        }
+
+        [HttpPut]
+        [Route("api/klant/{id:int}")]
+        public void WijzigKlant(int id, [FromBody]Klant klant)
+        {
+
         }
 
         // DELETE: api/Klant/5

@@ -60,6 +60,11 @@ namespace FotoWebservice.Models
             }
         }
 
+        public void ModifyKlant(Klant klant)
+        {
+
+        }
+
         private Klant DataRowToObject(DataRow row)
         {
             return new Klant

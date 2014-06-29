@@ -41,58 +41,89 @@
     </div>
 </div>
 <hr />
-<form name="form1" method="post" enctype="multipart/form-data" action="~/api/Fotoserie/flappies_fotoserie_key/foto/">
-    <div>
-        <label for="image1">Image File</label>
-        <input name="image1" type="file" />
-    </div>
-    <div>
-        <input type="submit" value="Submit" />
-    </div>
-</form>
+<div class="row">
+    <div id="UploadFoto" style="border: 1px solid red; padding: 5px;">
+        <h3>UPLOAD Foto</h3>
+        <form name="UploadFotoForm" id="UploadFotoForm" method="post" enctype="multipart/form-data" action="~/api/Fotoserie/flappies_fotoserie_key/foto/">
+            <div>
+                <label for="UploadFotoFotoserieKey">Fotoserie Key</label>
+                <input type="text" id="UploadFotoFotoserieKey" name="UploadFotoFotoserieKey" value="flappies_fotoserie_key" />
 
-<button id="getAllIdsButton">Alle foto id's</button>
-<div id="fotoIds_values">
+                <div>
+                    <label for="UploadFotoPlaatje">Plaatje</label>
+                    <input name="UploadFotoPlaatje" type="file" />
+                </div>
+                <input type="submit" value="Uploaden" />
 
+        </form>
+    </div>
 </div>
-<script>
-    window.onload = function () {
+    <script type="text/javascript">
+        $("#UploadFotoFotoserieKey").on("change", function () {
+            console.log("UploadFotoFotoserieKey is veranderd in " + $("#UploadFotoFotoserieKey").val());
+            $("#UploadFotoForm").attr("action", "/api/Fotoserie/" + $("#UploadFotoFotoserieKey").val() + "/foto/");
+        });
+    </script>
+<div class="row">
+    <div id="GetAllFotoIds" style="border: 1px solid red; padding: 5px;">
+        <h3>GET ALL Foto Ids</h3>
+        <label for="GetAllFotoIdsFotoserieKey">Fotoserie Key</label>
+        <input type="text" name="GetAllFotoIdsFotoserieKey" id="GetAllFotoIdsFotoserieKey" />
+        <button id="GetAllFotoIdsButton">Alle foto id's</button>
+        <div id="GetAllFotoIdsValues"></div>
+</div>
+</div>
+    <script>
         $(document).ready(function () {
             //$("#addFotoserie").submit(function (event) {
-             //   event.preventDefault();
+            //   event.preventDefault();
             //
-           //     var serie_key = $("input[name='key']").val();
-//
-           //     $.ajax({
-           //         type: "GET",
-           //         url: "",
-           //         dataType: "json",
-           //         success: function (data) {
+            //     var serie_key = $("input[name='key']").val();
+            //
+            //     $.ajax({
+            //         type: "GET",
+            //         url: "",
+            //         dataType: "json",
+            //         success: function (data) {
             //            $("#values").text(data);
             //        }
             //    })
-           // });
+            // });
+            var GetAllFotoIdsUrl = "@{Request.ApplicationPath.ToString();}/api/fotoserie/flappies_fotoserie_key/foto/all";
 
-            $("#getAllIdsButton").click(function () {
+            $("#GetAllFotoIdsFotoserieKey").on("change", function () {
+                console.log("GetAllFotoIdsFotoserieKey is veranderd in " + $("#GetAllFotoIdsFotoserieKey").val());
+                GetAllFotoIdsUrl = "@{Request.ApplicationPath.ToString();}/api/fotoserie/" + $("#GetAllFotoIdsFotoserieKey").val() + "/foto/all";
+            });
+
+            $("#GetAllFotoIdsButton").on("click", function () {
                 $.ajax({
                     type: "GET",
-                    url: "@{Request.ApplicationPath.ToString();}/api/fotoserie/flappies_fotoserie_key/foto/", // http://localhost:2372/api/Fotoserie/flappies_fotoserie_key/Foto/All
+                    url: GetAllFotoIdsUrl,
                     dataType: "json",
                     success: function (data) {
-                        $("#fotoids_values").text(data);
+                        console.log("getAllIds heeft success: " + data);
+                        console.dir(data);
+                        $("#GetAllFotoIdsValues").text(data);
                     }
                 })
             });
         });
-    };
-</script>
+    </script>
+    <div class="row">
+        <div id="DeleteFoto" style="border: 1px solid red; padding: 5px;">
+            <h3>DELETE Foto</h3>
+            <form id="DeleteFotoForm" method="delete" action="">
+                <label for="DeleteFotoFotoserieKey">Fotoserie Key</label>
+                <input type="text" id="DeleteFotoFotoserieKey" name="DeleteFotoFotoserieKey" value="flappies_fotoserie_key" />
 
-<div id="DeleteFoto" style="border: 1px solid red;">
-    <form id="DeleteFotoForm" method="delete" action="">
-        <input type="text" id="DeleteFotoFotoserieKey" name="DeleteFotoFotoserieKey" value="flappies_fotoserie_key" />
-        <input type="text" id="DeleteFotoId" name="DeleteFotoId" value="1"/>
-        <input type="submit" name="submit" value="Verwijderen"/>
-    </form>
+                <label for="DeleteFotoId">Foto Id</label>
+                <input type="text" id="DeleteFotoId" name="DeleteFotoId" value="1" />
+
+                <input type="submit" name="submit" value="Verwijderen" />
+            </form>
+        </div>
+    </div>
     <script type="text/javascript">
         $("#DeleteFotoForm").submit(function (event) {
             event.preventDefault();
@@ -113,5 +144,5 @@
             })
         });
     </script>
-   
-</div>
+
+

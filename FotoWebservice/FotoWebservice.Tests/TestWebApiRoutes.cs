@@ -47,6 +47,20 @@ namespace FotoWebservice.Tests
             this.config.ShouldMap("/api/klant/if")
                 .To<KlantController>(HttpMethod.Get, x => x.Get("if"));
         }
+
+        [TestMethod]
+        public void PostKlantWithIdTest()
+        {
+            this.config.ShouldMap("/api/klant/5")
+                .To<KlantController>(HttpMethod.Put, x => x.Put(5));
+        }
+
+        [TestMethod]
+        public void PostKlantWithStringTest()
+        {
+            this.config.ShouldMap("/api/klant/DitIsEenKlantKey")
+                .To<KlantController>(HttpMethod.Put, x => x.Put("DitIsEenKlantKey"));
+        }
     }
 
     [TestClass]

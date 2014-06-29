@@ -8,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Configuration;
+using FotoWebservice.Models;
 
 namespace FotoWebservice.Models
 {
-    public class SqlFotoRepository : FotoWebservice.Models.IFotoRepository
+    public class SqlFotoRepository : IFotoRepository
     {
         private MSSqlDataProvider dataProvider;
         public SqlFotoRepository()
@@ -37,7 +38,7 @@ namespace FotoWebservice.Models
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                Debug.WriteLine(ex.Message);
             }
             return fotoIds;
         }

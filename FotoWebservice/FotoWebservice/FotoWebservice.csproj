@@ -194,12 +194,12 @@
     <Compile Include="Models\Foto.cs" />
     <Compile Include="Models\Fotoserie.cs" />
     <Compile Include="Models\IFotoRepository.cs" />
+    <Compile Include="Models\IFotoserieRepository.cs" />
     <Compile Include="Models\IKlantRepository.cs" />
     <Compile Include="Models\Klant.cs" />
     <Compile Include="Models\MockKlantRepository.cs" />
     <Compile Include="Models\SqlFotoRepository.cs" />
     <Compile Include="Models\SqlFotoserieRepository.cs" />
-    <Compile Include="Models\IFotoserieRepository.cs" />
     <Compile Include="Models\SqlKlantRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
