@@ -36,5 +36,11 @@ namespace FotoWebservice.Models
             }
             return null;
         }
+
+
+        public void SaveKlant(Klant newKlant)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
