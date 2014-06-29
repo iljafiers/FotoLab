@@ -123,16 +123,19 @@ namespace FotoProducent
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+
+                // ga niet verder; waarschijnlijk geen verbiniding met WebAPI
+                return;
             }
 
+            // Deel 2. Neem de lijst van fotos en upload ze.
             try
             {
                 foreach (string fotoFileName in listBoxFotos.Items)
                 {
-                    // read the foto into memory
+                    // haal de foto naar eeb byte array
 
-                    // first found out how big it is
-                    // get the file information form the selected file
+                    // Hoe groot is het bestand?
                     FileInfo fotoFileInfo = new FileInfo(fotoFileName);
                     long numBytes = fotoFileInfo.Length;
 
@@ -172,6 +175,10 @@ namespace FotoProducent
                     fotoStream.Dispose();
 
                 }
+
+                // geen exception, dus fotos zijn correct ge-upload.
+                // maak daar een melding van.
+                MessageBox.Show("Fotoserie '" + m_fotoserie.Naam + "' (" + listBoxFotos.Items.Count + " foto's) voor klant '" + m_klant.Naam + "' succesvol verzonden.");
             }
             catch (Exception ex)
             {
