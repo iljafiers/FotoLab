@@ -32,17 +32,19 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Retrieve = new System.Windows.Forms.Button();
             this.textBoxKlantID = new System.Windows.Forms.TextBox();
-            this.KlantKey = new System.Windows.Forms.Label();
+            this.labelAdres = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.KlantNaam = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonVerwijder = new System.Windows.Forms.Button();
             this.textBoxFotoSerieNaam = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.buttonSelecteer = new System.Windows.Forms.Button();
             this.listBoxFotos = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.buttonVerwijder = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.labelWoonplaats = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -58,9 +60,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.labelWoonplaats);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.Retrieve);
             this.groupBox1.Controls.Add(this.textBoxKlantID);
-            this.groupBox1.Controls.Add(this.KlantKey);
+            this.groupBox1.Controls.Add(this.labelAdres);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.KlantNaam);
             this.groupBox1.Controls.Add(this.label2);
@@ -89,23 +93,23 @@
             this.textBoxKlantID.Size = new System.Drawing.Size(73, 20);
             this.textBoxKlantID.TabIndex = 6;
             // 
-            // KlantKey
+            // labelAdres
             // 
-            this.KlantKey.AutoSize = true;
-            this.KlantKey.Location = new System.Drawing.Point(147, 92);
-            this.KlantKey.Name = "KlantKey";
-            this.KlantKey.Size = new System.Drawing.Size(13, 13);
-            this.KlantKey.TabIndex = 5;
-            this.KlantKey.Text = "--";
+            this.labelAdres.AutoSize = true;
+            this.labelAdres.Location = new System.Drawing.Point(147, 92);
+            this.labelAdres.Name = "labelAdres";
+            this.labelAdres.Size = new System.Drawing.Size(13, 13);
+            this.labelAdres.TabIndex = 5;
+            this.labelAdres.Text = "--";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 92);
+            this.label3.Location = new System.Drawing.Point(59, 92);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 13);
+            this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Klant key:";
+            this.label3.Text = "Adres:";
             // 
             // KlantNaam
             // 
@@ -138,6 +142,16 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Fotos";
+            // 
+            // buttonVerwijder
+            // 
+            this.buttonVerwijder.Location = new System.Drawing.Point(389, 94);
+            this.buttonVerwijder.Name = "buttonVerwijder";
+            this.buttonVerwijder.Size = new System.Drawing.Size(75, 23);
+            this.buttonVerwijder.TabIndex = 10;
+            this.buttonVerwijder.Text = "Verwijder...";
+            this.buttonVerwijder.UseVisualStyleBackColor = true;
+            this.buttonVerwijder.Click += new System.EventHandler(this.buttonVerwijderClicked);
             // 
             // textBoxFotoSerieNaam
             // 
@@ -184,15 +198,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.OnClickUpload);
             // 
-            // buttonVerwijder
+            // label6
             // 
-            this.buttonVerwijder.Location = new System.Drawing.Point(389, 94);
-            this.buttonVerwijder.Name = "buttonVerwijder";
-            this.buttonVerwijder.Size = new System.Drawing.Size(75, 23);
-            this.buttonVerwijder.TabIndex = 10;
-            this.buttonVerwijder.Text = "Verwijder...";
-            this.buttonVerwijder.UseVisualStyleBackColor = true;
-            this.buttonVerwijder.Click += new System.EventHandler(this.buttonVerwijderClicked);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(29, 119);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Woonplaats:";
+            // 
+            // labelWoonplaats
+            // 
+            this.labelWoonplaats.AutoSize = true;
+            this.labelWoonplaats.Location = new System.Drawing.Point(147, 119);
+            this.labelWoonplaats.Name = "labelWoonplaats";
+            this.labelWoonplaats.Size = new System.Drawing.Size(13, 13);
+            this.labelWoonplaats.TabIndex = 9;
+            this.labelWoonplaats.Text = "--";
             // 
             // FormFotoProducent
             // 
@@ -220,8 +242,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button Retrieve;
         private System.Windows.Forms.TextBox textBoxKlantID;
-        private System.Windows.Forms.Label KlantKey;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox textBoxFotoSerieNaam;
         private System.Windows.Forms.Label label4;
@@ -229,6 +249,10 @@
         private System.Windows.Forms.ListBox listBoxFotos;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonVerwijder;
+        private System.Windows.Forms.Label labelAdres;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelWoonplaats;
+        private System.Windows.Forms.Label label6;
     }
 }
 

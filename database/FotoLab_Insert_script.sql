@@ -21,7 +21,7 @@ go
    twee keer worden genoteerd; anders wordt het opgevat als einde-string teken.
 */
 INSERT INTO klanten(naam, klant_key) VALUES ('Pieter Scheffers', 'PS');
-INSERT INTO klanten(naam, klant_key) VALUES ('Ilja Fiers', 'IF');
+INSERT INTO klanten(naam, klant_key, straat, huisnummer, postcode, woonplaats) VALUES ('Ilja Fiers', 'IF', 'Sophia van Wurtemberglaan', 49, '5616BN', 'Eindhoven');
 INSERT INTO klanten(naam, klant_key) VALUES ('Marco Langenhuizen', 'ML');
 GO
 
