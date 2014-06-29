@@ -307,9 +307,8 @@ function fotolabViewModel() {
 
 	self.sections = ko.observableArray([
 		new Section("fotolab_login", "Login", self.validations.validateLogin ),
-		new Section("fotolab_select_fotoserie", "Selecteer fotoserie", function() { return true; } ),
 		new Section("fotolab_klantgegevens", "Klantgegevens", self.validations.validateKlantGegevens ),
-
+		new Section("fotolab_select_fotoserie", "Selecteer fotoserie", function() { return true; } ),
 		new Section("fotolab_select_fotos", "Selecteer foto's", function() { return true; } ),
 		new Section("fotolab_productlist", "Productenlijst", function() { return true; } ),
 		new Section("fotolab_payment", "Betaalmethode", function() { return true; } ),

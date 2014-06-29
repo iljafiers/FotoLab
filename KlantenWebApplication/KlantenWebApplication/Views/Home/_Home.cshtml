@@ -20,17 +20,17 @@
 	   <div id="fotolabsite">
 
 
-	    	<div id="fotolab_login" class="section">
+	    	<script type="text/html" id="fotolab_login">
 	    		<div class="row">
 	    			<div class="form-group col-md-12">
 		    			<label class="control-label" for="klantkey">Voer uw klantcode in:</label>
 			    		<input id="klantkey" class="form-control" data-bind="value: klant.key" placeholder="bv. 3653695KL"/>
 		    		</div>
 	    		</div>
-	    	</div>
+	    	</script>
 
 
-	    	<div id="fotolab_klantgegevens" class="section">
+	    	<script type="text/html" id="fotolab_klantgegevens">
     			<div class="row">
 	    			<div class="form-group col-md-12">
 		    			<label class="control-label" for="klantnaam">Naam</label>
@@ -65,10 +65,10 @@
 			    		</div>
 		    		</div>
 	    		</div>
-	    	</div>
+	    	</script>
 
 
-	    	<div id="fotolab_select_fotoserie" class="section">
+	    	<script type="text/html" id="fotolab_select_fotoserie">
 	    		<div class="row">
 	    			<div class="form-group col-md-12">
 		    			<div data-bind="template: { name: 'fotoserieImage', foreach: klant.fotoseries }">
@@ -76,27 +76,27 @@
 			    		</div>
 		    		</div>
 	    		</div>
-	    	</div>
+	    	</script>
 
 
-	    	<div id="fotolab_select_fotos" class="section">
-	    		Foto's Selecteren
-	    	</div>
+	    	<script type="text/html" id="fotolab_select_fotos">
+	    		Fotos Selecteren
+	    	</script>
 
 
-	    	<div id="fotolab_productlist" class="section">
+	    	<script type="text/html" id="fotolab_productlist">
 	    		Productenlijst
-	    	</div>
+	    	</script>
 
 
-	    	<div id="fotolab_payment" class="section">
+	    	<script type="text/html" id="fotolab_payment">
 	    		Betaling selecteren
-	    	</div>
+	    	</script>
 
 
-	    	<div id="fotolab_thanks" class="section">
+	    	<script type="text/html" id="fotolab_thanks">
 	    		<img src="~/Content/Images/thumbsup.jpeg" style="width:100px" />
-	    	</div>
+	    	</script>
 
 			<script type="text/html" id="fotoserieImage">
 				<div class="fotoserieImage">
