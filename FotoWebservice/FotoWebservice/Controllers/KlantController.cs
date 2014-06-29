@@ -55,16 +55,36 @@ namespace FotoWebservice.Controllers
 
         [HttpPut]
         [Route("api/klant/{klantkey}")]
-        public void WijzigKlant(string klantKey, [FromBody]Klant klant)
+        public HttpResponseMessage UpdateKlant(string klantKey, [FromBody]Klant newKlant)
         {
-
+            try
+            {
+                Klant klant = repo.GetByKey(klantKey);
+                if (klant.Klant_key == newKlant.Klant_key)
+                {
+                    newKlant.Id = klant.Id;
+                    repo.SaveKlant(newKlant);
+                    return Request.CreateResponse(HttpStatusCode.Created);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+            
         }
 
         [HttpPut]
         [Route("api/klant/{id:int}")]
-        public void WijzigKlant(int id, [FromBody]Klant klant)
+        public void UpdateKlant(int id, [FromBody]Klant newKlant)
         {
-
+            newKlant.Id = id;
+            repo.SaveKlant(newKlant);
         }
 
         // DELETE: api/Klant/5

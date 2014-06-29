@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using FotoWebservice.Lib;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace FotoWebservice.Models
 {
@@ -60,9 +61,36 @@ namespace FotoWebservice.Models
             }
         }
 
-        public void ModifyKlant(Klant klant)
-        {
+        public void SaveKlant(Klant klant)
+        {      
+            try
+            {
+                string sql = 
+                    "UPDATE klanten SET " + 
+                    "naam = @Naam, " + 
+                    "klant_key = @KlantKey, " +
+                    "straat = @Straat, " +
+                    "huisnummer = @Huisnummer, " +
+                    "postcode = @Postcode, " +
+                    "woonplaats = @Woonplaats, " +
+                    "WHERE id = @Id";
 
+                List<SqlParameter> parameters = new List<SqlParameter> {
+                    new SqlParameter("Naam", klant.Naam),
+                    new SqlParameter("KlantKey", klant.Klant_key),
+                    new SqlParameter("Straat", klant.Straat),
+                    new SqlParameter("Huisnummer", klant.Huisnummer),
+                    new SqlParameter("Postcode", klant.Postcode),
+                    new SqlParameter("Woonplaats", klant.Woonplaats),
+                    new SqlParameter("Id", klant.Id)
+                };
+
+                dataProvider.Execute(sql, parameters);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message + " | Line: " + new StackTrace(ex, true).GetFrame(0).GetFileLineNumber().ToString());
+            }
         }
 
         private Klant DataRowToObject(DataRow row)
