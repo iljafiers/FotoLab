@@ -5,7 +5,7 @@
 			<div class="panel-heading">
 				<h3 class="panel-title" data-bind="text: headingTitle"></h3>
 			</div>
-			<div id="flashMessage" data-bind="fadeVisible: flashmessage.message().length > 0, text: flashmessage.message" class="alert alert-danger"></div>
+			<div id="flashMessage" data-bind="fadeHidden: flashmessage.message().length > 1, text: flashmessage.message" class="alert alert-danger"></div>
 			<div class="panel-body" data-bind="template: { name: displaySection }">
 			</div>
 			<div class="btn-group" id="navControls">
@@ -69,7 +69,13 @@
 
 
 	    	<div id="fotolab_select_fotoserie" class="section">
-	    		Fotoserie Selecteren
+	    		<div class="row">
+	    			<div class="form-group col-md-12">
+		    			<div data-bind="template: { name: 'fotoserieImage', foreach: klant.fotoseries }">
+
+			    		</div>
+		    		</div>
+	    		</div>
 	    	</div>
 
 
@@ -92,8 +98,17 @@
 	    		<img src="~/Content/Images/thumbsup.jpeg" style="width:100px" />
 	    	</div>
 
+			<script type="text/html" id="fotoserieImage">
+				<div class="fotoserieImage">
+					<h4 data-bind="text: naam"></h4>
+					<img data-bind="src: randomFotoSrc()"/>
+				</div>
+			</script>
+
 
 	    </div>
+
+
 
 
 	    

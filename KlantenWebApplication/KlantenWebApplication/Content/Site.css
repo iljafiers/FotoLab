@@ -62,3 +62,11 @@ textarea {
 .panel-lightblue {
     border-color: #12C8F8;
 }
+
+.fotoserieImage {
+    float: left;
+    width: 200px;
+}
+.fotoserieImage img {
+    width: 60px;
+}

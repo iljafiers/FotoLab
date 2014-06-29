@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Knockout Template With Inner Foreach</title>
+		<script type="text/javascript" src="jquery.min.js"></script>
+		<script type="text/javascript" src="knockout-min.js"></script>
+	</head>
+	<body>
+	 	<div id="mainDiv" data-bind="template: { name: currentSection }" style="border: 1px solid red">
+
+	 	</div>
+	 	<button data-bind="click: next">Next</button>
+
+
+		<div id="templatesZone" style="display:none">
+			<div id="template1">
+				template1
+			</div>
+			<div id="template2">
+				template2
+			</div>
+			<div id="template3">
+				<div data-bind="foreach: customers">
+					<div class="customerDiv">
+						<span data-bind="text: name"></span>
+						<span data-bind="text: age"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<p data-bind="text: currentSection"></p>
+		<p data-bind="text: currentSectionKey"></p>
+
+		<script type="text/javascript">
+			function Customer(name, age) {
+				var self = this;
+
+				self.name = name;
+				self.age = age;
+			}
+
+			function testViewModel() {
+				var self = this;
+
+				self.customers = ko.observableArray([
+					new Customer("Jake", 25), 
+					new Customer("Ritchie", 44), 
+					new Customer("Clarence", 34),
+					new Customer("Vince", 22)
+				]);
+				self.templates = [
+					"template1",
+					"template2",
+					"template3",
+				];
+				self.currentSectionKey = ko.observable(0);
+
+
+				self.nextEnabled = ko.computed(function() {	
+					return ( self.currentSectionKey() < (self.templates.length - 1) );
+				});
+
+				self.next = function() {
+					if(self.nextEnabled()) { 
+						self.currentSectionKey( self.currentSectionKey() + 1 );
+					}
+				};
+
+				self.currentSection = ko.computed(function() {
+					return self.templates[self.currentSectionKey()];
+				});
+
+			}
+
+			$(document).ready(function() {
+				ko.applyBindings(new testViewModel());
+			});
+		</script>
+	</body>
+</html>

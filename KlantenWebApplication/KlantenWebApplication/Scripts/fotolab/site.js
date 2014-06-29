@@ -11,6 +11,44 @@ ko.bindingHandlers.fadeVisible = {
     }
 };
 
+ko.bindingHandlers.fadeHidden = {
+    init: function(element, valueAccessor) {
+        // Initially set the element to be instantly visible/hidden depending on the value
+        var value = valueAccessor();
+
+        if( ko.unwrap(value) ) {
+        	$(element).css('visibility','');
+        } else {
+        	$(element).css( 'visibility', 'hidden');
+        }
+    },
+    update: function(element, valueAccessor) {
+        // Whenever the value subsequently changes, slowly fade the element in or out
+        var value = valueAccessor();
+        if( ko.unwrap(value) ) {
+        	$(element).css('visibility','visible');
+        } else {
+        	$(element).css('visibility','hidden');
+        }
+    }
+};
+
+ko.bindingHandlers.href = {
+    update: function (element, valueAccessor) {
+        ko.bindingHandlers.attr.update(element, function () {
+            return { href: valueAccessor()}
+        });
+    }
+};
+
+ko.bindingHandlers.src = {
+    update: function (element, valueAccessor) {
+        ko.bindingHandlers.attr.update(element, function () {
+            return { src: valueAccessor()}
+        });
+    }
+};
+
 var Utility = {
 	random: function(min, max) {
 		if(typeof min === "undefined") { min = 0; }
@@ -29,7 +67,7 @@ var Info = {
 function FlashMessages() {
 	var self = this;
 
-	self.message = ko.observable("");
+	self.message = ko.observable("m");
 	self.messages = [];
 
 	self.addMessage = function(message, bootstrapColor, time) {
@@ -40,7 +78,7 @@ function FlashMessages() {
 	};
 
 	self.nextMessage = function() {
-		if( self.message().length === 0) {
+		if( self.message().length === 1) {
 			if( self.messages.length > 0) {
 				var message = self.messages.shift();
 
@@ -49,12 +87,17 @@ function FlashMessages() {
 				self.message(message.message);
 
 				window.setTimeout(function(){
-					self.message("");
+					self.message("m");
 					self.nextMessage();
 				}, message.time);
 			}
 		}
 	};
+
+	/*self.message.subscribe(function() { 
+		console.log("Flashmessage length: " + self.message().length); 
+		console.log("Flashmessage: " + self.message()); 
+	});*/
 }
 
 function Section(template, titel, enableNext) {
@@ -108,13 +151,19 @@ function Fotoserie(key, naam, datum, fotos) {
 		});
 	};*/
 
-	self.randomFotoId = ko.computed(function() {
+	self.getFotoSrc = function(id) {
+		console.log("getFotoSrc self.key(): " + self.key);
+		console.log("getFotoSrc id: " + id);
+		return Info.baseApiUrl + "api/fotoserie/" + self.key + "/foto/" + id;
+	};
+
+	self.randomFotoSrc = ko.computed(function() {
 		if( self.fotos.length > 0) {
 			var fotosKey = Utility.random(0, self.fotos.length - 1);
-			return self.fotos[fotosKey].Id;
-		} else {
-			return false;
+			var id = self.fotos[fotosKey].Id;
+			return self.getFotoSrc(id);
 		}
+		return "";
 	});
 }
 
@@ -129,16 +178,21 @@ function Klant() {
 	self.postcode = ko.observable("");
 	self.woonplaats = ko.observable("");
 
-	var getFotoseries = function(key) {
-		if( key.length > 1 ) {
-			//$.getJSON("http://localhost:2372/api/klant/" + self.key() + "/fotoseries");
-			$.getJSON(Info.baseApiUrl + "api/klant/" + key + "/fotoserie/", function(dataArr) {
+	var getFotoseries = function() {
+		if( self.key().length > 1 ) {
+			$.getJSON(Info.baseApiUrl + "api/klant/" + self.key() + "/fotoserie/", function(dataArr) {
 				console.dir(dataArr);
 				var fss = $.map(dataArr, function(datarow) {
 					console.dir(datarow);
 					return new Fotoserie(datarow.Key, datarow.Naam, datarow.Datum, datarow.Fotos);
 				});
 				self.fotoseries(fss);
+
+				if( self.fotoseries().length === 0 ) {
+					fotolab.vm.flashmessage.addMessage("U heeft geen fotoseries.", "danger");
+				} else {
+					fotolab.vm.flashmessage.addMessage("Fotoseries opgehaald!", "info");
+				}
 			});
 		}
 	};
@@ -147,6 +201,7 @@ function Klant() {
 		if( key.length > 1 ) {
 			$.getJSON(Info.baseApiUrl + "api/klant/" + key, function(data) {
 				if(data !== null) {
+					fotolab.vm.flashmessage.addMessage("Klantgegevens opgehaald!", "success");
 					if( data.Naam !== null ) { self.naam(data.Naam); };
 					if( data.Straat !== null ) { self.straat(data.Straat); };
 					if( data.Huisnummer !== null ) { self.huisnummer(data.Huisnummer); };
@@ -154,6 +209,7 @@ function Klant() {
 					if( data.Woonplaats !== null ) { self.woonplaats(data.Woonplaats); };
 				} else {
 					fotolab.vm.flashmessage.addMessage("Klantcode bestaat niet!", "danger");
+					fotolab.vm.reset();
 				}
 			});
 		}
@@ -174,7 +230,7 @@ function Klant() {
                 },
                 //dataType: "json",
                 success: function (data) {
-                    fotolab.vm.flashmessage.addMessage("Klant opgeslagen!", "success");
+                    fotolab.vm.flashmessage.addMessage("Uw gegevens zijn opgeslagen!", "success");
                 },
                 error: function (data) {
                     fotolab.vm.flashmessage.addMessage("Klant kon niet opgeslagen worden!", "danger");
@@ -185,7 +241,8 @@ function Klant() {
 
 	self.reset = function() {
 		self.key("");
-		self.fotoseries = ko.observableArray().removeAll();
+		self.fotoseries.removeAll();
+
 
 		self.naam("");
 		self.straat("");
@@ -195,7 +252,7 @@ function Klant() {
 	};
 
 	self.key.subscribe(getKlantDetails);
-	self.key.subscribe(getFotoseries);
+	self.naam.subscribe(getFotoseries);
 
 	self.naam.subscribe(saveKlantDetails);
 	self.straat.subscribe(saveKlantDetails);
@@ -250,8 +307,9 @@ function fotolabViewModel() {
 
 	self.sections = ko.observableArray([
 		new Section("fotolab_login", "Login", self.validations.validateLogin ),
-		new Section("fotolab_klantgegevens", "Klantgegevens", self.validations.validateKlantGegevens ),
 		new Section("fotolab_select_fotoserie", "Selecteer fotoserie", function() { return true; } ),
+		new Section("fotolab_klantgegevens", "Klantgegevens", self.validations.validateKlantGegevens ),
+
 		new Section("fotolab_select_fotos", "Selecteer foto's", function() { return true; } ),
 		new Section("fotolab_productlist", "Productenlijst", function() { return true; } ),
 		new Section("fotolab_payment", "Betaalmethode", function() { return true; } ),
@@ -282,7 +340,6 @@ function fotolabViewModel() {
 		}
 	};
 	self.reset = function() {
-		self.klant.key("");
 		self.currentSectionKey(0);
 		self.klant.reset();
 		self.order.reset();
