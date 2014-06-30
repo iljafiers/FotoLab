@@ -65,12 +65,13 @@ textarea {
 
 .fotoserieImage {
     float: left;
-    width: 180px;
+    width: 170px;
     border: 1px solid black;
     border-radius: 15px;
     text-align: center;
     padding: 5px;
     height: 150px;
+    margin: 1px;
 }
 .fotoserieImage h5 {
     border-bottom: 1px solid black;
@@ -83,5 +84,32 @@ textarea {
 }
 .fotoserieImage:hover {
     background-color: #12C8F8;
+}
+.fotoserieImage:hover, .singleFoto img:hover {
     cursor: pointer;
+}
+.singleFoto img:hover {
+    border: 3px solid #12C8F8;
+}
+.singleFoto {
+    float: left;
+    max-width: 200px;
+    height: 200px;
+    
+    border-radius: 10px;
+    margin: 5px;
+}
+.singleFoto img {
+    max-height: 194px;
+    max-width: 194px;
+    border-radius: 10px;
+    border: 3px solid black;
+}
+.productlistFotoDiv {
+    height: 40px;
+    width: 40px;
+}
+.productlistFoto {
+    max-height: 40px;
+    max-width: 40px;
 }

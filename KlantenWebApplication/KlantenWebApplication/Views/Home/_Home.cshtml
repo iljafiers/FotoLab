@@ -72,7 +72,6 @@
 	    		<div class="row">
 	    			<div class="form-group col-md-12">
 		    			<div data-bind="template: { name: 'fotoserieImage', foreach: klant.fotoseries }">
-
 			    		</div>
 		    		</div>
 	    		</div>
@@ -80,12 +79,41 @@
 
 
 	    	<script type="text/html" id="fotolab_select_fotos">
-	    		Fotos Selecteren
+	    		<div class="row">
+	    			<div class="form-group col-md-12">
+	    				<h2 data-bind="text: activeFotoserie().naam"></h2>
+		    			<div data-bind="template: { name: 'singleFoto', foreach: activeFotoserie().fotos }">
+			    		</div>
+			    		<span data-bind="if: activeFotoserie().fotos.length < 1">Deze fotoserie heeft helaas geen fotos. Ga 1 stap terug en kies een andere fotoserie.</span>
+		    		</div>
+	    		</div>
 	    	</script>
 
 
 	    	<script type="text/html" id="fotolab_productlist">
-	    		Productenlijst
+	    		<table class="table">
+				    <thead>
+				        <tr>
+				        	<th>Foto</th>
+				        	<th>Extra</th>
+				        	<th>Bedrag</th>
+				        </tr>
+				    </thead>
+				    <tbody data-bind="foreach: order.items">
+				        <tr>
+				            <td><div class="productlistFotoDiv"><img class="productlistFoto" data-bind="src: $root.activeFotoserie().getFotoSrc(foto.id)"/></div></td>
+				            <td><select data-bind="options: $root.order.availableExtras"></select></td>
+				            <td data-bind="text: formattedSubTotal"></td>
+				        </tr>
+				    </tbody>
+				    <tfoot>
+				    	<tr class="">
+				    		<td>&nbsp;</td>
+				    		<td class="text-right"><strong>Totaal:</strong></td>
+				     		<td><strong data-bind="text: order.formattedTotal"></strong></td>
+				    	</tr>
+				    </tfoot>
+				</table>
 	    	</script>
 
 
@@ -105,6 +133,11 @@
 				</div>
 			</script>
 
+			<script type="text/html" id="singleFoto">
+				<div class="singleFoto" >
+					<img data-bind="src: $root.activeFotoserie().getFotoSrc(id), data_key: id, click: $root.order.selectFoto, redborder: isSelected" />
+				</div>
+			</script>
 
 	    </div>
 
@@ -120,6 +153,20 @@
 
 	    <button data-bind="click: showDebug">showDebug</button>
 
+<table>
+    <thead>
+        <tr>
+        	<th>id</th>
+        	<th>isSelected</th>
+        </tr>
+    </thead>
+<tbody data-bind="foreach: order.items">
+	<tr>
+		<td data-bind="text: foto.id"></td>
+		<td data-bind="text: foto.isSelected"></td>
+	</tr>
+</tbody>
+<!--
 <h4>Fotoseries</h4>
 <table>
     <thead>
@@ -136,12 +183,12 @@
             <td data-bind="text: naam"></td>
             <td data-bind="text: datum"></td>
             <td data-bind="foreach: fotos">
-            	<span data-bind="text: Id"></span>
+            	<span data-bind="text: id"></span>
             </td>
         </tr>
     </tbody>
 </table>
-
+-->
 <img src="/Content/Images/Circle-question-red.svg" width="20px" />
 
 <span data-bind="text: activeFotoserie()"></span>

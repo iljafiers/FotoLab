@@ -54,6 +54,27 @@ ko.bindingHandlers.lightgreenbackground = {
     }
 };
 
+ko.bindingHandlers.redborder = {
+    init: function(element, valueAccessor) {
+        // Initially set the element to be instantly visible/hidden depending on the value
+        var value = valueAccessor();
+        if( ko.unwrap(value) ) {
+        	$(element).css('border-color', 'red')
+        } else {
+        	$(element).css('border-color', '')
+        }
+    },
+    update: function(element, valueAccessor) {
+        // Whenever the value subsequently changes, slowly fade the element in or out
+        var value = valueAccessor();
+        if( ko.unwrap(value) ) {
+        	$(element).css('border-color', 'red')
+        } else {
+        	$(element).css('border-color', '')
+        }
+    }
+};
+
 ko.bindingHandlers.href = {
     update: function (element, valueAccessor) {
         ko.bindingHandlers.attr.update(element, function () {
@@ -84,6 +105,9 @@ var Utility = {
 		if(typeof max === "undefined") { max = 10; }
 
 		return Math.floor( Math.random() * ( max - min + 1 ) + min);
+	},
+	arrayRemoveAt: function(arr, key) {
+		return arr.splice(key, 1);
 	}
 };
 
@@ -93,6 +117,7 @@ var Info = {
 };
 
 // usage: self.flashmessage.addMessage("Dit is een message");
+// Als er geen message is, dan is de message 'm', dit om de hoogte van de div te houden
 function FlashMessages() {
 	var self = this;
 
@@ -147,21 +172,59 @@ function Extra(naam, bedrag) {
 function Item(foto) {
 	var self = this;
 
-	self.foto = ko.observable(foto);
-	self.extra = ko.observable();
+	self.foto = foto;
+	self.extra = ko.observable(new Extra("Origineel", 0));
 
 	self.subtotal = ko.computed(function() {
-		return self.foto().bedrag + self.extra().bedrag;
-	});	
+		return self.foto.bedrag + self.extra().bedrag;
+	});
+
+	self.formattedSubTotal = ko.computed(function() {
+		return "€ " + (self.subtotal()).toFixed(2);
+	});
 }
 
-/*function Foto(id, fotoserie) {
+function Order(klant) {
+	var self = this;
+
+	self.klant = klant;
+	self.items = ko.observableArray([]);
+
+	self.availableExtras = ko.observableArray([]);
+
+	self.selectFoto = function(foto) {
+		if( foto.isSelected() ) {
+			foto.isSelected(false);
+			self.items.remove(function(item) { return item.foto.isSelected() == false });
+		} else {
+			var item = new Item(foto);
+			self.items.push(item);
+			foto.isSelected(true);
+		}
+	};
+
+	self.total = ko.computed(function() {
+		var total = 0;
+		$.each(self.items(), function() { total += this.subtotal(); });
+		return total;
+	});
+
+	self.formattedTotal = ko.computed(function() {
+		return "€ " + (self.total()).toFixed(2);
+	});
+
+	self.reset = function() {
+		self.items.removeAll();
+	};
+}
+
+function Foto(id, bedrag) {
 	var self = this;
 
 	self.id = id;
-	self.fotoserie = fotoserie;
-
-}*/
+	self.bedrag = bedrag;
+	self.isSelected = ko.observable(false);
+}
 
 function Fotoserie(key, naam, datum, fotos) {
 	var self = this;
@@ -172,28 +235,17 @@ function Fotoserie(key, naam, datum, fotos) {
 	self.fotos = fotos;
 	self.isActive = ko.observable(false);
 
-	/*self.getFotos = function() {
-		$.getJSON("http://localhost:2372/api/fotoserie/", function(dataArr) {
-			var fss = $.map(dataArr, function(datarow) {
-				return new Fotoserie(datarow.serie_key, datarow.naam, datarow.fotos);
-			});
-			self.fotoseries(fss);
-		});
-	};*/
-
 	self.getFotoSrc = function(id) {
-		console.log("getFotoSrc self.key(): " + self.key);
-		console.log("getFotoSrc id: " + id);
 		return Info.baseApiUrl + "api/fotoserie/" + self.key + "/foto/" + id;
 	};
 
 	self.randomFotoSrc = ko.computed(function() {
 		if( self.fotos.length > 0) {
 			var fotosKey = Utility.random(0, self.fotos.length - 1);
-			var id = self.fotos[fotosKey].Id;
+			var id = self.fotos[fotosKey].id;
 			return self.getFotoSrc(id);
 		}
-		return "";
+		return "/Content/Images/Circle-question-red.svg";
 	});
 }
 
@@ -211,10 +263,14 @@ function Klant() {
 	var getFotoseries = function() {
 		if( self.key().length > 1 ) {
 			$.getJSON(Info.baseApiUrl + "api/klant/" + self.key() + "/fotoserie/", function(dataArr) {
-				console.dir(dataArr);
 				var fss = $.map(dataArr, function(datarow) {
-					console.dir(datarow);
-					return new Fotoserie(datarow.Key, datarow.Naam, datarow.Datum, datarow.Fotos);
+
+					var fotos = [];
+					for (var i = 0; i < datarow.Fotos.length; i++) {
+						var foto = new Foto(datarow.Fotos[i].Id, 20); // TODO: Prijs aan een foto geven vanuit de WEBAPI
+						fotos.push(foto);
+					};
+					return new Fotoserie(datarow.Key, datarow.Naam, datarow.Datum, fotos);
 				});
 				self.fotoseries(fss);
 
@@ -245,6 +301,8 @@ function Klant() {
 		}
 	};
 
+	// Om een JSON string te POSTen in ASP NET moet je geen JSON contentType meegeven.
+	// Ook moet je als data een object met een naamloze-parameter meegegeven. Deze parameter kan dan de JSON string bevatten
 	var saveKlantDetails = function() {
 		if( fotolab.vm.validations.validateKlantGegevens() ) {
             $.ajax({
@@ -303,23 +361,6 @@ function Klant() {
 	self.woonplaats.subscribe(saveKlantDetails);
 }
 
-function Order(klant) {
-	var self = this;
-
-	self.klant = klant;
-	self.items = ko.observableArray();
-
-	self.total = ko.computed(function() {
-		var total = 0;
-		$.each(self.items(), function() { total += this.subtotal(); });
-		return total;
-	});
-
-	self.reset = function() {
-		self.items.removeAll();
-	};
-}
-
 function fotolabViewModel() {
 	var self = this;
 
@@ -344,14 +385,20 @@ function fotolabViewModel() {
 				(self.klant.postcode().length > 0) &&
 				(self.klant.woonplaats().length > 0)
 			);
+		},
+		validateSelecteerFotoserie: function() {
+			return ( self.activeFotoserie() !== null && typeof self.activeFotoserie() !== "undefined");
+		},
+		validateSelecteerFotos: function() {
+			return (self.order.items().length > 0);
 		}
 	};
 
 	self.sections = ko.observableArray([
 		new Section("fotolab_login", "Login", self.validations.validateLogin ),
 		new Section("fotolab_klantgegevens", "Klantgegevens", self.validations.validateKlantGegevens ),
-		new Section("fotolab_select_fotoserie", "Selecteer fotoserie", function() { return true; } ),
-		new Section("fotolab_select_fotos", "Selecteer foto's", function() { return true; } ),
+		new Section("fotolab_select_fotoserie", "Selecteer fotoserie", self.validations.validateSelecteerFotoserie ),
+		new Section("fotolab_select_fotos", "Selecteer foto's", self.validations.validateSelecteerFotos ),
 		new Section("fotolab_productlist", "Productenlijst", function() { return true; } ),
 		new Section("fotolab_payment", "Betaalmethode", function() { return true; } ),
 		new Section("fotolab_thanks", "Bedankt voor uw bestelling!", function() { return true; } )
@@ -407,11 +454,14 @@ function fotolabViewModel() {
 	});
 
 	self.setActiveFotoserie = function(fotoserie) {
-		self.activeFotoserie().isActive(false);
+		var oldFotoserie = self.activeFotoserie();
+		if( oldFotoserie !== null && typeof oldFotoserie !== "undefined") {
+			oldFotoserie.isActive(false);
+		}
 
 		self.activeFotoserie(fotoserie);
 		fotoserie.isActive(true);
-	}
+	};
 
 	/*self.isActiveFotoserie = ko.computed(function(fotoserieKey) {
 		console.log("BEGIN isActiveFotoserie");
