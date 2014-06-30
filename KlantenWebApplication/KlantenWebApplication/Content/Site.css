@@ -113,3 +113,6 @@ textarea {
     max-height: 40px;
     max-width: 40px;
 }
+.smallinput {
+    width: 50px;
+}

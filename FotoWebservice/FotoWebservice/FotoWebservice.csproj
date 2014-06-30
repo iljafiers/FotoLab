@@ -180,6 +180,7 @@
     <Compile Include="Areas\RouteDebugger\RouteDebuggerAreaRegistration.cs" />
     <Compile Include="Areas\RouteDebugger\RouteDebuggerConfig.cs" />
     <Compile Include="Controllers\FotoController.cs" />
+    <Compile Include="Controllers\FotoProductenController.cs" />
     <Compile Include="Controllers\FotoserieController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KlantController.cs" />

@@ -96,6 +96,7 @@
 				        <tr>
 				        	<th>Foto</th>
 				        	<th>Extra</th>
+				        	<th>Aantal</th>
 				        	<th>Bedrag</th>
 				        </tr>
 				    </thead>
@@ -103,11 +104,13 @@
 				        <tr>
 				            <td><div class="productlistFotoDiv"><img class="productlistFoto" data-bind="src: foto.fotoserie.getFotoSrc(foto.id)"/></div></td>
 				            <td><select data-bind="options: $root.order.availableExtras"></select></td>
+				            <td><input type="number" class="smallinput" data-bind="value: aantal"/></td>
 				            <td data-bind="text: formattedSubTotal"></td>
 				        </tr>
 				    </tbody>
 				    <tfoot>
-				    	<tr class="">
+				    	<tr>
+				    		<td>&nbsp;</td>
 				    		<td>&nbsp;</td>
 				    		<td class="text-right"><strong>Totaal:</strong></td>
 				     		<td><strong data-bind="text: order.formattedTotal"></strong></td>
@@ -123,7 +126,7 @@
 
 
 	    	<script type="text/html" id="fotolab_thanks">
-	    		<img src="~/Content/Images/thumbsup.jpeg" style="width:100px" />
+	    		<img src="/Content/Images/thumbsup.jpeg" style="width:100px" />
 	    	</script>
 
 			<script type="text/html" id="fotoserieImage">

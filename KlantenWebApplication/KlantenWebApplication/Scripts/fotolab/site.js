@@ -174,9 +174,10 @@ function Item(foto) {
 
 	self.foto = foto;
 	self.extra = ko.observable(new Extra("Origineel", 0));
+	self.aantal = ko.observable(1);
 
 	self.subtotal = ko.computed(function() {
-		return self.foto.bedrag + self.extra().bedrag;
+		return (self.foto.bedrag + self.extra().bedrag) * self.aantal();
 	});
 
 	self.formattedSubTotal = ko.computed(function() {
