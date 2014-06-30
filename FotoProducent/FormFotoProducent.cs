@@ -210,7 +210,12 @@ namespace FotoProducent
             DialogResult res = kltDialog.ShowDialog(this);
             if (res == DialogResult.OK)
             {
-                MessageBox.Show("OK");
+                //// gebruiker heeft dialoog afgesloten met OK.
+                //// we sturen de kltDialog.m_klant als nieuwe klant naar de WebAPI.
+                //string url = "http://localhost:2372/api/Klant/add";
+                //var cli = new WebClient();
+                //cli.Headers[HttpRequestHeader.ContentType] = "application/json";
+                //string responseJSON = cli.UploadString(url, JSON);
             }
         }
 

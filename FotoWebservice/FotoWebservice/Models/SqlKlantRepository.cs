@@ -93,6 +93,11 @@ namespace FotoWebservice.Models
             }
         }
 
+        public void InsertKlant(Klant newKlant)
+        {
+            throw new NotImplementedException();
+        }
+
         private Klant DataRowToObject(DataRow row)
         {
             return new Klant
@@ -106,5 +111,7 @@ namespace FotoWebservice.Models
                 Woonplaats = Convert.ToString(row["woonplaats"])
             };
         }
+
+
     }
 }

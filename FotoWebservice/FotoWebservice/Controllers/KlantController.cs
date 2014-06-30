@@ -46,8 +46,22 @@ namespace FotoWebservice.Controllers
         }
 
         // POST: api/Klant
-        public void Post([FromBody]string value)
+        [HttpPut]
+        [Route("api/klant")]
+        public HttpResponseMessage AddKlant([FromBody]string newKlantJSON)
         {
+            try
+            {
+                Klant newKlant = JsonConvert.DeserializeObject<Klant>(newKlantJSON);
+
+                repo.SaveKlant(newKlant);
+
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
         }
 
         [HttpPut]
