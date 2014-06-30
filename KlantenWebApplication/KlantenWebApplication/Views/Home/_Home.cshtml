@@ -101,7 +101,7 @@
 				    </thead>
 				    <tbody data-bind="foreach: order.items">
 				        <tr>
-				            <td><div class="productlistFotoDiv"><img class="productlistFoto" data-bind="src: $root.activeFotoserie().getFotoSrc(foto.id)"/></div></td>
+				            <td><div class="productlistFotoDiv"><img class="productlistFoto" data-bind="src: foto.fotoserie.getFotoSrc(foto.id)"/></div></td>
 				            <td><select data-bind="options: $root.order.availableExtras"></select></td>
 				            <td data-bind="text: formattedSubTotal"></td>
 				        </tr>
@@ -158,12 +158,14 @@
         <tr>
         	<th>id</th>
         	<th>isSelected</th>
+        	<th>fotoserieNaam</th>
         </tr>
     </thead>
 <tbody data-bind="foreach: order.items">
 	<tr>
 		<td data-bind="text: foto.id"></td>
 		<td data-bind="text: foto.isSelected"></td>
+		<td data-bind="text: foto.fotoserie.naam"></td>
 	</tr>
 </tbody>
 <!--

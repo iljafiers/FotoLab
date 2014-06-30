@@ -223,6 +223,7 @@ function Foto(id, bedrag) {
 
 	self.id = id;
 	self.bedrag = bedrag;
+	self.fotoserie = null;
 	self.isSelected = ko.observable(false);
 }
 
@@ -247,6 +248,12 @@ function Fotoserie(key, naam, datum, fotos) {
 		}
 		return "/Content/Images/Circle-question-red.svg";
 	});
+
+	self.bindFotoserieToFotos = function() {
+		for (var i = 0; i < self.fotos.length; i++) {
+			self.fotos[i].fotoserie = self;
+		};
+	};
 }
 
 function Klant() {
@@ -270,7 +277,9 @@ function Klant() {
 						var foto = new Foto(datarow.Fotos[i].Id, 20); // TODO: Prijs aan een foto geven vanuit de WEBAPI
 						fotos.push(foto);
 					};
-					return new Fotoserie(datarow.Key, datarow.Naam, datarow.Datum, fotos);
+					var fotoserie = new Fotoserie(datarow.Key, datarow.Naam, datarow.Datum, fotos);
+					fotoserie.bindFotoserieToFotos();
+					return fotoserie;
 				});
 				self.fotoseries(fss);
 
@@ -431,7 +440,7 @@ function fotolabViewModel() {
 		self.currentSectionKey(0);
 		self.klant.reset();
 		self.order.reset();
-		self.fotoserie(null);
+		self.activeFotoserie(null);
 	};
 
 	self.displaySection = function() {
