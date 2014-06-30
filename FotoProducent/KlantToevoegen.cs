@@ -16,6 +16,7 @@ namespace FotoProducent
         public KlantToevoegen()
         {
             InitializeComponent();
+            m_klant = new Klant();
         }
 
         private void UIToData()
@@ -31,12 +32,15 @@ namespace FotoProducent
         private void buttonOK_Click(object sender, EventArgs e)
         {
             UIToData();
+            this.DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void buttonAnnuleer_Click(object sender, EventArgs e)
         {
             UIToData();
-            this.DialogResult = Dialo
+            this.DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }

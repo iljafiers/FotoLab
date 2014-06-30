@@ -7,5 +7,6 @@ namespace FotoWebservice.Models
         Klant GetByKey(string key);
 
         void SaveKlant(Klant newKlant);
+        void InsertKlant(Klant newKlant);
     }
 }
