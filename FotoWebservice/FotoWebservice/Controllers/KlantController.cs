@@ -27,11 +27,6 @@ namespace FotoWebservice.Controllers
             this.repo = repo;
         }
 
-        // GET: api/Klant
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
         // GET: api/Klant/5
         [HttpGet]
