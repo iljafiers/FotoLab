@@ -59,7 +59,7 @@ namespace FotoWebservice.Tests
         public void PostKlantWithStringTest()
         {
             this.config.ShouldMap("/api/klant/DitIsEenKlantKey")
-                .To<KlantController>(HttpMethod.Put, x => x.UpdateKlant("DitIsEenKlantKey", new Klant()));
+                .To<KlantController>(HttpMethod.Put, x => x.UpdateKlant("DitIsEenKlantKey", "DitIsEenJSONString"));
         }
     }
 
