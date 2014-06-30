@@ -204,5 +204,15 @@ namespace FotoProducent
             }
         }
 
+        private void buttonAanmaken_Click(object sender, EventArgs e)
+        {
+            KlantToevoegen kltDialog = new KlantToevoegen();
+            DialogResult res = kltDialog.ShowDialog(this);
+            if (res == DialogResult.OK)
+            {
+                MessageBox.Show("OK");
+            }
+        }
+
     }
 }

@@ -30,6 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelWoonplaats = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.Retrieve = new System.Windows.Forms.Button();
             this.textBoxKlantID = new System.Windows.Forms.TextBox();
             this.labelAdres = new System.Windows.Forms.Label();
@@ -43,8 +45,7 @@
             this.buttonSelecteer = new System.Windows.Forms.Button();
             this.listBoxFotos = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.labelWoonplaats = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +61,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.labelWoonplaats);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.Retrieve);
@@ -75,6 +77,24 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Klant informatie";
+            // 
+            // labelWoonplaats
+            // 
+            this.labelWoonplaats.AutoSize = true;
+            this.labelWoonplaats.Location = new System.Drawing.Point(147, 119);
+            this.labelWoonplaats.Name = "labelWoonplaats";
+            this.labelWoonplaats.Size = new System.Drawing.Size(13, 13);
+            this.labelWoonplaats.TabIndex = 9;
+            this.labelWoonplaats.Text = "--";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(29, 119);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Woonplaats:";
             // 
             // Retrieve
             // 
@@ -198,23 +218,15 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.OnClickUpload);
             // 
-            // label6
+            // button2
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(29, 119);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 13);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Woonplaats:";
-            // 
-            // labelWoonplaats
-            // 
-            this.labelWoonplaats.AutoSize = true;
-            this.labelWoonplaats.Location = new System.Drawing.Point(147, 119);
-            this.labelWoonplaats.Name = "labelWoonplaats";
-            this.labelWoonplaats.Size = new System.Drawing.Size(13, 13);
-            this.labelWoonplaats.TabIndex = 9;
-            this.labelWoonplaats.Text = "--";
+            this.button2.Location = new System.Drawing.Point(389, 63);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "&Aanmaken";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.buttonAanmaken_Click);
             // 
             // FormFotoProducent
             // 
@@ -253,6 +265,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelWoonplaats;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button2;
     }
 }
 
