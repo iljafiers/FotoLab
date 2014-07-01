@@ -215,12 +215,25 @@ namespace FotoProducent
             DialogResult res = kltDialog.ShowDialog(this);
             if (res == DialogResult.OK)
             {
-                //// gebruiker heeft dialoog afgesloten met OK.
-                //// we sturen de kltDialog.m_klant als nieuwe klant naar de WebAPI.
-                //string url = "http://localhost:2372/api/Klant/add";
-                //var cli = new WebClient();
-                //cli.Headers[HttpRequestHeader.ContentType] = "application/json";
-                //string responseJSON = cli.UploadString(url, JSON);
+                // gebruiker heeft dialoog afgesloten met OK.
+                // we sturen de kltDialog.m_klant als nieuwe klant naar de WebAPI.
+                // Maak JSON text van de fotoserie
+                var serializer = new JavaScriptSerializer();
+                string JSON = serializer.Serialize(kltDialog.m_klant);
+
+                string url = "http://localhost:2372/api/Klant";
+                var cli = new WebClient();
+                cli.Headers[HttpRequestHeader.ContentType] = "application/json";
+                string responseJSON = cli.UploadString(url, JSON);
+
+                // response JSON vertalen naar een instantie van Klasse Fotoserie.
+                m_klant = serializer.Deserialize<Klant>(responseJSON);
+                if (m_klant != null)
+                {
+                    MessageBox.Show("Klant aangemaakt met ID " + m_klant.Id);
+
+                    DataToUI();
+                }
             }
         }
 
