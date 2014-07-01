@@ -30,6 +30,16 @@ namespace FotoProducent
             m_klant = new Klant();
         }
 
+        public void DataToUI()
+        {
+            if (m_klant != null)
+            {
+                this.KlantNaam.Text = m_klant.Naam;
+                this.labelAdres.Text = m_klant.Straat + " " + m_klant.Huisnummer;
+                this.labelWoonplaats.Text = m_klant.Postcode + " " + m_klant.Woonplaats;
+            }
+        }
+
 
         private void OnClickOphalenKlant(object sender, EventArgs e)
         {
@@ -53,12 +63,7 @@ namespace FotoProducent
                 var serializer = new JavaScriptSerializer();
                 m_klant = serializer.Deserialize<Klant>(JSON);
 
-                if (m_klant != null)
-                {
-                    this.KlantNaam.Text = m_klant.Naam;
-                    this.labelAdres.Text = m_klant.Straat + " " + m_klant.Huisnummer;
-                    this.labelWoonplaats.Text = m_klant.Postcode + " " + m_klant.Woonplaats;
-                }
+                DataToUI();
 
             }
             catch (WebException ex)
