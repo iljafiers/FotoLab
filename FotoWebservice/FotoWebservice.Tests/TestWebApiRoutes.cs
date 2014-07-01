@@ -148,4 +148,14 @@ namespace FotoWebservice.Tests
                 .To<FotoController>(HttpMethod.Delete, x => x.Delete("DitIsEenFotoserieKey", 22));
         }
     }
+
+    [TestClass]
+    public class TestFotoProductenRoutes : TestWebApiRoutes
+    {
+        public void GetAllFotoProductenTest()
+        {
+            this.config.ShouldMap("/api/fotoproducten")
+                .To<FotoProductenController>(HttpMethod.Get, x => x.GetAll());
+        }
+    }
 }

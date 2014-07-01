@@ -136,13 +136,35 @@
                 url: "@{Request.ApplicationPath.ToString();}/api/fotoserie/" + fotoserieKey + "/foto/" + fotoId,
                 //dataType: "json",
                 success: function (data) {
-                    console.log("foto verwijderd! " + data);
+                    console.log("fotoproducten");
+                    console.dir(data);
                 },
                 error: function (data) {
-                    console.log("foto kon niet verwijderd worden! " + data);
+                    console.log("De fotoproducten konden niet opgehaald worden! " + data);
                 }
             })
         });
     </script>
+
+<div id="GetFotoProducten" style="border: 1px solid red; padding: 5px;">
+    <button id="GetFotoProductenButton">Haal fotoproducten op</button>
+    <div id="GetFotoProductenDiv"></div>
+</div>
+
+<script type="text/javascript">
+    $("#GetFotoProductenButton").on("click", function () {
+        $.ajax({
+            type: "GET",
+            url: "@{Request.ApplicationPath.ToString();}/api/fotoproducten/",
+            //dataType: "json",
+            success: function (data) {
+                console.log("foto verwijderd! " + data);
+            },
+            error: function (data) {
+                console.log("foto kon niet verwijderd worden! " + data);
+            }
+        });
+    });
+</script>
 
 

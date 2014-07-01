@@ -103,7 +103,7 @@
 				    <tbody data-bind="foreach: order.items">
 				        <tr>
 				            <td><div class="productlistFotoDiv"><img class="productlistFoto" data-bind="src: foto.fotoserie.getFotoSrc(foto.id)"/></div></td>
-				            <td><select data-bind="options: $root.order.availableExtras"></select></td>
+				            <td><select data-bind="options: $root.order.availableFotoProducten(), optionsText: 'naam', value: fotoproduct"></select></td>
 				            <td><input type="number" class="smallinput" data-bind="value: aantal"/></td>
 				            <td data-bind="text: formattedSubTotal"></td>
 				        </tr>

@@ -7,5 +7,8 @@ namespace FotoWebservice.Models
 {
     public class FotoProduct
     {
+        public int Id { get;set;}
+        public string Naam { get; set; }
+        public decimal Meerprijs { get; set; }
     }
 }

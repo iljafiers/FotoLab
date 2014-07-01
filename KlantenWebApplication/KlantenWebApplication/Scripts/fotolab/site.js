@@ -171,8 +171,9 @@ function Section(template, titel, enableNext) {
 	//self.onNext = onNext; 		  // function to fire on next
 }
 
-function Extra(naam, bedrag) {
+function FotoProduct(id, naam, bedrag) {
 	var self = this;
+	self.id = id;
 	self.naam = naam;
 	self.bedrag = bedrag;
 }
@@ -181,11 +182,11 @@ function Item(foto) {
 	var self = this;
 
 	self.foto = foto;
-	self.extra = ko.observable(new Extra("Origineel", 0));
+	self.fotoproduct = ko.observable(new FotoProduct("Origineel", 0));
 	self.aantal = ko.observable(1);
 
 	self.subtotal = ko.computed(function() {
-		return (self.foto.bedrag + self.extra().bedrag) * self.aantal();
+		return (self.foto.bedrag + self.fotoproduct().bedrag) * self.aantal();
 	});
 
 	self.formattedSubTotal = ko.computed(function() {
@@ -199,7 +200,7 @@ function Order(klant) {
 	self.klant = klant;
 	self.items = ko.observableArray([]);
 
-	self.availableExtras = ko.observableArray([]);
+	self.availableFotoProducten = ko.observableArray([]);
 
 	self.selectFoto = function(foto) {
 		if( foto.isSelected() ) {
@@ -225,6 +226,17 @@ function Order(klant) {
 	self.reset = function() {
 		self.items.removeAll();
 	};
+
+	self.getAvailableFotoProducten = function() {
+		$.getJSON(Info.baseApiUrl + "api/fotoproducten", function(dataArr) {
+			var fotoproducten = $.map(dataArr, function(datarow) {
+				return new FotoProduct(datarow.Id, datarow.Naam, datarow.Meerprijs);
+			});
+			self.availableFotoProducten(fotoproducten);
+		});
+	};
+
+	self.getAvailableFotoProducten();
 }
 
 function Foto(id, bedrag) {
