@@ -9,5 +9,6 @@ namespace FotoWebservice.Models
     {
         public Foto Foto { get; set; }
         public FotoProduct FotoProduct { get; set; }
+        public int Aantal { get; set; }
     }
 }

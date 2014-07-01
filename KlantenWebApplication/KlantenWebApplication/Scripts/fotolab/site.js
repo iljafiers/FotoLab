@@ -188,7 +188,14 @@ function PayPalPayment(order) {
         	}
        	};
        	for (var i = 0; i < self.order.items().length; i++) {
-       		sendObject.BestelRegels.push(self.order.items()[i]
+       		var item = self.order.items()[i];
+       		var ft = item.foto;
+       		var pr = item.fotoproduct();
+
+       		sendObject.BestelRegels.push({ 
+       			Foto: { Id: ft.id, Bedrag: ft.bedrag },
+       			FotoProduct: { Id: pr.id, Naam: pr.naam, Meerprijs: pr.bedrag }
+       		});
        	};
 
 
