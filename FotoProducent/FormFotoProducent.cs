@@ -30,6 +30,16 @@ namespace FotoProducent
             m_klant = new Klant();
         }
 
+        public void DataToUI()
+        {
+            if (m_klant != null)
+            {
+                this.KlantNaam.Text = m_klant.Naam;
+                this.labelAdres.Text = m_klant.Straat + " " + m_klant.Huisnummer;
+                this.labelWoonplaats.Text = m_klant.Postcode + " " + m_klant.Woonplaats;
+            }
+        }
+
 
         private void OnClickOphalenKlant(object sender, EventArgs e)
         {
@@ -53,12 +63,7 @@ namespace FotoProducent
                 var serializer = new JavaScriptSerializer();
                 m_klant = serializer.Deserialize<Klant>(JSON);
 
-                if (m_klant != null)
-                {
-                    this.KlantNaam.Text = m_klant.Naam;
-                    this.labelAdres.Text = m_klant.Straat + " " + m_klant.Huisnummer;
-                    this.labelWoonplaats.Text = m_klant.Postcode + " " + m_klant.Woonplaats;
-                }
+                DataToUI();
 
             }
             catch (WebException ex)
@@ -210,12 +215,25 @@ namespace FotoProducent
             DialogResult res = kltDialog.ShowDialog(this);
             if (res == DialogResult.OK)
             {
-                //// gebruiker heeft dialoog afgesloten met OK.
-                //// we sturen de kltDialog.m_klant als nieuwe klant naar de WebAPI.
-                //string url = "http://localhost:2372/api/Klant/add";
-                //var cli = new WebClient();
-                //cli.Headers[HttpRequestHeader.ContentType] = "application/json";
-                //string responseJSON = cli.UploadString(url, JSON);
+                // gebruiker heeft dialoog afgesloten met OK.
+                // we sturen de kltDialog.m_klant als nieuwe klant naar de WebAPI.
+                // Maak JSON text van de fotoserie
+                var serializer = new JavaScriptSerializer();
+                string JSON = serializer.Serialize(kltDialog.m_klant);
+
+                string url = "http://localhost:2372/api/Klant";
+                var cli = new WebClient();
+                cli.Headers[HttpRequestHeader.ContentType] = "application/json";
+                string responseJSON = cli.UploadString(url, JSON);
+
+                // response JSON vertalen naar een instantie van Klasse Fotoserie.
+                m_klant = serializer.Deserialize<Klant>(responseJSON);
+                if (m_klant != null)
+                {
+                    MessageBox.Show("Klant aangemaakt met ID " + m_klant.Id);
+
+                    DataToUI();
+                }
             }
         }
 
