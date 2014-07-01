@@ -121,7 +121,14 @@
 
 
 	    	<script type="text/html" id="fotolab_payment">
-	    		Betaling selecteren
+   		 		<div class="row">
+    				<div class="col-md-12">
+			    		<img data-bind="click: $root.order.payment.initiatePayment" src="https://www.paypalobjects.com/nl_NL/NL/i/btn/btn_paynowCC_LG.gif"/>
+			    		<div data-bind="if: $root.order.payment.approveUrl().length > 0">
+			    			<iframe id="paypalIframe" data-bind="src: $root.order.payment.approveUrl"></iframe>
+			    		</div>
+			    	</div>
+			    </div>
 	    	</script>
 
 
@@ -143,10 +150,7 @@
 			</script>
 
 	    </div>
-
-
-
-
+<!--
 	    
 <br /><br /><br />
 	    <div id="fotolabcart" >
@@ -171,7 +175,7 @@
 		<td data-bind="text: foto.fotoserie.naam"></td>
 	</tr>
 </tbody>
-<!--
+
 <h4>Fotoseries</h4>
 <table>
     <thead>
@@ -193,11 +197,11 @@
         </tr>
     </tbody>
 </table>
--->
+
 <img src="/Content/Images/Circle-question-red.svg" width="20px" />
 
 <span data-bind="text: activeFotoserie()"></span>
-
+-->
 
 
 <!-- End content-->

@@ -72,7 +72,8 @@ go
 create table bestellingregels (
 	bestelling_id		int 				not null,
 	foto_id				int 				not null,
-	fotoproduct_id		int 				not null
+	fotoproduct_id		int 				not null,
+	aantal				int 				not null
 )
 go
 

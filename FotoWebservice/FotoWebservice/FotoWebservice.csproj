@@ -179,6 +179,7 @@
     <Compile Include="Areas\RouteDebugger\RequestHelper.cs" />
     <Compile Include="Areas\RouteDebugger\RouteDebuggerAreaRegistration.cs" />
     <Compile Include="Areas\RouteDebugger\RouteDebuggerConfig.cs" />
+    <Compile Include="Controllers\BestellingController.cs" />
     <Compile Include="Controllers\FotoController.cs" />
     <Compile Include="Controllers\FotoProductenController.cs" />
     <Compile Include="Controllers\FotoserieController.cs" />
@@ -192,10 +193,12 @@
     <Compile Include="Lib\IDataProvider.cs" />
     <Compile Include="Lib\MSSqlDataProvider.cs" />
     <Compile Include="Models\Bestelling.cs" />
+    <Compile Include="Models\BestelRegel.cs" />
     <Compile Include="Models\FileFotoRepository.cs" />
     <Compile Include="Models\Foto.cs" />
     <Compile Include="Models\FotoProduct.cs" />
     <Compile Include="Models\Fotoserie.cs" />
+    <Compile Include="Models\IBestellingRepository.cs" />
     <Compile Include="Models\IFotoProductenRepository.cs" />
     <Compile Include="Models\IFotoRepository.cs" />
     <Compile Include="Models\IFotoserieRepository.cs" />
@@ -203,6 +206,7 @@
     <Compile Include="Models\Klant.cs" />
     <Compile Include="Models\MockKlantRepository.cs" />
     <Compile Include="Models\PayPalBetaalmethode.cs" />
+    <Compile Include="Models\SqlBestellingRepository.cs" />
     <Compile Include="Models\SqlFotoProductenRepository.cs" />
     <Compile Include="Models\SqlFotoRepository.cs" />
     <Compile Include="Models\SqlFotoserieRepository.cs" />

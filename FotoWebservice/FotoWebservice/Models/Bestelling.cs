@@ -8,6 +8,7 @@ namespace FotoWebservice.Models
     public class Bestelling
     {
         public DateTime Datum { get; set; }
-        public List<BestelRegel> Bestelregels { get; set; }
+        public List<BestelRegel> BestelRegels { get; set; }
+        public PayPalBetaalmethode BetaalMethode { get; set; }
     }
 }

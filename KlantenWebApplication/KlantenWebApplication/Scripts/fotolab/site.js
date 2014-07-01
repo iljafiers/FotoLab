@@ -121,7 +121,8 @@ var Utility = {
 
 
 var Info = {
-	baseApiUrl: "http://localhost:2372/"
+	baseApiUrl: "http://localhost:2372/",
+	payPalReturnUrl: this.baseApiUrl + "Home/PaypalEnd/"
 };
 
 // usage: self.flashmessage.addMessage("Dit is een message");
@@ -168,7 +169,42 @@ function Section(template, titel, enableNext) {
 	self.template = template;
 	self.titel = ko.observable(titel);
 	self.enableNext = enableNext; // function to validate if next step should be enabled
-	//self.onNext = onNext; 		  // function to fire on next
+}
+
+function PayPalPayment(order) {
+	var self = this;
+
+	self.order = order;
+
+	self.approveUrl = ko.observable("");
+
+	self.initiatePayment = function() {
+		var sendObject = {
+        	Id: 0,
+        	Datum: new Date(),
+        	BestelRegels: [],
+        	BetaalMethod: {
+        		RedirectUrl: Info.payPalReturnUrl
+        	}
+       	};
+       	for (var i = 0; i < self.order.items().length; i++) {
+       		sendObject.BestelRegels.push(self.order.items()[i]
+       	};
+
+
+        $.ajax({
+            type: "POST",
+            url: Info.baseApiUrl + "api/klant/" + self.order.klant.key() +"/bestelling/",
+        	data: {"": JSON.stringify(sendObject) },
+            success: function (data) {
+                
+            },
+            error: function (data) {
+                
+            },
+            timeout: 10000 // extra lange timeout
+        })
+	};
 }
 
 function FotoProduct(id, naam, bedrag) {
@@ -197,8 +233,10 @@ function Item(foto) {
 function Order(klant) {
 	var self = this;
 
+	self.payment = new PayPalPayment(order);
 	self.klant = klant;
 	self.items = ko.observableArray([]);
+	self.isPaid = ko.observable(false);
 
 	self.availableFotoProducten = ko.observableArray([]);
 
@@ -235,6 +273,8 @@ function Order(klant) {
 			self.availableFotoProducten(fotoproducten);
 		});
 	};
+
+
 
 	self.getAvailableFotoProducten();
 }
@@ -425,7 +465,10 @@ function fotolabViewModel() {
 		},
 		validateSelecteerFotos: function() {
 			return (self.order.items().length > 0);
-		}
+		},
+		validateSelecteerBetaalMethode: function() {
+			return self.order.isPaid();
+		},
 	};
 
 	self.sections = ko.observableArray([
@@ -433,8 +476,8 @@ function fotolabViewModel() {
 		new Section("fotolab_klantgegevens", "Klantgegevens", self.validations.validateKlantGegevens ),
 		new Section("fotolab_select_fotoserie", "Selecteer fotoserie", self.validations.validateSelecteerFotoserie ),
 		new Section("fotolab_select_fotos", "Selecteer foto's", self.validations.validateSelecteerFotos ),
-		new Section("fotolab_productlist", "Productenlijst", function() { return true; } ),
-		new Section("fotolab_payment", "Betaalmethode", function() { return true; } ),
+		new Section("fotolab_productlist", "Overzicht Producten", function() { return true; } ),
+		new Section("fotolab_payment", "Selecteer Betaalmethode", self.validations.validateSelecteerBetaalMethode ),
 		new Section("fotolab_thanks", "Bedankt voor uw bestelling!", function() { return true; } )
 	]);
 	self.currentSectionKey = ko.observable(0);
