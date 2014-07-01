@@ -7,6 +7,7 @@ namespace FotoWebservice.Models
 {
     public class Bestelling
     {
-
+        public DateTime Datum { get; set; }
+        public List<BestelRegel> Bestelregels { get; set; }
     }
 }
