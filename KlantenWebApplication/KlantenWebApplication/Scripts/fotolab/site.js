@@ -99,6 +99,14 @@ ko.bindingHandlers.data_key = {
     }
 };
 
+ko.bindingHandlers.title = {
+    update: function (element, valueAccessor) {
+        ko.bindingHandlers.attr.update(element, function () {
+            return { 'title': valueAccessor()}
+        });
+    }
+};
+
 var Utility = {
 	random: function(min, max) {
 		if(typeof min === "undefined") { min = 0; }
@@ -226,6 +234,10 @@ function Foto(id, bedrag) {
 	self.bedrag = bedrag;
 	self.fotoserie = null;
 	self.isSelected = ko.observable(false);
+
+	self.formattedBedrag = function() {
+		return "€ " + self.bedrag.toFixed(2);
+	};
 }
 
 function Fotoserie(key, naam, datum, fotos) {
@@ -275,7 +287,7 @@ function Klant() {
 
 					var fotos = [];
 					for (var i = 0; i < datarow.Fotos.length; i++) {
-						var foto = new Foto(datarow.Fotos[i].Id, 20); // TODO: Prijs aan een foto geven vanuit de WEBAPI
+						var foto = new Foto(datarow.Fotos[i].Id, datarow.Fotos[i].Bedrag); // TODO: Prijs aan een foto geven vanuit de WEBAPI
 						fotos.push(foto);
 					};
 					var fotoserie = new Fotoserie(datarow.Key, datarow.Naam, datarow.Datum, fotos);

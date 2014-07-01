@@ -52,7 +52,7 @@ namespace FotoWebservice.Models
 
             try
             {
-                StringBuilder sql = new StringBuilder("SELECT id, fotoserie_id FROM fotos WHERE fotoserie_id IN (");
+                StringBuilder sql = new StringBuilder("SELECT id, fotoserie_id, bedrag FROM fotos WHERE fotoserie_id IN (");
                 List<SqlParameter> parameters = new List<SqlParameter>();
 
                 for (int i = 0; i < fotoseries.Count; i++)
@@ -77,12 +77,13 @@ namespace FotoWebservice.Models
                 {
                     int fotoId = Convert.ToInt32(r["id"]);
                     int fotoserieId = Convert.ToInt32(r["fotoserie_id"]);
+                    decimal bedrag = Convert.ToDecimal(r["bedrag"]);
 
                     foreach (Fotoserie fs in fotoseries)
                     {
                         if (fs.Id == fotoserieId)
                         {
-                            fs.Fotos.Add( new Foto { Id = fotoId } );
+                            fs.Fotos.Add(new Foto { Id = fotoId, Bedrag = bedrag });
                             break;
                         }
                     }

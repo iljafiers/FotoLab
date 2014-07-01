@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using FotoWebservice.Models;
 
 namespace FotoWebservice.Controllers
 {
@@ -158,7 +157,7 @@ namespace FotoWebservice.Controllers
         [Route("api/foto/{fotoserieId:int}/upload")]
         public async Task<HttpResponseMessage> UploadPhoto(int fotoSerieID) 
         {
-            decimal bedrag = 20.00m;
+            decimal bedrag = new Random().Next(10, 30); // Evt. nog bedragen POSTen, voor nu faken met een random bedrag
             //int fotoSerieID     = Convert.ToInt32(Request.GetRouteData().Values["fotoSerieID"]);
 
             if (!Request.Content.IsMimeMultipartContent())
