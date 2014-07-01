@@ -93,9 +93,24 @@ namespace FotoWebservice.Models
             }
         }
 
-        public void InsertKlant(Klant newKlant)
+        public Klant InsertKlant(Klant newKlant)
         {
-            throw new NotImplementedException();
+            string sql = "INSERT INTO Klanten (naam, klant_key, straat, huisnummer, postcode, woonplaats) " +
+                         "OUTPUT INSERTED.ID AS Id " +
+                         "VALUES (@naam, @klant_key, @straat, @huisnummer, @postcode, @woonplaats)";
+            List<SqlParameter> parameters = new List<SqlParameter> { 
+                    new SqlParameter("naam", newKlant.Naam),
+                    new SqlParameter("klant_key", newKlant.Klant_key),
+                    new SqlParameter("straat", newKlant.Straat),
+                    new SqlParameter("huisnummer", newKlant.Huisnummer),
+                    new SqlParameter("postcode", newKlant.Postcode),
+                    new SqlParameter("woonplaats", newKlant.Woonplaats)
+                };
+
+            DataSet ds = dataProvider.Query(sql, parameters);
+            newKlant.Id = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"]);
+
+            return newKlant;
         }
 
         private Klant DataRowToObject(DataRow row)

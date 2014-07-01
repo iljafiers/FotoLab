@@ -42,9 +42,11 @@ namespace FotoWebservice.Models
         {
             this.klanten.Add(newKlant);
         }
-        public void InsertKlant(Klant newKlant)
+        public Klant InsertKlant(Klant newKlant)
         {
             this.klanten.Add(newKlant);
+            newKlant.Id = 1;
+            return newKlant;
         }
     }
 }
