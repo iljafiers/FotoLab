@@ -11,5 +11,10 @@ namespace KlantenWebApplication.Controllers
         {
             return View();
         }
+
+        public ActionResult PaypalEnd()
+        {
+            return View();
+        }
     }
 }

@@ -122,7 +122,7 @@ namespace FotoWebservice.Models
             }
         }*/
 
-        public int Add(int fotoserieId, string md5)
+        public int Add(int fotoserieId, string md5, decimal bedrag)
         {
             int id = 0;
 
@@ -139,7 +139,11 @@ namespace FotoWebservice.Models
                 param2.DbType = DbType.String;
                 param2.Size = 32;
 
-                List<SqlParameter> parameters = new List<SqlParameter> { param1, param2 }; 
+                SqlParameter param3 = new SqlParameter("@bedrag", bedrag);
+                param3.Direction = ParameterDirection.Input;
+                param3.DbType = DbType.Decimal;
+
+                List<SqlParameter> parameters = new List<SqlParameter> { param1, param2, param3 }; 
 
                 DataSet ds = dataProvider.Query(sql, parameters, true);
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

@@ -5,9 +5,7 @@ using System.Web;
 
 namespace FotoWebservice.Models
 {
-    public class Foto
+    public class FotoProduct
     {
-        public int Id { get; set; }
-        public decimal Bedrag { get; set; }
     }
 }

@@ -51,7 +51,8 @@ go
 create table fotos (
 	id 					int 				primary key identity not null,
 	fotoserie_id		int 				not null,
-	md5					varchar(32)			not null
+	md5					varchar(32)			not null,
+	bedrag				smallmoney			not null
 )
 go
 
@@ -98,12 +99,13 @@ go
 
 CREATE PROC sp_InsertFoto
 @fotoserieId 		int,
-@md5 				varchar(32)
+@md5 				varchar(32),
+@bedrag				smallmoney
 AS 
 BEGIN
 	IF NOT EXISTS(SELECT 1 FROM fotos WHERE md5 = @md5 AND fotoserie_id = @fotoserieId)
 	BEGIN 
-		INSERT INTO fotos (fotoserie_id, md5) OUTPUT INSERTED.ID AS Id VALUES (@fotoserieId, @md5) 
+		INSERT INTO fotos (fotoserie_id, md5, bedrag) OUTPUT INSERTED.ID AS Id VALUES (@fotoserieId, @md5, @bedrag) 
 	END
 	ELSE
 	BEGIN

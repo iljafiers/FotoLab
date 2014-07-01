@@ -158,6 +158,7 @@ namespace FotoWebservice.Controllers
         [Route("api/foto/{fotoserieId:int}/upload")]
         public async Task<HttpResponseMessage> UploadPhoto(int fotoSerieID) 
         {
+            decimal bedrag = 20.00m;
             //int fotoSerieID     = Convert.ToInt32(Request.GetRouteData().Values["fotoSerieID"]);
 
             if (!Request.Content.IsMimeMultipartContent())
@@ -176,7 +177,7 @@ namespace FotoWebservice.Controllers
                 foreach (MultipartFileData file in provider.FileData)
                 {
                     string md5 = FileFotoRepository.CalculateMD5Hash(File.ReadAllBytes(file.LocalFileName));
-                    int id = repository.Add(fotoSerieID, md5);
+                    int id = repository.Add(fotoSerieID, md5, bedrag);
 
                     if (id != null && id > 0) // id > 0 dus het plaatje is toegevoegd aan de database
                     {

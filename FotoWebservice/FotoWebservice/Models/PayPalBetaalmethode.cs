@@ -5,9 +5,9 @@ using System.Web;
 
 namespace FotoWebservice.Models
 {
-    public class Foto
+    public class PayPalBetaalmethode
     {
-        public int Id { get; set; }
-        public decimal Bedrag { get; set; }
+        private string redirectUrl;
+
     }
 }

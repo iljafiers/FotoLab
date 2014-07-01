@@ -191,14 +191,17 @@
     <Compile Include="Lib\FotoApiSection.cs" />
     <Compile Include="Lib\IDataProvider.cs" />
     <Compile Include="Lib\MSSqlDataProvider.cs" />
+    <Compile Include="Models\Bestelling.cs" />
     <Compile Include="Models\FileFotoRepository.cs" />
     <Compile Include="Models\Foto.cs" />
+    <Compile Include="Models\FotoProduct.cs" />
     <Compile Include="Models\Fotoserie.cs" />
     <Compile Include="Models\IFotoRepository.cs" />
     <Compile Include="Models\IFotoserieRepository.cs" />
     <Compile Include="Models\IKlantRepository.cs" />
     <Compile Include="Models\Klant.cs" />
     <Compile Include="Models\MockKlantRepository.cs" />
+    <Compile Include="Models\PayPalBetaalmethode.cs" />
     <Compile Include="Models\SqlFotoRepository.cs" />
     <Compile Include="Models\SqlFotoserieRepository.cs" />
     <Compile Include="Models\SqlKlantRepository.cs" />
