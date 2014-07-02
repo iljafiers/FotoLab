@@ -346,7 +346,7 @@ function Klant() {
 
 					var fotos = [];
 					for (var i = 0; i < datarow.Fotos.length; i++) {
-						var foto = new Foto(datarow.Fotos[i].Id, datarow.Fotos[i].Bedrag); // TODO: Prijs aan een foto geven vanuit de WEBAPI
+						var foto = new Foto(datarow.Fotos[i].Id, datarow.Fotos[i].Bedrag);
 						fotos.push(foto);
 					};
 					var fotoserie = new Fotoserie(datarow.Key, datarow.Naam, datarow.Datum, fotos);

@@ -73,6 +73,7 @@
 	    			<div class="form-group col-md-12">
 		    			<div data-bind="template: { name: 'fotoserieImage', foreach: klant.fotoseries }">
 			    		</div>
+			    		<span data-bind="if: klant.fotoseries().length == 0">U heeft helaas geen fotoseries.</span>
 		    		</div>
 	    		</div>
 	    	</script>
