@@ -20,7 +20,9 @@ namespace FotoWebservice
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-            // PayPalBetaalMethode.WriteCredentials("<clientId>", "<clientSecret>", "<endpoint>");
+            PayPalBetaalMethode pm = new PayPalBetaalMethode();
+
+            //pm.PostPayment("http://www.startpagina.nl", "http://www.google.nl", 12.49m);
         }
     }
 }

@@ -10,5 +10,7 @@ namespace FotoWebservice.Models
         public string ClientID { get; set; }
         public string ClientSecret { get; set; }
         public string Endpoint { get; set; }
+        public string AccessToken { get; set; }
+        public DateTime AccessTokenExpires { get; set; }
     }
 }
