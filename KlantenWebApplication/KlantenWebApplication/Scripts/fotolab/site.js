@@ -240,7 +240,7 @@ function Item(foto) {
 function Order(klant) {
 	var self = this;
 
-	self.payment = new PayPalPayment(order);
+	self.payment = new PayPalPayment(self);
 	self.klant = klant;
 	self.items = ko.observableArray([]);
 	self.isPaid = ko.observable(false);
