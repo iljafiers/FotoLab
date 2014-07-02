@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FotoWebservice.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,8 @@ namespace FotoWebservice
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            // PayPalBetaalMethode.WriteCredentials("<clientId>", "<clientSecret>", "<endpoint>");
         }
     }
 }

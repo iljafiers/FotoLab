@@ -43,6 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MvcRouteTester">
       <HintPath>..\packages\MvcRouteTester.Mvc5.1.2.1\lib\net45\MvcRouteTester.dll</HintPath>
@@ -50,6 +53,12 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PayPalCoreSDK">
+      <HintPath>..\packages\PayPalCoreSDK.1.4.2\lib\net45\PayPalCoreSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="RestApiSDK">
+      <HintPath>..\packages\RestApiSDK.0.7.6\lib\net45\RestApiSDK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -126,6 +135,7 @@
     <Folder Include="App_Data\Upload_Temp\" />
     <Folder Include="Auth\" />
     <Folder Include="Fotos\" />
+    <Folder Include="PayPalConfig\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -205,7 +215,8 @@
     <Compile Include="Models\IKlantRepository.cs" />
     <Compile Include="Models\Klant.cs" />
     <Compile Include="Models\MockKlantRepository.cs" />
-    <Compile Include="Models\PayPalBetaalmethode.cs" />
+    <Compile Include="Models\PayPalBetaalMethode.cs" />
+    <Compile Include="Models\PayPalCredentials.cs" />
     <Compile Include="Models\SqlBestellingRepository.cs" />
     <Compile Include="Models\SqlFotoProductenRepository.cs" />
     <Compile Include="Models\SqlFotoRepository.cs" />
@@ -252,6 +263,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="App.config" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
