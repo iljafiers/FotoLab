@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace FotoWebservice.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class BestellingController : ApiController
     {
         IBestellingRepository repository;
@@ -23,7 +25,7 @@ namespace FotoWebservice.Controllers
         }
 
         [HttpPost]
-        [Route("api/klant/{klantKey}bestelling")]
+        [Route("api/klant/{klantKey}/bestelling")]
         public HttpResponseMessage PostBestelling(string klantKey, [FromBody]string newBestelling)
         {
             try
